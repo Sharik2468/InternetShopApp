@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище Internet_ShopModelContainer" CdmEntityContainer="InternetShopEntities">
+    <EntitySetMapping Name="Category_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Category_Table">
+        <MappingFragment StoreEntitySet="Category_Table">
+          <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+          <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+          <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Client_Table">
+        <MappingFragment StoreEntitySet="Client_Table">
+          <ScalarProperty Name="Client_Code" ColumnName="Client_Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Telephone_Number" ColumnName="Telephone_Number" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Location_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Location_Table">
+        <MappingFragment StoreEntitySet="Location_Table">
+          <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Item_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Order_Item_Table">
+        <MappingFragment StoreEntitySet="Order_Item_Table">
+          <ScalarProperty Name="Order_Item_Code" ColumnName="Order_Item_Code" />
+          <ScalarProperty Name="Order_Sum" ColumnName="Order_Sum" />
+          <ScalarProperty Name="Amount_Order_Item" ColumnName="Amount_Order_Item" />
+          <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+          <ScalarProperty Name="Order_Code" ColumnName="Order_Code" />
+          <ScalarProperty Name="Status_Order_Item_Table_ID" ColumnName="Status_Order_Item_Table_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Order_Table">
+        <MappingFragment StoreEntitySet="Order_Table">
+          <ScalarProperty Name="Order_Code" ColumnName="Order_Code" />
+          <ScalarProperty Name="Order_Fullfillment" ColumnName="Order_Fullfillment" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+          <ScalarProperty Name="Client_Code" ColumnName="Client_Code" />
+          <ScalarProperty Name="Salesman_Code" ColumnName="Salesman_Code" />
+          <ScalarProperty Name="Delivery_Code" ColumnName="Delivery_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Product_Table">
+        <MappingFragment StoreEntitySet="Product_Table">
+          <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+          <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+          <ScalarProperty Name="Market_Price_Product" ColumnName="Market_Price_Product" />
+          <ScalarProperty Name="Purchase_Price_Product" ColumnName="Purchase_Price_Product" />
+          <ScalarProperty Name="Date_of_Manufacture_Product" ColumnName="Date_of_Manufacture_Product" />
+          <ScalarProperty Name="Best_Before_Date_Product" ColumnName="Best_Before_Date_Product" />
+          <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Number_in_Stock" ColumnName="Number_in_Stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salesman_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Salesman_Table">
+        <MappingFragment StoreEntitySet="Salesman_Table">
+          <ScalarProperty Name="Salesman_Code" ColumnName="Salesman_Code" />
+          <ScalarProperty Name="Saleman_Name" ColumnName="Saleman_Name" />
+          <ScalarProperty Name="Salesman_Surname" ColumnName="Salesman_Surname" />
+          <ScalarProperty Name="Telephone_Number" ColumnName="Telephone_Number" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status_Order_Item_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Status_Order_Item_Table">
+        <MappingFragment StoreEntitySet="Status_Order_Item_Table">
+          <ScalarProperty Name="Status_Order_Item_ID" ColumnName="Status_Order_Item_ID" />
+          <ScalarProperty Name="Status_Order_Item_Table1" ColumnName="Status_Order_Item_Table" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status_Table">
+      <EntityTypeMapping TypeName="Internet_ShopModel.Status_Table">
+        <MappingFragment StoreEntitySet="Status_Table">
+          <ScalarProperty Name="Delivery_Code" ColumnName="Delivery_Code" />
+          <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Internet_ShopModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

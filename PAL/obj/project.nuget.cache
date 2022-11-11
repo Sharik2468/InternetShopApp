@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "J/qQMQ1qng/DPPSS2RLMm5ersNsCISu2N+6pS0zcq2sQPRUWMq9itPIKedoflgHRgehO8d7MsvGh3aiyq1iVaQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Работа в универе\\Конструирование ПО\\InternetShop\\InternetShopApp\\PAL\\PL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ADMIN\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"EntityFramework 6.2.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "EntityFramework",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}

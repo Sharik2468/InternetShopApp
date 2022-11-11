@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Internet_ShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category_Table">
+    <Key>
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Category_ID" Type="int" Nullable="false" />
+    <Property Name="Category_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Parent_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Client_Table">
+    <Key>
+      <PropertyRef Name="Client_Code" />
+    </Key>
+    <Property Name="Client_Code" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telephone_Number" Type="bigint" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Location_Code" Type="int" />
+  </EntityType>
+  <EntityType Name="Location_Table">
+    <Key>
+      <PropertyRef Name="Location_Code" />
+    </Key>
+    <Property Name="Location_Code" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Order_Item_Table">
+    <Key>
+      <PropertyRef Name="Order_Item_Code" />
+    </Key>
+    <Property Name="Order_Item_Code" Type="int" Nullable="false" />
+    <Property Name="Order_Sum" Type="int" />
+    <Property Name="Amount_Order_Item" Type="real" />
+    <Property Name="Product_Code" Type="int" />
+    <Property Name="Order_Code" Type="int" />
+    <Property Name="Status_Order_Item_Table_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order_Table">
+    <Key>
+      <PropertyRef Name="Order_Code" />
+    </Key>
+    <Property Name="Order_Code" Type="int" Nullable="false" />
+    <Property Name="Order_Fullfillment" Type="date" />
+    <Property Name="Order_Date" Type="date" />
+    <Property Name="Client_Code" Type="int" />
+    <Property Name="Salesman_Code" Type="int" />
+    <Property Name="Delivery_Code" Type="int" />
+  </EntityType>
+  <EntityType Name="Product_Table">
+    <Key>
+      <PropertyRef Name="Product_Code" />
+    </Key>
+    <Property Name="Product_Code" Type="int" Nullable="false" />
+    <Property Name="Name_Product" Type="nchar" MaxLength="10" />
+    <Property Name="Market_Price_Product" Type="real" />
+    <Property Name="Purchase_Price_Product" Type="real" />
+    <Property Name="Date_of_Manufacture_Product" Type="date" />
+    <Property Name="Best_Before_Date_Product" Type="int" />
+    <Property Name="Category_ID" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="Number_in_Stock" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Salesman_Table">
+    <Key>
+      <PropertyRef Name="Salesman_Code" />
+    </Key>
+    <Property Name="Salesman_Code" Type="int" Nullable="false" />
+    <Property Name="Saleman_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Salesman_Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telephone_Number" Type="bigint" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Location_Code" Type="int" />
+  </EntityType>
+  <EntityType Name="Status_Order_Item_Table">
+    <Key>
+      <PropertyRef Name="Status_Order_Item_ID" />
+    </Key>
+    <Property Name="Status_Order_Item_ID" Type="int" Nullable="false" />
+    <Property Name="Status_Order_Item_Table" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Status_Table">
+    <Key>
+      <PropertyRef Name="Delivery_Code" />
+    </Key>
+    <Property Name="Delivery_Code" Type="int" Nullable="false" />
+    <Property Name="Order_Status" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Category_Table_Category_Table">
+    <End Role="Category_Table" Type="Self.Category_Table" Multiplicity="1" />
+    <End Role="Category_Table1" Type="Self.Category_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Table">
+        <PropertyRef Name="Category_ID" />
+      </Principal>
+      <Dependent Role="Category_Table1">
+        <PropertyRef Name="Parent_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_Table_Location_Table">
+    <End Role="Location_Table" Type="Self.Location_Table" Multiplicity="0..1" />
+    <End Role="Client_Table" Type="Self.Client_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location_Table">
+        <PropertyRef Name="Location_Code" />
+      </Principal>
+      <Dependent Role="Client_Table">
+        <PropertyRef Name="Location_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Item_Table_Order_Table">
+    <End Role="Order_Table" Type="Self.Order_Table" Multiplicity="0..1" />
+    <End Role="Order_Item_Table" Type="Self.Order_Item_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order_Table">
+        <PropertyRef Name="Order_Code" />
+      </Principal>
+      <Dependent Role="Order_Item_Table">
+        <PropertyRef Name="Order_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Item_Table_Product_Table">
+    <End Role="Product_Table" Type="Self.Product_Table" Multiplicity="0..1" />
+    <End Role="Order_Item_Table" Type="Self.Order_Item_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Table">
+        <PropertyRef Name="Product_Code" />
+      </Principal>
+      <Dependent Role="Order_Item_Table">
+        <PropertyRef Name="Product_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Item_Table_Status_Order_Item_Table">
+    <End Role="Status_Order_Item_Table" Type="Self.Status_Order_Item_Table" Multiplicity="1" />
+    <End Role="Order_Item_Table" Type="Self.Order_Item_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status_Order_Item_Table">
+        <PropertyRef Name="Status_Order_Item_ID" />
+      </Principal>
+      <Dependent Role="Order_Item_Table">
+        <PropertyRef Name="Status_Order_Item_Table_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Table_Client_Table">
+    <End Role="Client_Table" Type="Self.Client_Table" Multiplicity="0..1" />
+    <End Role="Order_Table" Type="Self.Order_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client_Table">
+        <PropertyRef Name="Client_Code" />
+      </Principal>
+      <Dependent Role="Order_Table">
+        <PropertyRef Name="Client_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Table_Delivery_Table">
+    <End Role="Status_Table" Type="Self.Status_Table" Multiplicity="0..1" />
+    <End Role="Order_Table" Type="Self.Order_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status_Table">
+        <PropertyRef Name="Delivery_Code" />
+      </Principal>
+      <Dependent Role="Order_Table">
+        <PropertyRef Name="Delivery_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Table_Salesman_Table">
+    <End Role="Salesman_Table" Type="Self.Salesman_Table" Multiplicity="0..1" />
+    <End Role="Order_Table" Type="Self.Order_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salesman_Table">
+        <PropertyRef Name="Salesman_Code" />
+      </Principal>
+      <Dependent Role="Order_Table">
+        <PropertyRef Name="Salesman_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Table_Category_Table">
+    <End Role="Category_Table" Type="Self.Category_Table" Multiplicity="0..1" />
+    <End Role="Product_Table" Type="Self.Product_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Table">
+        <PropertyRef Name="Category_ID" />
+      </Principal>
+      <Dependent Role="Product_Table">
+        <PropertyRef Name="Category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Salesman_Table_Location_Table">
+    <End Role="Location_Table" Type="Self.Location_Table" Multiplicity="0..1" />
+    <End Role="Salesman_Table" Type="Self.Salesman_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location_Table">
+        <PropertyRef Name="Location_Code" />
+      </Principal>
+      <Dependent Role="Salesman_Table">
+        <PropertyRef Name="Location_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище Internet_ShopModelContainer">
+    <EntitySet Name="Category_Table" EntityType="Self.Category_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client_Table" EntityType="Self.Client_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location_Table" EntityType="Self.Location_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Item_Table" EntityType="Self.Order_Item_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Table" EntityType="Self.Order_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Table" EntityType="Self.Product_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salesman_Table" EntityType="Self.Salesman_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status_Order_Item_Table" EntityType="Self.Status_Order_Item_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status_Table" EntityType="Self.Status_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Category_Table_Category_Table" Association="Self.FK_Category_Table_Category_Table">
+      <End Role="Category_Table" EntitySet="Category_Table" />
+      <End Role="Category_Table1" EntitySet="Category_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_Table_Location_Table" Association="Self.FK_Client_Table_Location_Table">
+      <End Role="Location_Table" EntitySet="Location_Table" />
+      <End Role="Client_Table" EntitySet="Client_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Item_Table_Order_Table" Association="Self.FK_Order_Item_Table_Order_Table">
+      <End Role="Order_Table" EntitySet="Order_Table" />
+      <End Role="Order_Item_Table" EntitySet="Order_Item_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Item_Table_Product_Table" Association="Self.FK_Order_Item_Table_Product_Table">
+      <End Role="Product_Table" EntitySet="Product_Table" />
+      <End Role="Order_Item_Table" EntitySet="Order_Item_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Item_Table_Status_Order_Item_Table" Association="Self.FK_Order_Item_Table_Status_Order_Item_Table">
+      <End Role="Status_Order_Item_Table" EntitySet="Status_Order_Item_Table" />
+      <End Role="Order_Item_Table" EntitySet="Order_Item_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Table_Client_Table" Association="Self.FK_Order_Table_Client_Table">
+      <End Role="Client_Table" EntitySet="Client_Table" />
+      <End Role="Order_Table" EntitySet="Order_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Table_Delivery_Table" Association="Self.FK_Order_Table_Delivery_Table">
+      <End Role="Status_Table" EntitySet="Status_Table" />
+      <End Role="Order_Table" EntitySet="Order_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Table_Salesman_Table" Association="Self.FK_Order_Table_Salesman_Table">
+      <End Role="Salesman_Table" EntitySet="Salesman_Table" />
+      <End Role="Order_Table" EntitySet="Order_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Table_Category_Table" Association="Self.FK_Product_Table_Category_Table">
+      <End Role="Category_Table" EntitySet="Category_Table" />
+      <End Role="Product_Table" EntitySet="Product_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Salesman_Table_Location_Table" Association="Self.FK_Salesman_Table_Location_Table">
+      <End Role="Location_Table" EntitySet="Location_Table" />
+      <End Role="Salesman_Table" EntitySet="Salesman_Table" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

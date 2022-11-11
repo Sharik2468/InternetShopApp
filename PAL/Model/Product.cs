@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Text;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+namespace PL.Model
+{
+    class Product : INotifyPropertyChanged
+    {
+        public Product()
+        { }
+        public Product(DBAccess.Product_Table product)
+        {
+            Product_Code = product.Product_Code;
+            Name = product.Name_Product;
+            Price = (float)product.Purchase_Price_Product;
+            BestBeforeDate = (float)product.Best_Before_Date_Product;
+            Desctription = product.Description;
+            Image = product.Image;
+            NumberInStock = Convert.ToInt32(product.Number_in_Stock);
+
+            /// Выгрузка изображения
+            try
+            {
+                using (Stream StreamObj = new MemoryStream(product.Image))
+                {
+                    var image = new BitmapImage();
+
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = StreamObj;
+                    image.EndInit();
+                    ImageToShow = image;
+                }
+            }
+            catch
+            {
+                //Необходимо использования логгера
+                Console.WriteLine($"Ошибка инициализации изображения пользователя {this}");
+            }
+        }
+        public int Product_Code { get; set; }
+        public byte[] Image { get; set; }
+
+        private ImageSource _imageToShow;
+        public ImageSource ImageToShow
+        {
+            get => _imageToShow;
+            set
+            {
+                _imageToShow = value;
+                OnPropertyChanged(nameof(ImageToShow));
+            }
+        }
+
+        private int _num;
+        public int NumberInStock
+        {
+            get => _num;
+            set
+            {
+                _num = value;
+                OnPropertyChanged(nameof(NumberInStock));
+            }
+        }
+
+        private string _desc;
+        public string Desctription
+        {
+            get => _desc;
+            set
+            {
+                _desc = value;
+                OnPropertyChanged(nameof(Desctription));
+            }
+        }
+
+        private float _price;
+        public float Price
+        {
+            get => _price;
+            set
+            {
+                _price = value;
+                OnPropertyChanged(nameof(Price));
+            }
+        }
+
+        private float _bestData;
+        public float BestBeforeDate
+        {
+            get => _bestData;
+            set
+            {
+                _bestData = value;
+                OnPropertyChanged(nameof(BestBeforeDate));
+            }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        #region Ovverides of INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+    }
+}
