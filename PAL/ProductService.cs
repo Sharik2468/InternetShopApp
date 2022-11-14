@@ -16,11 +16,9 @@ namespace PL
             db = new InternetShopEntities();//3lab
         }
 
-        public List<Model.Product> GetProducts()
+        public List<Product> GetProducts()
         {
-
-            return db.Product_Table.Select(u => new Model.Product(u)).ToList();
-
+            return db.Product_Table.AsEnumerable().Select(o => new Product(o)).ToList();
         }
 
         public void AddProduct(Model.Product product, string photoUri)
@@ -29,7 +27,7 @@ namespace PL
             {
                 Name_Product = product.Name,
                 Purchase_Price_Product = product.Price,
-                Best_Before_Date_Product = (int?)product.BestBeforeDate,
+                Best_Before_Date_Product = (int)product.BestBeforeDate,
                 Number_in_Stock = product.NumberInStock.ToString(),
                 Description = product.Desctription
             };
@@ -61,9 +59,7 @@ namespace PL
 
         public void SaveChanges()
         {
-
             db.SaveChanges();
-
         }
     }
 }

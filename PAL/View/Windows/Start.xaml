@@ -3,14 +3,12 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PL.View"
       xmlns:vm="clr-namespace:PL.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Start">
 
     <Page.DataContext>
-        <!--Источник данных для данного окна. см. пространство имен vm (строка 7)-->
         <vm:ProductViewModel/>
     </Page.DataContext>
 
@@ -21,10 +19,11 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="299*"></ColumnDefinition>
+            <ColumnDefinition Width="101*"/>
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" MaxHeight="1003">
+        <ScrollViewer Grid.Column="0" MaxHeight="1003" Grid.ColumnSpan="2" Margin="0,112,0,56" Grid.RowSpan="3">
             <Grid MaxHeight="999" Height="715">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -35,12 +34,11 @@
                     </LinearGradientBrush>
                 </Grid.Background>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="35*"></RowDefinition>
-                    <RowDefinition Height="100*"></RowDefinition>
-                    <RowDefinition Height="35*"></RowDefinition>
-                    <RowDefinition Height="100*"></RowDefinition>
-                    <RowDefinition Height="100*"></RowDefinition>
-                    <RowDefinition Height="100*"></RowDefinition>
+                    <RowDefinition Height="52*"></RowDefinition>
+                    <RowDefinition Height="140*"></RowDefinition>
+                    <RowDefinition Height="43*"></RowDefinition>
+                    <RowDefinition Height="480*"></RowDefinition>
+
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -49,12 +47,12 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Frame x:Name="_frame" />
+                <Frame x:Name="_frame" Grid.ColumnSpan="2" Margin="0,0,196,7" />
 
-                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Категории товаров" HorizontalAlignment="Center" FontSize="22" Width="199" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Text="Новые товары" HorizontalAlignment="Center" FontSize="22" Width="157" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Категории товаров" HorizontalAlignment="Center" FontSize="22" Width="199" VerticalAlignment="Center" Height="28"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Text="Новые товары" HorizontalAlignment="Center" FontSize="22" Width="157" VerticalAlignment="Center" Height="30"/>
 
-                <StackPanel Grid.Column="0" Grid.Row="1">
+                <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,196,8">
                     <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False">
                         <Button.Background>
                             <ImageBrush ImageSource="/View/Windows/Icons/free-icon-appliances-448836.png" Stretch="Fill" TileMode="None" Opacity="1"/>
@@ -64,7 +62,7 @@
                     <TextBlock Text="Бытовая техника" HorizontalAlignment="Center" FontSize="16"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Grid.Row="1">
+                <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,195,8">
                     <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False">
                         <Button.Background>
                             <ImageBrush ImageSource="/View/Windows/Icons/free-icon-smartphones-1079519.png" Stretch="Fill" TileMode="None" Opacity="1"/>
@@ -74,7 +72,7 @@
                     <TextBlock Text="Смартфоны" HorizontalAlignment="Center" FontSize="16"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Grid.Row="1">
+                <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,0,0,8">
                     <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False">
                         <Button.Background>
                             <ImageBrush ImageSource="/View/Windows/Icons/free-icon-television-1025152.png" Stretch="Fill" TileMode="None" Opacity="1"/>
@@ -84,7 +82,7 @@
                     <TextBlock Text="Телевизоры" HorizontalAlignment="Center" FontSize="16"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Grid.Row="1">
+                <StackPanel Grid.Column="3" Grid.Row="1" Margin="1,0,0,8">
                     <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False">
                         <Button.Background>
                             <ImageBrush ImageSource="/View/Windows/Icons/free-icon-pc-3233554.png" Stretch="Fill" TileMode="None" Opacity="1"/>
@@ -93,10 +91,36 @@
 
                     <TextBlock Text="Компьютеры" HorizontalAlignment="Center" FontSize="16"/>
                 </StackPanel>
+
+                <ListBox x:Name="ProductsListBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" Background="Transparent" HorizontalContentAlignment="Stretch" MaxHeight="475" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" d:ItemsSource="{d:SampleData}" ForceCursor="True">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <!--Для отображения карточек пользователей с динамическим количеством колонок-->
+                            <!--Внимание на Binding для ширины. Значение берется у UsersListBox-->
+                            <WrapPanel Height="{Binding Path=ActualHeight, ElementName=ProductsListBox}" Orientation="Vertical"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="80" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="700"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="{Binding ImageToShow, Mode=OneWay}"/>
+                                <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+                                    <TextBlock FontSize="22" Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Price}"/>
+                                    <TextBlock Text="{Binding Desctription}"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </ScrollViewer>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Background="#00D1FF" HorizontalAlignment="Stretch">
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="#00D1FF" Grid.ColumnSpan="2">
             <TextBlock Text="ElectroNIX" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="Motorwerk" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                 <TextBox Background="White" HorizontalAlignment="Stretch" Margin="20,0,20,0" Text="Поиск" Width="700"/>
@@ -108,7 +132,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="0" Grid.Row="2" Background="#FF00AEFF" Orientation="Horizontal" HorizontalAlignment="Center" FlowDirection="LeftToRight" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Stretch" Margin="0,0,0,0">
+        <StackPanel Grid.Column="0" Grid.Row="2" Background="#FF00AEFF" Orientation="Horizontal" HorizontalAlignment="Left" FlowDirection="LeftToRight" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="340,0,0,0">
 
             <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Click="Main_Click">
                 <Button.Background>

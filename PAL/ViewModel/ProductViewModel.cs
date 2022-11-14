@@ -1,10 +1,7 @@
 ﻿using Microsoft.Win32;
 using PL.Commands;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using PL.Model;
 
 namespace PL.ViewModel
@@ -26,8 +23,8 @@ namespace PL.ViewModel
                       openFileDialog.DefaultExt = ".jpeg";
                       if (openFileDialog.ShowDialog().Value)
                       {
-                          Product user = new Product();
-                          _productService.AddProduct(user, openFileDialog.FileName);
+                          Product product = new Product();
+                          _productService.AddProduct(product, openFileDialog.FileName);
                           Products = new ObservableCollection<Product>(_productService.GetProducts());
                           OnPropertyChanged(nameof(Products));
                       }

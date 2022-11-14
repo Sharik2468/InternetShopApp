@@ -61,7 +61,7 @@ namespace PAL.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/PL;V1.0.0.0;component/view/windows/settings.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/PL;component/view/windows/settings.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\Windows\Settings.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
