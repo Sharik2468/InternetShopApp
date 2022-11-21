@@ -53,7 +53,7 @@
                             </TransformGroup>
                         </StackPanel.RenderTransform>
                         <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Рыночная стоимость продукта:</TextBlock>
-                        <TextBox Width="200" Height="25" VerticalAlignment="Center" Name="MarketPrice" Text="{Binding _newProduct.Price}"/>
+                        <TextBox Width="200" Height="25" VerticalAlignment="Center" Name="MarketPrice" Text="{Binding NewProduct.Price, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
@@ -66,7 +66,7 @@
                             </TransformGroup>
                         </StackPanel.RenderTransform>
                         <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Закупочная стоимость продукта:</TextBlock>
-                        <TextBox Width="200" Height="25" VerticalAlignment="Center" Name="PurchasePrice" />
+                        <TextBox Width="200" Height="25" VerticalAlignment="Center" Name="PurchasePrice"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
@@ -101,7 +101,7 @@
                             </TransformGroup>
                         </StackPanel.RenderTransform>
                         <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0" HorizontalAlignment="Stretch">Гарантия:</TextBlock>
-                        <TextBox Width="200" Height="25" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="BestDate" Text="{Binding _newProduct.BestBeforeDate}">
+                        <TextBox Width="200" Height="25" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="BestDate" Text="{Binding NewProduct.BestBeforeDate, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="1"/>
@@ -123,7 +123,7 @@
                             </TransformGroup>
                         </StackPanel.RenderTransform>
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="0,0,5,0">Описание:</TextBlock>
-                        <TextBox Width="500" Height="500" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="Description" Text="{Binding _newProduct.Desctription}">
+                        <TextBox Width="500" Height="500" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="Description" Text="{Binding NewProduct.Desctription, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="1"/>

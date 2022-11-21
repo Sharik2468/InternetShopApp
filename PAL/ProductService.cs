@@ -23,8 +23,20 @@ namespace PL
 
         public void AddProduct(Model.Product product, string photoUri)
         {
+            var db = new InternetShopEntities();
+
+            var max = new Product_Table();
+            foreach (var entry in db.Product_Table)
+            {
+                if (entry.Product_Code > max.Product_Code)
+                {
+                    max = entry;
+                }
+            }
+
             var dbProduct = new DBAccess.Product_Table()
             {
+                Product_Code = max.Product_Code + 1,
                 Name_Product = product.Name,
                 Purchase_Price_Product = product.Price,
                 Best_Before_Date_Product = (int)product.BestBeforeDate,
