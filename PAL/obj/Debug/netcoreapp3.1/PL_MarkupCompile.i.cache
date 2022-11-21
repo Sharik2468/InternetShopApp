@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\App.xaml
-7-2117153526
+82001529295
 
-141348178653
+15538498197
 196474546665
-ButtonTemplate.xaml;View\Windows\Basket.xaml;View\Windows\Login.xaml;View\Windows\Main.xaml;View\Windows\Profile.xaml;View\Windows\Settings.xaml;View\Windows\Start.xaml;
+ButtonTemplate.xaml;View\Windows\AddProductWindow.xaml;View\Windows\Basket.xaml;View\Windows\Login.xaml;View\Windows\Main.xaml;View\Windows\Profile.xaml;View\Windows\Settings.xaml;View\Windows\Start.xaml;
 
-False
+True
 

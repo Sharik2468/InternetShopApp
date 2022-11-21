@@ -1,0 +1,183 @@
+﻿<Page x:Class="PL.View.Windows.AddProductWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:PL.ViewModel"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddProductWindow">
+
+    <Page.DataContext>
+        <vm:ProductViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF00AEFF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0" Grid.Row="1" MaxHeight="1000">
+            <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF00D1FF">
+               
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-69"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+
+
+                        <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Название товара:</TextBlock>
+                        <TextBox Width="200" Height="25" VerticalAlignment="Center" x:Name="ProductName" Text="{Binding NewProduct.Name, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-20"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Рыночная стоимость продукта:</TextBlock>
+                        <TextBox Width="200" Height="25" VerticalAlignment="Center" Name="MarketPrice" Text="{Binding _newProduct.Price}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-37"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Закупочная стоимость продукта:</TextBlock>
+                        <TextBox Width="200" Height="25" VerticalAlignment="Center" Name="PurchasePrice" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-68"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0" HorizontalAlignment="Stretch">Дата изготовления:</TextBlock>
+                        <TextBox Width="200" Height="25" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="ManufDate">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="2"/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-68"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0" HorizontalAlignment="Stretch">Гарантия:</TextBlock>
+                        <TextBox Width="200" Height="25" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="BestDate" Text="{Binding _newProduct.BestBeforeDate}">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="2"/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-68"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="0,0,5,0">Описание:</TextBlock>
+                        <TextBox Width="500" Height="500" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="Description" Text="{Binding _newProduct.Desctription}">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="2"/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                        <Button x:Name="AddProduct" Command="{Binding AddCommand}" Content="Добавить"/>
+                    </StackPanel>
+
+                
+            </StackPanel>
+            </ScrollViewer>
+
+            <StackPanel Grid.Column="0" Grid.Row="0" Background="#00D1FF" HorizontalAlignment="Stretch">
+                <TextBlock Text="ElectroNIX" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="Motorwerk" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="2" Background="#FF00AEFF" Orientation="Horizontal" HorizontalAlignment="Center" FlowDirection="LeftToRight" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Stretch" Margin="0,0,0,0">
+
+                <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Click="Main_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Icons/ea0aee6ec78d9ec755e3102507320029.png" Stretch="Fill" TileMode="None"/>
+                    </Button.Background>
+                </Button>
+
+                <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Opacity="0.9" Focusable="False" Click="Settings_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Icons/free-icon-settings-126472.png" Stretch="Fill" TileMode="None" Opacity="1"/>
+                    </Button.Background>
+                </Button>
+
+                <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Click="Basket_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Icons/pngwing.com.png" Stretch="Fill" TileMode="None"/>
+                    </Button.Background>
+                </Button>
+
+                <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Click="Profile_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Icons/free-icon-profile-1250689.png" Stretch="Fill" TileMode="None"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Page>

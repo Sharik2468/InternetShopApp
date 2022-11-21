@@ -6,7 +6,7 @@
       xmlns:vm="clr-namespace:PL.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Start">
+      Title="Start" KeyDown="Page_KeyDown">
 
     <Page.DataContext>
         <vm:ProductViewModel/>
@@ -24,6 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Column="0" MaxHeight="1003" Grid.ColumnSpan="2" Margin="0,112,0,56" Grid.RowSpan="3">
+            
             <Grid MaxHeight="999" Height="715">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -49,6 +50,7 @@
 
                 <Frame x:Name="_frame" Grid.ColumnSpan="2" Margin="0,0,196,7" />
 
+                <Button Grid.Row="0" Grid.Column="4" x:Name="AddUser" Click="AddUser_Click" Content="Добавить"/>
                 <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Категории товаров" HorizontalAlignment="Center" FontSize="22" Width="199" VerticalAlignment="Center" Height="28"/>
                 <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Text="Новые товары" HorizontalAlignment="Center" FontSize="22" Width="157" VerticalAlignment="Center" Height="30"/>
 

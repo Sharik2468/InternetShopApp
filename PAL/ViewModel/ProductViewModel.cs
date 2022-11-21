@@ -9,22 +9,49 @@ namespace PL.ViewModel
     class ProductViewModel : INotifyPropertyChanged
     {
         private readonly ProductService _productService = new ProductService();
+
+        private Product _newProduct;
+        public Product NewProduct
+        {
+            get
+            {
+                return _newProduct;
+            }
+            set
+            {
+                _newProduct = value;
+                OnPropertyChanged(nameof(NewProduct));
+            }
+        }
         public ProductViewModel()
         {
             Products = new ObservableCollection<Product>(_productService.GetProducts());
+            setNewProductInstance();
+        }
+
+        public void setNewProductInstance()
+        {
+            _newProduct = _newProduct == null ? new Product() : _newProduct;
+        }
+
+        public Product getNewProductInstance()
+        {
+            setNewProductInstance();
+            return _newProduct;
         }
 
         private RelayCommand _addCommand;
         public RelayCommand AddCommand => _addCommand ??
                   (_addCommand = new RelayCommand(obj =>
                   {
+
                       OpenFileDialog openFileDialog = new OpenFileDialog();
                       openFileDialog.Filter = "Файлы рисунков (*.bmp, *.jpg)|*.bmp;*.jpg";
                       openFileDialog.DefaultExt = ".jpeg";
                       if (openFileDialog.ShowDialog().Value)
                       {
-                          Product product = new Product();
-                          _productService.AddProduct(product, openFileDialog.FileName);
+                          //Product product = new Product();
+                          _productService.AddProduct(getNewProductInstance(), openFileDialog.FileName);
                           Products = new ObservableCollection<Product>(_productService.GetProducts());
                           OnPropertyChanged(nameof(Products));
                       }
