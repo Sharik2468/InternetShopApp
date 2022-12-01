@@ -8,9 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Start" KeyDown="Page_KeyDown">
 
-    <Page.DataContext>
-        <vm:ProductViewModel/>
-    </Page.DataContext>
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF00AEFF">
         <Grid.RowDefinitions>
@@ -20,11 +17,10 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="299*"></ColumnDefinition>
-            <ColumnDefinition Width="101*"/>
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Column="0" MaxHeight="1003" Grid.ColumnSpan="2" Margin="0,112,0,56" Grid.RowSpan="3">
-            
+
             <Grid MaxHeight="999" Height="715">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -50,7 +46,6 @@
 
                 <Frame x:Name="_frame" Grid.ColumnSpan="2" Margin="0,0,196,7" />
 
-                <Button Grid.Row="0" Grid.Column="4" x:Name="AddUser" Click="AddUser_Click" Content="Добавить"/>
                 <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Категории товаров" HorizontalAlignment="Center" FontSize="22" Width="199" VerticalAlignment="Center" Height="28"/>
                 <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Text="Новые товары" HorizontalAlignment="Center" FontSize="22" Width="157" VerticalAlignment="Center" Height="30"/>
 
@@ -94,20 +89,21 @@
                     <TextBlock Text="Компьютеры" HorizontalAlignment="Center" FontSize="16"/>
                 </StackPanel>
 
-                <ListBox x:Name="ProductsListBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" Background="Transparent" HorizontalContentAlignment="Stretch" MaxHeight="475" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" d:ItemsSource="{d:SampleData}" ForceCursor="True">
+                <ListBox x:Name="ProductsListBox" MouseDoubleClick="ProductsListBox_MouseDoubleClick" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" Background="Transparent" HorizontalContentAlignment="Stretch" MaxHeight="475" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" d:ItemsSource="{d:SampleData}" ForceCursor="True" SelectionMode="Single" IsSynchronizedWithCurrentItem="True">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <!--Для отображения карточек пользователей с динамическим количеством колонок-->
                             <!--Внимание на Binding для ширины. Значение берется у UsersListBox-->
-                            <WrapPanel Height="{Binding Path=ActualHeight, ElementName=ProductsListBox}" Orientation="Vertical"></WrapPanel>
+                            <WrapPanel x:Name="wrapPanel" Height="{Binding Path=ActualHeight, ElementName=ProductsListBox}" Orientation="Vertical">
+                            </WrapPanel>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="80" HorizontalAlignment="Stretch">
+                            <Grid Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="{Binding ActualWidth, ElementName=wrapPanel, Mode=OneWay}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="700"/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="{Binding ImageToShow, Mode=OneWay}"/>
                                 <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
@@ -134,27 +130,37 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="0" Grid.Row="2" Background="#FF00AEFF" Orientation="Horizontal" HorizontalAlignment="Left" FlowDirection="LeftToRight" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="340,0,0,0">
+        <StackPanel x:Name="stackPanel" Grid.Column="0" Grid.Row="2" Background="#FF00AEFF" Orientation="Horizontal" HorizontalAlignment="Stretch" FlowDirection="LeftToRight" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,0,0,0" VerticalAlignment="Stretch">
+        </StackPanel>
 
-            <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Click="Main_Click">
+        <StackPanel  Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
+            <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Click="Main_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" HorizontalContentAlignment="Center">
                 <Button.Background>
                     <ImageBrush ImageSource="Icons/ea0aee6ec78d9ec755e3102507320029.png" Stretch="Fill" TileMode="None"/>
                 </Button.Background>
             </Button>
 
-            <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Opacity="0.9" Focusable="False" Click="Settings_Click">
+            <Button Style="{DynamicResource ColorOverButtonChange}" VerticalAlignment="Center" Height="30" Width="30" Opacity="0.9" Focusable="False" Click="Settings_Click" HorizontalAlignment="Center">
                 <Button.Background>
                     <ImageBrush ImageSource="Icons/free-icon-settings-126472.png" Stretch="Fill" TileMode="None" Opacity="1"/>
                 </Button.Background>
             </Button>
 
-            <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Click="Basket_Click">
+            <Button Style="{DynamicResource ColorOverButtonChange}" VerticalAlignment="Center" Height="30" Width="30" Click="Basket_Click" HorizontalAlignment="Center">
                 <Button.Background>
                     <ImageBrush ImageSource="Icons/pngwing.com.png" Stretch="Fill" TileMode="None"/>
                 </Button.Background>
             </Button>
 
-            <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="30" Width="30" Click="Profile_Click">
+            <Button Style="{DynamicResource ColorOverButtonChange}" VerticalAlignment="Center" Height="30" Width="30" Click="Profile_Click" HorizontalAlignment="Center">
                 <Button.Background>
                     <ImageBrush ImageSource="Icons/free-icon-profile-1250689.png" Stretch="Fill" TileMode="None"/>
                 </Button.Background>

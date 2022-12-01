@@ -21,6 +21,15 @@ namespace PL
             return db.Product_Table.AsEnumerable().Select(o => new Product(o)).ToList();
         }
 
+        public void DeleteProduct(Model.Product product)
+        {
+            var db = new InternetShopEntities();
+
+            Product_Table p = db.Product_Table.Where(s => s.Product_Code == product.Product_Code).First();
+            db.Product_Table.Remove(p);
+            db.SaveChanges();
+        }
+
         public void AddProduct(Model.Product product, string photoUri)
         {
             var db = new InternetShopEntities();

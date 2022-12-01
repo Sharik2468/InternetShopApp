@@ -8,6 +8,8 @@ namespace PL.ViewModel
 {
     class ProductViewModel : INotifyPropertyChanged
     {
+        private static ProductViewModel _instance = new ProductViewModel();
+        public static ProductViewModel Instance => _instance;
         private readonly ProductService _productService = new ProductService();
 
         private Product _newProduct;
@@ -50,11 +52,19 @@ namespace PL.ViewModel
                       openFileDialog.DefaultExt = ".jpeg";
                       if (openFileDialog.ShowDialog().Value)
                       {
-                          //Product product = new Product();
                           _productService.AddProduct(getNewProductInstance(), openFileDialog.FileName);
                           Products = new ObservableCollection<Product>(_productService.GetProducts());
                           OnPropertyChanged(nameof(Products));
                       }
+                  }));
+
+        private RelayCommand _delCommand;
+        public RelayCommand DelCommand => _delCommand ??
+                  (_delCommand = new RelayCommand(obj =>
+                  {
+                      _productService.DeleteProduct(SelectedProduct);
+                      Products = new ObservableCollection<Product>(_productService.GetProducts());
+                      OnPropertyChanged(nameof(Products));
                   }));
 
         private RelayCommand _saveCommand;

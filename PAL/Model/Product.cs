@@ -17,10 +17,13 @@ namespace PL.Model
             Product_Code = product.Product_Code;
             Name = product.Name_Product;
             Price = (float)product.Purchase_Price_Product;
+            MarketPrice = (float)product.Market_Price_Product;
             BestBeforeDate = (float)product.Best_Before_Date_Product;
             Desctription = product.Description;
             Image = product.Image;
             NumberInStock = Convert.ToInt32(product.Number_in_Stock);
+            DateOfManufacture = (DateTime)product.Date_of_Manufacture_Product;
+            CategoryID = (int)product.Category_ID;
 
             /// Выгрузка изображения
             try
@@ -67,6 +70,28 @@ namespace PL.Model
             }
         }
 
+        private int _category;
+        public int CategoryID
+        {
+            get => _category;
+            set
+            {
+                _category = value;
+                OnPropertyChanged(nameof(CategoryID));
+            }
+        }
+
+        private System.DateTime _dateOfManuf;
+        public System.DateTime DateOfManufacture
+        {
+            get => _dateOfManuf;
+            set
+            {
+                _dateOfManuf = value;
+                OnPropertyChanged(nameof(DateOfManufacture));
+            }
+        }
+
         private string _desc;
         public string Desctription
         {
@@ -86,6 +111,17 @@ namespace PL.Model
             {
                 _price = value;
                 OnPropertyChanged(nameof(Price));
+            }
+        }
+
+        private float _markPrice;
+        public float MarketPrice
+        {
+            get => _markPrice;
+            set
+            {
+                _markPrice = value;
+                OnPropertyChanged(nameof(MarketPrice));
             }
         }
 
@@ -111,7 +147,7 @@ namespace PL.Model
             }
         }
 
-        #region Ovverides of INotifyPropertyChanged
+        #region Overides of INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

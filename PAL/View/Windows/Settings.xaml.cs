@@ -52,5 +52,15 @@ namespace PAL.Windows
         {
             this.NavigationService.Navigate(Settings.getInstance());
         }
+
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(PL.View.Windows.AddProductWindow.getInstance());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(PL.View.Windows.AboutWindow.getInstance());
+        }
     }
 }

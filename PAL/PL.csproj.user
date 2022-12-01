@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\Windows\AboutWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Windows\Basket.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,6 +17,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Windows\Main.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Windows\ProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Windows\Profile.xaml.cs">
@@ -30,6 +36,9 @@
     <Page Update="ButtonTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Windows\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Windows\Basket.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -37,6 +46,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\Main.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Windows\ProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\Profile.xaml">

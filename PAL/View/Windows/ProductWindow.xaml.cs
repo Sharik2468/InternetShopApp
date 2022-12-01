@@ -1,5 +1,4 @@
-﻿using PL;
-using PL.View.Windows;
+﻿using PAL.Windows;
 using PL.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,27 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PAL.Windows
+namespace PL.View.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для Start.xaml
+    /// Логика взаимодействия для ProductWindow.xaml
     /// </summary>
-    public partial class Start : Page
+    public partial class ProductWindow : Page
     {
-        public Start()
+        public ProductWindow()
         {
             InitializeComponent();
             DataContext = ProductViewModel.Instance;
         }
 
-        private static Page StartPage = null;
+        private static Page ProductPage = null;
         public static Page getInstance()
         {
-            if (StartPage == null)
+            if (ProductPage == null)
             {
-                StartPage = new Start();
+                ProductPage = new ProductWindow();
             }
-            return StartPage;
+            return ProductPage;
         }
 
         private void Main_Click(object sender, RoutedEventArgs e)
@@ -55,16 +54,6 @@ namespace PAL.Windows
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(Settings.getInstance());
-        }
-
-        private void Page_KeyDown(object sender, KeyEventArgs e)
-        {
-            //if (e.Key == Key.F5)
-        }
-
-        private void ProductsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            this.NavigationService.Navigate(ProductWindow.getInstance());
         }
     }
 }

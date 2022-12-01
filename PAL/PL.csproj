@@ -34,7 +34,9 @@
     <None Remove="View\Windows\Icons\free-icon-pc-3233554.png" />
     <None Remove="View\Windows\Icons\free-icon-smartphones-1079519.png" />
     <None Remove="View\Windows\Icons\free-icon-television-1025152.png" />
+    <None Remove="View\Windows\Icons\kindpng_3520971.png" />
     <None Remove="View\Windows\Icons\pngwing12.com.png" />
+    <None Remove="View\Windows\kindpng_3520971.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +60,7 @@
     <Resource Include="View\Windows\Icons\free-icon-settings-126472.png" />
     <Resource Include="View\Windows\Icons\free-icon-smartphones-1079519.png" />
     <Resource Include="View\Windows\Icons\free-icon-television-1025152.png" />
+    <Resource Include="View\Windows\Icons\kindpng_3520971.png" />
     <Resource Include="View\Windows\Icons\pngwing.com.png" />
     <Resource Include="View\Windows\Icons\pngwing12.com.png" />
   </ItemGroup>
