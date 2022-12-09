@@ -10,6 +10,7 @@ namespace PL.Model
 {
     class Product : INotifyPropertyChanged
     {
+        private readonly CategoryService _categoryServ = new CategoryService();
         public Product()
         { }
         public Product(DBAccess.Product_Table product)
@@ -78,6 +79,18 @@ namespace PL.Model
             {
                 _category = value;
                 OnPropertyChanged(nameof(CategoryID));
+            }
+        }
+
+        private string _categoryName;
+        public string CategoryName
+        {
+            get => _categoryName;
+            set
+            {
+                CategoryID = _categoryServ.GetCategoryIDByName(value.ToString()).Category_ID;
+                _categoryName = value;
+                OnPropertyChanged(nameof(CategoryName));
             }
         }
 

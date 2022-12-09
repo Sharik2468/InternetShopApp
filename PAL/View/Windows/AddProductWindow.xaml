@@ -113,6 +113,19 @@
                         </TextBox>
                     </StackPanel>
 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="127,10,0,10" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-37"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Категория:</TextBlock>
+                        <ComboBox Width="200" Height="20" VerticalAlignment="Center" Name="CategoryComboBox" SelectedItem="{Binding NewProduct.CategoryName, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="200,10,10,10" RenderTransformOrigin="0.5,0.5" Height="200">
                         <StackPanel.RenderTransform>
                             <TransformGroup>

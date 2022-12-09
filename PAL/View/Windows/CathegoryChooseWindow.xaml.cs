@@ -16,27 +16,30 @@ using System.Windows.Shapes;
 namespace PL.View.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для AddProductWindow.xaml
+    /// Логика взаимодействия для CathegoryChooseWindow.xaml
     /// </summary>
-    public partial class AddProductWindow : Page
+    public partial class CathegoryChooseWindow : Page
     {
-        private readonly CategoryService _categoryServ;
-        public AddProductWindow()
+
+        public CathegoryChooseWindow()
         {
             InitializeComponent();
-            _categoryServ = new CategoryService();
-            CategoryComboBox.ItemsSource = _categoryServ.GetCategoryName();
+            DataContext = CathegoryViewModel.Instance;
         }
 
-        private static Page AddWindowPage = null;
-        public static Page getInstance()
+        private static Page CategoryPage = null;
+        public static Page getInstance(int CategoryParentID)
         {
-            if (AddWindowPage == null)
+            if (CategoryPage == null)
             {
-                AddWindowPage = new AddProductWindow();
+                CathegoryViewModel.Instance.SetNewCategory(CategoryParentID);
+                CategoryPage = new CathegoryChooseWindow();
             }
-            return AddWindowPage;
-
+            else
+            {
+                CathegoryViewModel.Instance.SetNewCategory(CategoryParentID);
+            }
+            return CategoryPage;
         }
 
         private void Main_Click(object sender, RoutedEventArgs e)
@@ -57,6 +60,11 @@ namespace PL.View.Windows
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(Settings.getInstance());
+        }
+
+        private void ProductsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(ResultWindow.getInstance(CathegoryViewModel.Instance.SelectedCategory.Category_ID.ToString()));
         }
     }
 }

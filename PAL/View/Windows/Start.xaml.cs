@@ -30,10 +30,13 @@ namespace PAL.Windows
         private static Page StartPage = null;
         public static Page getInstance()
         {
+            ProductViewModel.Instance.SetAllProducts();
+
             if (StartPage == null)
             {
                 StartPage = new Start();
             }
+
             return StartPage;
         }
 
@@ -65,6 +68,42 @@ namespace PAL.Windows
         private void ProductsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.NavigationService.Navigate(ProductWindow.getInstance());
+        }
+
+        private void ProductsListBox_RequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
+        {
+            e.Handled = false;
+        }
+
+        private void ProductsListBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = false;
+        }
+
+
+        private void Computer_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(CathegoryChooseWindow.getInstance(4));
+        }
+
+        private void Smartphones_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(CathegoryChooseWindow.getInstance(2));
+        }
+
+        private void Appliances_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(CathegoryChooseWindow.getInstance(1));
+        }
+
+        private void Television_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(CathegoryChooseWindow.getInstance(3));
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(ResultWindow.getInstance(Search.Text));
         }
     }
 }

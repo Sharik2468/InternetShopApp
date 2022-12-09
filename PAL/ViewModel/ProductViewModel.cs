@@ -27,8 +27,14 @@ namespace PL.ViewModel
         }
         public ProductViewModel()
         {
-            Products = new ObservableCollection<Product>(_productService.GetProducts());
+            SetAllProducts();
             setNewProductInstance();
+        }
+
+        public void SetAllProducts()
+        {
+            Products = new ObservableCollection<Product>(_productService.GetProducts());
+            OnPropertyChanged(nameof(Products));
         }
 
         public void setNewProductInstance()
@@ -40,6 +46,18 @@ namespace PL.ViewModel
         {
             setNewProductInstance();
             return _newProduct;
+        }
+
+        public void SetProductByID(int CategoryID)
+        {
+            Products = new ObservableCollection<Product>(_productService.GetProductByID(CategoryID));
+            OnPropertyChanged(nameof(Products));
+        }
+
+        public void SetProductByText(string Text)
+        {
+            Products = new ObservableCollection<Product>(_productService.GetProductByText(Text));
+            OnPropertyChanged(nameof(Products));
         }
 
         private RelayCommand _addCommand;

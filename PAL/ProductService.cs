@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using DBAccess;
 using PL.Model;
 
@@ -76,6 +77,26 @@ namespace PL
             dbProduct.Description = product.Desctription;
             db.SaveChanges();
 
+        }
+
+        public List<Product> GetProductByID(int CategoryID)
+        {
+            return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.CategoryID == CategoryID).ToList();
+        }
+
+        public List<Product> GetProductByText(string Text)
+        {
+            List<Product> ResultProducts = new List<Product>();
+            var products = GetProducts();
+
+            foreach (var prod in products)
+            {
+                if (Regex.IsMatch(prod.Name, "\\b" + Text + "\\b") ||
+                    Regex.IsMatch(prod.Desctription, "\\b" + Text + "\\b"))
+                    ResultProducts.Add(prod);
+            }
+
+            return ResultProducts;
         }
 
         public void SaveChanges()
