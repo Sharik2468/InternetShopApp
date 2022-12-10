@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,7 @@ namespace PAL.Windows
         public Basket()
         {
             InitializeComponent();
+            DataContext = OrderViewModel.Instance;
         }
         private static Page BasketPage = null;
         public static Page getInstance()

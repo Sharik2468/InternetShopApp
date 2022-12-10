@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PAL.Windows"
+      xmlns:local="clr-namespace:PAL.Windows" xmlns:viewmodel="clr-namespace:PL.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ClientViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Settings">
@@ -89,7 +89,7 @@
                         <TextBlock Text="Инструкция" HorizontalAlignment="Center" FontSize="16"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="0" Margin="1,0,0,0" Grid.Row="2">
+                    <StackPanel Grid.Column="0" Margin="1,0,0,0" Grid.Row="2" Visibility="{Binding AuthorizedUser.isAuthorized, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}">
                         <Button Style="{DynamicResource ColorOverButtonChange}" Name="AddProductButton" Content="" Click="AddProductButton_Click" Height="100" Width="100" Opacity="0.9" Focusable="False">
                             <Button.Background>
                                 <ImageBrush ImageSource="/View/Windows/Icons/kindpng_3520971.png" Stretch="Fill" TileMode="None" Opacity="1"/>

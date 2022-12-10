@@ -21,11 +21,13 @@
     <None Remove="free-icon-television-1025152.png" />
     <None Remove="pngwing.com.png" />
     <None Remove="pngwing12.com.png" />
+    <None Remove="View\Windows\free-icon-add-to-shopping-cart-57493.png" />
     <None Remove="View\Windows\free-icon-appliances-448836.png" />
     <None Remove="View\Windows\free-icon-guest-859030.png" />
     <None Remove="View\Windows\free-icon-pc-3233554.png" />
     <None Remove="View\Windows\free-icon-smartphones-1079519.png" />
     <None Remove="View\Windows\free-icon-television-1025152.png" />
+    <None Remove="View\Windows\Icons\free-icon-add-to-shopping-cart-57493.png" />
     <None Remove="View\Windows\Icons\free-icon-appliances-448836.png" />
     <None Remove="View\Windows\Icons\free-icon-guest-859030.png" />
     <None Remove="View\Windows\Icons\free-icon-instructions-2618630.png" />
@@ -49,6 +51,7 @@
 
   <ItemGroup>
     <Resource Include="View\Windows\Icons\ea0aee6ec78d9ec755e3102507320029.png" />
+    <Resource Include="View\Windows\Icons\free-icon-add-to-shopping-cart-57493.png" />
     <Resource Include="View\Windows\Icons\free-icon-appliances-448836.png" />
     <Resource Include="View\Windows\Icons\free-icon-guest-859030.png" />
     <Resource Include="View\Windows\Icons\free-icon-instructions-2618630.png" />

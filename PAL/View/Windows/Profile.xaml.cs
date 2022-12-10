@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,10 +22,12 @@ namespace PAL.Windows
         public Profile()
         {
             InitializeComponent();
+            DataContext = ClientViewModel.Instance;
         }
         private static Page ProfilePage = null;
         public static Page getInstance()
         {
+
             if (ProfilePage == null)
             {
                 ProfilePage = new Profile();
@@ -54,12 +57,12 @@ namespace PAL.Windows
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(Login.getInstance());
+            this.NavigationService.Navigate(Login.getInstance("Login"));
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(Login.getInstance("Register"));
         }
     }
 }

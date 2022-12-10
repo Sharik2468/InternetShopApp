@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PL.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PAL.Windows
 {
@@ -21,11 +12,14 @@ namespace PAL.Windows
         public Login()
         {
             InitializeComponent();
+            DataContext = ClientViewModel.Instance;
         }
 
         private static Page LoginPage = null;
-        public static Page getInstance()
+        public static Page getInstance(string ButtonName)
         {
+            ClientViewModel.Instance.SetPageName(ButtonName);
+
             if (LoginPage == null)
             {
                 LoginPage = new Login();
@@ -51,6 +45,17 @@ namespace PAL.Windows
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(Settings.getInstance());
+        }
+
+        private void RegisterOrLoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (RegisterOrLoginButton.Content.ToString() == "Войти")
+            {
+                ClientViewModel.Instance.Autorization(RegisterOrLoginButton.Content.ToString());
+                OrderViewModel.Instance.SetCurrentOrderForAuthorizedUser();
+                OrderViewModel.Instance.SetCurrentOrderItem();
+            }
+            this.NavigationService.Navigate(Start.getInstance());
         }
     }
 }

@@ -55,5 +55,10 @@ namespace PL.View.Windows
         {
             this.NavigationService.Navigate(Settings.getInstance());
         }
+
+        private void AddToBasket_Click(object sender, RoutedEventArgs e)
+        {
+            OrderViewModel.Instance.AddOrderItemCommand.Execute(null);
+        }
     }
 }

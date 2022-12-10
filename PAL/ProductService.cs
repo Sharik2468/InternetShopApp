@@ -79,7 +79,12 @@ namespace PL
 
         }
 
-        public List<Product> GetProductByID(int CategoryID)
+        public List<Product> GetProductByID(int ID)
+        {
+            return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.Product_Code == ID).ToList();
+        }
+
+        public List<Product> GetProductByCategoryID(int CategoryID)
         {
             return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.CategoryID == CategoryID).ToList();
         }

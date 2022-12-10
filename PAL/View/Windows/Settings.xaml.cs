@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,7 @@ namespace PAL.Windows
         public Settings()
         {
             InitializeComponent();
+            DataContext = ClientViewModel.Instance;
         }
 
         private static Page SettingsPage = null;

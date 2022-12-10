@@ -50,7 +50,7 @@ namespace PL.ViewModel
 
         public void SetProductByID(int CategoryID)
         {
-            Products = new ObservableCollection<Product>(_productService.GetProductByID(CategoryID));
+            Products = new ObservableCollection<Product>(_productService.GetProductByCategoryID(CategoryID));
             OnPropertyChanged(nameof(Products));
         }
 

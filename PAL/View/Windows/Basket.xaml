@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PAL.Windows"
+      xmlns:local="clr-namespace:PAL.Windows" xmlns:viewmodel="clr-namespace:PL.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:OrderViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Basket">
@@ -46,13 +46,54 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Здравствуйте, гость! Ваша корзина:" HorizontalAlignment="Center" FontSize="22" Width="369" VerticalAlignment="Center" Height="29"/>
 
-                            <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Margin="0,53,0,0" Grid.RowSpan="2">
+                    <ListBox x:Name="ProductsListBox" 
+                         Grid.Row="1" 
+                         Grid.Column="0" 
+                         Grid.ColumnSpan="4" 
+                         Grid.RowSpan="4" 
+                         ItemsSource="{Binding ProductsInBasket}"
+                         Background="Transparent" 
+                         HorizontalContentAlignment="Stretch" 
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
+                         d:ItemsSource="{d:SampleData}" 
+                         IsSynchronizedWithCurrentItem="True">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <!--Для отображения карточек пользователей с динамическим количеством колонок-->
+                                <!--Внимание на Binding для ширины. Значение берется у UsersListBox-->
+                                <WrapPanel x:Name="wrapPanel" Height="{Binding Path=ActualHeight, ElementName=ProductsListBox}" Orientation="Vertical">
+                                </WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="{Binding ActualWidth, ElementName=wrapPanel, Mode=OneWay}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="{Binding ImageToShow, Mode=OneWay}"/>
+                                    <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+                                        <TextBlock FontSize="22" Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Price}"/>
+                                        <TextBlock Text="{Binding Desctription}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock FontSize="16">Количество товара: </TextBlock>
+                                        <TextBlock Text="{Binding CurrentAmount}"/>
+                                        <TextBlock FontSize="16">Сумма товара: </TextBlock>
+                                        <TextBlock Text="{Binding CurrentSum}"/>
+                                        <TextBlock FontSize="16">Статус товара: </TextBlock>
+                                        <TextBlock Text="{Binding CurrentStatusID}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-
-
-                            </StackPanel>
-
-                        </Grid>
+                </Grid>
                     </ScrollViewer>
 
                     <StackPanel Grid.Column="0" Grid.Row="0" Background="#00D1FF" HorizontalAlignment="Stretch">

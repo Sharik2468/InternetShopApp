@@ -160,6 +160,39 @@ namespace PL.Model
             }
         }
 
+        private int _currentAmount;
+        public int CurrentAmount
+        {
+            get => _currentAmount;
+            set
+            {
+                _currentAmount = value;
+                OnPropertyChanged(nameof(CurrentAmount));
+            }
+        }
+
+        private float _currentSum;
+        public float CurrentSum
+        {
+            get => _currentSum;
+            set
+            {
+                _currentSum = value;
+                OnPropertyChanged(nameof(CurrentSum));
+            }
+        }
+
+        private int _currentStatusID;
+        public int CurrentStatusID
+        {
+            get => _currentStatusID;
+            set
+            {
+                _currentStatusID = value;
+                OnPropertyChanged(nameof(CurrentStatusID));
+            }
+        }
+
         #region Overides of INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
