@@ -90,11 +90,7 @@ namespace PL.ViewModel
 
         public void AddNewOrderItemToTheBasket()
         {
-            if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0)
-            {
-                System.Windows.MessageBox.Show("Пожалуйста, авторизируйтесь");
-                return; 
-            }
+            if (!CheckAuthorizationAndClientCondition()) return;
 
             bool NewOrder = false;
             if (CurrentOrder.Order_Code == 0)
@@ -143,7 +139,23 @@ namespace PL.ViewModel
             }
         }
 
-        private void SetNewAmount(Operations Opeartion, OrderItemModel RepeatOrderItem)
+        private bool CheckAuthorizationAndClientCondition()
+        {
+            if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0)
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, авторизируйтесь");
+                return false;
+            }
+
+            if (ClientViewModel.Instance.AuthorizedUser.UserTable == ClientVariety.Продавец)
+            {
+                System.Windows.MessageBox.Show("Вы не можете покупать товар, как продавец!");
+                return false;
+            }
+            return true;
+        }
+
+        private bool SetNewAmount(Operations Opeartion, OrderItemModel RepeatOrderItem)
         {
             OrderItemModel NewOrderItem = new OrderItemModel()
             {
@@ -159,9 +171,24 @@ namespace PL.ViewModel
                 Status_Order_Item_Table_ID = 1
             };
 
+            if (!CheckAvailableAmount(NewOrderItem))
+            {
+                System.Windows.MessageBox.Show("Количество товара превышает допустимое! Нельзя добавить товар в корзину.");
+                return false;
+            }
+
             _orderService.DeleteOrderItem(RepeatOrderItem);
             _orderService.AddOrderItem(NewOrderItem);
             SetCurrentOrderItem();
+            return true;
+        }
+
+        public bool CheckAvailableAmount(OrderItemModel SearchOrderItem)
+        {
+            if (SearchOrderItem.Order_Code == 0) return false;
+            var searchProduct = _productService.GetProductByID((int)SearchOrderItem.Product_Code);
+
+            return searchProduct[0].NumberInStock > SearchOrderItem.Amount_Order_Item ? true : false;
         }
 
         private int FindRepeatOrder(OrderItemModel OrderItem)

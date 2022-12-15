@@ -60,5 +60,12 @@ namespace PL.View.Windows
         {
             OrderViewModel.Instance.AddOrderItemCommand.Execute(null);
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0 ||
+                ClientViewModel.Instance.AuthorizedUser.UserTable==Model.ClientVariety.Покупатель) { DeleteProduct.Visibility=Visibility.Hidden; return; }
+            DeleteProduct.Visibility = Visibility.Visible;
+        }
     }
 }

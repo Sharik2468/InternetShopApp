@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PAL.Windows" xmlns:viewmodel="clr-namespace:PL.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ClientViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Profile">
+      Title="Profile" Loaded="Page_Loaded">
 
     <Grid>
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF00AEFF">
@@ -43,7 +43,7 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AuthorizedUser.Name}" HorizontalAlignment="Center" FontSize="22" Width="110" VerticalAlignment="Center" Height="29" Margin="195,0,0,0"/>
+                        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" x:Name="ClientProfileName" Text="гость" HorizontalAlignment="Center" FontSize="22" Width="110" VerticalAlignment="Center" Height="29" Margin="195,0,0,0"/>
                         <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Здравствуйте, " HorizontalAlignment="Center" FontSize="22" Width="200" VerticalAlignment="Center" Height="29"/>
 
                         <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Margin="0,53,0,0" Grid.RowSpan="2">

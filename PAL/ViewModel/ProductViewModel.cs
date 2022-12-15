@@ -33,7 +33,9 @@ namespace PL.ViewModel
 
         public void SetAllProducts()
         {
-            Products = new ObservableCollection<Product>(_productService.GetProducts());
+            var NewProducts =_productService.GetProducts();
+            NewProducts.Reverse();
+            Products = new ObservableCollection<Product>(NewProducts);
             OnPropertyChanged(nameof(Products));
         }
 

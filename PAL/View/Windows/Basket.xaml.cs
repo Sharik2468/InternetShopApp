@@ -64,5 +64,11 @@ namespace PAL.Windows
                 BasketScrollViewer.LineUp();
             }
         }
+
+        private void ClientName_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0) { ClientName.Text = "гость"; return; }
+            ClientName.Text = ClientViewModel.Instance.AuthorizedUser.Name;
+        }
     }
 }

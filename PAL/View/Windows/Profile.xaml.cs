@@ -64,5 +64,11 @@ namespace PAL.Windows
         {
             this.NavigationService.Navigate(PL.View.Windows.RegisterWindow.getInstance());
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(ClientViewModel.Instance.AuthorizedUser.Client_Code == 0) { ClientProfileName.Text = "гость"; return; }
+            ClientProfileName.Text = ClientViewModel.Instance.AuthorizedUser.Name;
+        }
     }
 }

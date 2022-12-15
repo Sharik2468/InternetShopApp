@@ -2,8 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PAL.Windows" xmlns:viewmodel="clr-namespace:PL.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:OrderViewModel}"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:viewmodel="clr-namespace:PL.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:OrderViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Basket">
@@ -44,7 +43,9 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Здравствуйте, гость! Ваша корзина:" HorizontalAlignment="Center" FontSize="22" Width="369" VerticalAlignment="Center" Height="29"/>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Здравствуйте," HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="0,0,100,25"/>
+                    <TextBlock x:Name="ClientName" Grid.Column="1" Grid.ColumnSpan="2" Text= "гость" HorizontalAlignment="Left" FontSize="22" VerticalAlignment="Center" Height="29" Width="250" Margin="220,0,0,25" Loaded="ClientName_Loaded"/>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="                Ваша корзина:" HorizontalAlignment="Center" FontSize="22" Width="369" VerticalAlignment="Center" Height="29" Margin="0,25,0,0"/>
 
                     <ListBox x:Name="ProductsListBox" 
                          Grid.Row="1" 
