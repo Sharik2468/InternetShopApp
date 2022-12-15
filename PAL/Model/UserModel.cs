@@ -21,9 +21,12 @@ namespace PL.Model
             Password = c.Password;
             Location_Code = c.Location_Code;
             isAuthorized = Visibility.Hidden;
+            UserTable = ClientVariety.Покупатель;
         }
         public UserModel(SalesmanModel c)
         {
+            if (c == null) return;
+
             Client_Code = c.Salesman_Code;
             Name = c.Saleman_Name;
             Surname = c.Salesman_Surname;
@@ -31,6 +34,17 @@ namespace PL.Model
             Password = c.Password;
             Location_Code = c.Location_Code;
             isAuthorized = Visibility.Hidden;
+            UserTable = ClientVariety.Продавец;
+        }
+
+        public ClientVariety UserTable
+        {
+            get => _userTable;
+            set
+            {
+                _userTable = value;
+                OnPropertyChanged(nameof(UserTable));
+            }
         }
 
         public Visibility isAuthorized
@@ -104,6 +118,7 @@ namespace PL.Model
         private Nullable<long> _telephoneNumber;
         private string _password;
         private Nullable<int> _locationCode;
+        private ClientVariety _userTable;
 
 
         #region Overides of INotifyPropertyChanged
@@ -121,4 +136,10 @@ namespace PL.Model
         Visible,
         Collapsed
     };
+
+    enum ClientVariety
+    {
+        Продавец,
+        Покупатель
+    }
 }

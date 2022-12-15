@@ -68,8 +68,34 @@ namespace PL.ViewModel
                       AddNewOrderItemToTheBasket();
                   }));
 
+        private RelayCommand _removeOrderItemCommand;
+        public RelayCommand RemoveOrderItemCommand => _removeOrderItemCommand ??
+                  (_removeOrderItemCommand = new RelayCommand(obj =>
+                  {
+                      if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0)
+                      {
+                          System.Windows.MessageBox.Show("Пожалуйста, авторизируйтесь");
+                          return;
+                      }
+
+                      var OrderItemsForDelete = _orderService.GetAllOrderItems(_currentOrder.Order_Code);
+                      foreach (var Item in OrderItemsForDelete)
+                          _orderService.DeleteOrderItem(Item);
+
+                      _orderService.DeleteOrder(CurrentOrder);
+
+                      SetCurrentOrderForAuthorizedUser();
+                      SetCurrentOrderItem();
+                  }));
+
         public void AddNewOrderItemToTheBasket()
         {
+            if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0)
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, авторизируйтесь");
+                return; 
+            }
+
             bool NewOrder = false;
             if (CurrentOrder.Order_Code == 0)
             {
@@ -82,7 +108,7 @@ namespace PL.ViewModel
                     Salesman_Code = 1,//TODO добавить код того, кто добавил продукт!!!!
                     Delivery_Code = 1,
                 };
-                if (CurrentOrder.Order_Code == 0) { CurrentOrder = new OrderModel(); return; }
+                if (CurrentOrder.Order_Code == 0) { CurrentOrder = new OrderModel(); return; }//обработка ошибки
                 NewOrder = true;
                 _orderService.AddOrder(CurrentOrder);
             }
@@ -101,12 +127,18 @@ namespace PL.ViewModel
             {
                 OrderItems.Add(NewOrderItem);
                 _orderService.AddOrderItem(NewOrderItem);
+                SetCurrentOrderItem();
             }
             else
             {
                 int RepeatIndex = FindRepeatOrder(NewOrderItem);
 
-                if (RepeatIndex == 0) { OrderItems.Add(NewOrderItem); _orderService.AddOrderItem(NewOrderItem); }
+                if (RepeatIndex == 0)
+                {
+                    OrderItems.Add(NewOrderItem);
+                    _orderService.AddOrderItem(NewOrderItem);
+                    SetCurrentOrderItem();
+                }
                 else SetNewAmount(Operations.Plus, _orderService.FindRepeatOrderItem(NewOrderItem));
             }
         }
@@ -115,7 +147,7 @@ namespace PL.ViewModel
         {
             OrderItemModel NewOrderItem = new OrderItemModel()
             {
-                Order_Item_Code = FindRepeatOrder(RepeatOrderItem),
+                Order_Item_Code = _orderService.FindRepeatOrderItem(RepeatOrderItem).Order_Item_Code,
                 Order_Sum = Opeartion == Operations.Plus ?
                                          RepeatOrderItem.Order_Sum += (int)_productService.GetProductByID((int)RepeatOrderItem.Product_Code)[0].MarketPrice :
                                          RepeatOrderItem.Order_Sum -= (int)_productService.GetProductByID((int)RepeatOrderItem.Product_Code)[0].MarketPrice,
@@ -134,8 +166,12 @@ namespace PL.ViewModel
 
         private int FindRepeatOrder(OrderItemModel OrderItem)
         {
-            var item = _orderService.FindRepeatOrderItem(OrderItem);
-            return (int)(item.Order_Code == 0 ? 0 : item.Order_Code);
+            try
+            {
+                var item = _orderService.FindRepeatOrderItem(OrderItem);
+                return (int)(item.Order_Code == 0 ? 0 : item.Order_Code);
+            }
+            catch (Exception) { return 0; }
         }
         private ObservableCollection<Product> GetProductsByOrderItem(ObservableCollection<OrderItemModel> Orders)
         {
@@ -149,7 +185,7 @@ namespace PL.ViewModel
                 OrderModel max;
                 List<OrderModel> Orders;
                 max = new OrderModel();
-                Orders = _orderService.GetAllOrders((int)CurrentOrder.Client_Code);
+                Orders = _orderService.GetAllOrders();
                 foreach (var entry in Orders)
                     if (entry.Order_Code > max.Order_Code) max = entry;
                 return max.Order_Code;

@@ -48,10 +48,13 @@ namespace PL
             {
                 Product_Code = max.Product_Code + 1,
                 Name_Product = product.Name,
-                Purchase_Price_Product = product.Price,
+                Purchase_Price_Product = product.PurchasePrice,
                 Best_Before_Date_Product = (int)product.BestBeforeDate,
-                Number_in_Stock = product.NumberInStock.ToString(),
-                Description = product.Desctription
+                Number_in_Stock = 1.ToString(),
+                Description = product.Desctription,
+                Category_ID = product.CategoryID,
+                Market_Price_Product = product.MarketPrice,
+                Date_of_Manufacture_Product = product.DateOfManufacture
             };
 
             try
@@ -64,6 +67,8 @@ namespace PL
             db.Product_Table.Add(dbProduct);
             db.SaveChanges();
 
+            System.Windows.MessageBox.Show("Товар успешно добавлен");
+
         }
 
         public void Update(Model.Product product)
@@ -71,7 +76,7 @@ namespace PL
 
             var dbProduct = db.Product_Table.FirstOrDefault(u => u.Product_Code == product.Product_Code);
             dbProduct.Name_Product = product.Name;
-            dbProduct.Purchase_Price_Product = product.Price;
+            dbProduct.Purchase_Price_Product = product.PurchasePrice;
             dbProduct.Best_Before_Date_Product = (int?)product.BestBeforeDate;
             dbProduct.Number_in_Stock = product.NumberInStock.ToString();
             dbProduct.Description = product.Desctription;

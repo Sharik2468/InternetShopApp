@@ -16,10 +16,8 @@ namespace PAL.Windows
         }
 
         private static Page LoginPage = null;
-        public static Page getInstance(string ButtonName)
+        public static Page getInstance()
         {
-            ClientViewModel.Instance.SetPageName(ButtonName);
-
             if (LoginPage == null)
             {
                 LoginPage = new Login();
@@ -49,12 +47,9 @@ namespace PAL.Windows
 
         private void RegisterOrLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (RegisterOrLoginButton.Content.ToString() == "Войти")
-            {
-                ClientViewModel.Instance.Autorization(RegisterOrLoginButton.Content.ToString());
-                OrderViewModel.Instance.SetCurrentOrderForAuthorizedUser();
-                OrderViewModel.Instance.SetCurrentOrderItem();
-            }
+            if (!ClientViewModel.Instance.Autorization(UserComboBox.SelectedIndex == 0 ? ClientName.Text : SalemanName.Text)) return; 
+            OrderViewModel.Instance.SetCurrentOrderForAuthorizedUser();
+            OrderViewModel.Instance.SetCurrentOrderItem();
             this.NavigationService.Navigate(Start.getInstance());
         }
     }

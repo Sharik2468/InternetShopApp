@@ -105,5 +105,17 @@ namespace PAL.Windows
         {
             this.NavigationService.Navigate(ResultWindow.getInstance(Search.Text));
         }
+
+        private void ProductsListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta < 0)
+            {
+                ProductsScrollViewer.LineDown();
+            }
+            else
+            {
+                ProductsScrollViewer.LineUp();
+            }
+        }
     }
 }

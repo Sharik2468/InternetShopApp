@@ -53,7 +53,7 @@
                             </TransformGroup>
                         </StackPanel.RenderTransform>
                         <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Рыночная стоимость продукта:</TextBlock>
-                        <TextBox Width="200" Height="20" VerticalAlignment="Center" Name="MarketPrice" Text="{Binding NewProduct.Price, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Width="200" Height="20" VerticalAlignment="Center" Name="MarketPrice" Text="{Binding NewProduct.MarketPrice, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10,10,45,10" RenderTransformOrigin="0.5,0.5">
@@ -66,7 +66,7 @@
                             </TransformGroup>
                         </StackPanel.RenderTransform>
                         <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Закупочная стоимость продукта:</TextBlock>
-                        <TextBox Width="200" Height="20" VerticalAlignment="Center" Name="PurchasePrice"/>
+                        <TextBox Width="200" Height="20" VerticalAlignment="Center" Name="PurchasePrice" Text="{Binding NewProduct.PurchasePrice, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="131,10,10,10" RenderTransformOrigin="0.5,0.5">
@@ -136,7 +136,7 @@
                             </TransformGroup>
                         </StackPanel.RenderTransform>
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="0,0,5,0">Описание:</TextBlock>
-                        <TextBox VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="Description" Text="{Binding NewProduct.Desctription, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Height="200">
+                        <TextBox VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="Description" Text="{Binding NewProduct.Desctription, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Height="200" TextWrapping="WrapWithOverflow">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="1"/>

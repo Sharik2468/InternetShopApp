@@ -17,7 +17,7 @@ namespace PL.Model
         {
             Product_Code = product.Product_Code;
             Name = product.Name_Product;
-            Price = (float)product.Purchase_Price_Product;
+            PurchasePrice = (float)product.Purchase_Price_Product;
             MarketPrice = (float)product.Market_Price_Product;
             BestBeforeDate = (float)product.Best_Before_Date_Product;
             Desctription = product.Description;
@@ -116,24 +116,24 @@ namespace PL.Model
             }
         }
 
-        private float _price;
-        public float Price
+        private float _purchasePrice;
+        public float PurchasePrice
         {
-            get => _price;
+            get => _purchasePrice;
             set
             {
-                _price = value;
-                OnPropertyChanged(nameof(Price));
+                _purchasePrice = value;
+                OnPropertyChanged(nameof(PurchasePrice));
             }
         }
 
-        private float _markPrice;
+        private float _marketPrice;
         public float MarketPrice
         {
-            get => _markPrice;
+            get => _marketPrice;
             set
             {
-                _markPrice = value;
+                _marketPrice = value;
                 OnPropertyChanged(nameof(MarketPrice));
             }
         }

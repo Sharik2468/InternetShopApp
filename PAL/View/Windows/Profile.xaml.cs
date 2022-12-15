@@ -57,12 +57,12 @@ namespace PAL.Windows
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(Login.getInstance("Login"));
+            this.NavigationService.Navigate(Login.getInstance());
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(Login.getInstance("Register"));
+            this.NavigationService.Navigate(PL.View.Windows.RegisterWindow.getInstance());
         }
     }
 }

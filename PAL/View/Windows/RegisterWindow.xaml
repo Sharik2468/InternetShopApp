@@ -1,11 +1,12 @@
-﻿<Page x:Class="PAL.Windows.Login"
+﻿<Page x:Class="PL.View.Windows.RegisterWindow"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:viewmodel="clr-namespace:PL.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ClientViewModel}"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PL.View.Windows"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Login">
+      Title="RegisterWindow">
 
     <Grid>
 
@@ -18,7 +19,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
 
             <StackPanel Grid.Column="0" Grid.Row="1" Background="#FF00D1FF">
 
@@ -34,14 +34,62 @@
 
                     <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Кем вы являетесь:</TextBlock>
 
-                    <ComboBox x:Name="UserComboBox" Height="25" Width="200" VerticalAlignment="Top">
-                        <ComboBoxItem x:Name="SelectedUser" IsSelected="True">
+                    <ComboBox x:Name="SelectedUserTable" Height="25" Width="200" VerticalAlignment="Top">
+                        <ComboBoxItem  IsSelected="True">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock x:Name="ClientName">Покупатель</TextBlock>
                             </StackPanel>
                         </ComboBoxItem>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="SalemanName">Продавец</TextBlock>
+                            <TextBlock x:Name="SalesmanName">Продавец</TextBlock>
+                        </StackPanel>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="-72,10,10,10" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-69"/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+
+                    <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0">Выберите пункт самовывоза:</TextBlock>
+
+                    <ComboBox x:Name="SelectedStreet" Height="25" Width="200" VerticalAlignment="Top">
+                        <ComboBoxItem IsSelected="True">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="Loc0">г.Иваново ул. Василевского д.13</TextBlock>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc1">г.Иваново ул. Суворово д.23</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc2">г.Иваново ул. Жарова д.3</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc3">г.Иваново ул. Шубиных д.6</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc4">г.Иваново ул. Шубиных д.100в</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc5">г.Иваново ул. Горово д.27</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc6">г.Иваново ул. Хорого д.89</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc7">г.Иваново ул. Мохрового д.15</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc8">г.Иваново ул. Суворово д.123</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Loc9">г.Иваново ул. Дубина д.14</TextBlock>
                         </StackPanel>
                     </ComboBox>
                 </StackPanel>
@@ -72,6 +120,28 @@
                     <TextBox Width="200" Height="25" VerticalAlignment="Center" Text="{Binding AuthorizedUser.Surname, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-68"/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0" HorizontalAlignment="Stretch">Номер телефона:</TextBlock>
+                    <TextBox Width="200" Height="25" VerticalAlignment="Center" Text="{Binding AuthorizedUser.Telephone_Number, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch">
+                        <TextBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="2"/>
+                            </TransformGroup>
+                        </TextBox.RenderTransform>
+                    </TextBox>
+                </StackPanel>
+
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="79,10,10,10" RenderTransformOrigin="0.5,0.5">
                     <StackPanel.RenderTransform>
                         <TransformGroup>
@@ -95,7 +165,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
-                    <Button x:Name="RegisterOrLoginButton" Content="Войти" Width="200" Height="25" Click="RegisterOrLoginButton_Click"/>
+                    <Button x:Name="RegisterOrLoginButton" Content="Регистрация" Width="200" Height="25" Click="RegisterOrLoginButton_Click"/>
                 </StackPanel>
 
             </StackPanel>

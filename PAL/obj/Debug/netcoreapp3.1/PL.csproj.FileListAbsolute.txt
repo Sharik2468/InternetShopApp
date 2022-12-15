@@ -54,3 +54,5 @@ C:\Users\ADMIN\Desktop\Работа в универе\Конструирован
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\ResultWindow.baml
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\CathegoryChooseWindow.g.cs
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\CathegoryChooseWindow.baml
+C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\RegisterWindow.g.cs
+C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\RegisterWindow.baml

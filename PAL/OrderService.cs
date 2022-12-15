@@ -24,11 +24,16 @@ namespace PL
             return c.ToList();
         }
 
-        public List<OrderModel> GetAllOrders(int UserID)
+        public List<OrderModel> GetAllOrdersByUserID(int UserID)
         {
             var c = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
                 .Where(s => s.Client_Code == UserID);
             return c.ToList();
+        }
+
+        public List<OrderModel> GetAllOrders()
+        {
+            return db.Order_Table.AsEnumerable().Select(o => new OrderModel(o)).ToList();
         }
         public ObservableCollection<Product> GetProductsByOrderItem(ObservableCollection<OrderItemModel> Orders)
         {
@@ -51,8 +56,8 @@ namespace PL
 
         public OrderItemModel FindRepeatOrderItem(OrderItemModel OrderItem)
         {
-            return db.Order_Item_Table.AsEnumerable().Select(o => new OrderItemModel(o))
-                     .Where(s => s.Product_Code == OrderItem.Product_Code).First();
+                return db.Order_Item_Table.AsEnumerable().Select(o => new OrderItemModel(o))
+                         .Where(s => s.Product_Code == OrderItem.Product_Code && s.Order_Code == OrderItem.Order_Code).First();
         }
 
         public void AddOrder(OrderModel Order)

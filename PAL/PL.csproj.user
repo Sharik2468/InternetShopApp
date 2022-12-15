@@ -28,6 +28,9 @@
     <Compile Update="View\Windows\Profile.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Windows\RegisterWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Windows\ResultWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,6 +64,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\Profile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Windows\RegisterWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\ResultWindow.xaml">

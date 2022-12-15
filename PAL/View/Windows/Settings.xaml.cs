@@ -23,6 +23,12 @@ namespace PAL.Windows
         {
             InitializeComponent();
             DataContext = ClientViewModel.Instance;
+            
+        }
+
+        public static void ChangeButtonVisibility(bool isVisible)
+        {
+            
         }
 
         private static Page SettingsPage = null;
@@ -63,6 +69,21 @@ namespace PAL.Windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(PL.View.Windows.AboutWindow.getInstance());
+        }
+
+        private void Page_GotFocus(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0) return;
+
+            AddProductStackPanel.Visibility =
+                ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец ?
+                Visibility.Visible :
+                Visibility.Hidden;
         }
     }
 }

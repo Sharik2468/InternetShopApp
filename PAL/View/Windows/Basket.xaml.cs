@@ -52,5 +52,17 @@ namespace PAL.Windows
         {
             this.NavigationService.Navigate(Settings.getInstance());
         }
+
+        private void ProductsListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta < 0)
+            {
+                BasketScrollViewer.LineDown();
+            }
+            else
+            {
+                BasketScrollViewer.LineUp();
+            }
+        }
     }
 }
