@@ -151,7 +151,7 @@ namespace PL.Model
         public RelayCommand AcceptOrderStatusCommand => _acceptOrderStatusCommand ??
                   (_acceptOrderStatusCommand = new RelayCommand(obj =>
                   {
-                      OrderViewModel.Instance.ChangeOrderStatus(true);
+                      OrderViewModel.Instance.OrderPay();
                   }));
 
         #region Overides of INotifyPropertyChanged

@@ -147,12 +147,20 @@ namespace PL.ViewModel
 
             return InOrder == "Отменён" ? "В наличии" : "Отменён";
         }
-        public void ChangeOrderStatus(bool ForAccept = false)
+        public void ChangeOrderStatus()
         {
-            if (!ForAccept)
-                CurrentOrderForView.Delivery_Code = CurrentOrderForView.Delivery_Code == 2 ? 4 : 2;
-            else
-                CurrentOrderForView.Delivery_Code = 3;
+            CurrentOrderForView.Delivery_Code = CurrentOrderForView.Delivery_Code == 2 ? 4 : 2;
+            _orderService.EditOrder(CurrentOrderForView);
+
+            SetCurrentOrderForAuthorizedUser();
+            SetCurrentOrderItem();
+        }
+
+        public void OrderPay()
+        {
+            if (CurrentOrderForView.Order_Code == 0) return;
+
+            CurrentOrderForView.Delivery_Code = 3;
             CurrentOrderForView.Order_Fullfillment = DateTime.Now;
             CurrentOrderForView.Salesman_Code = ClientViewModel.Instance.AuthorizedUser.Client_Code;
 

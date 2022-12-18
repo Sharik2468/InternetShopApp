@@ -14,7 +14,7 @@ namespace PL
         InternetShopEntities db;
         public ProductService()
         {
-            db = new InternetShopEntities();//3lab
+            db = new InternetShopEntities();
         }
 
         public List<Product> GetProducts()
