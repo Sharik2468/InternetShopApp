@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PL.Commands;
+using PL.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -97,6 +99,36 @@ namespace PL.Model
             }
         }
 
+        public string Order_Result_Name
+        {
+            get => _orderResultName;
+            set
+            {
+                _orderResultName = value;
+                OnPropertyChanged(nameof(Order_Result_Name));
+            }
+        }
+
+        public string Order_Status_Name
+        {
+            get => _orderStatusName;
+            set
+            {
+                _orderStatusName = value;
+                OnPropertyChanged(nameof(Order_Status_Name));
+            }
+        }
+
+        public string Order_Client_Name
+        {
+            get => _orderClientName;
+            set
+            {
+                _orderClientName = value;
+                OnPropertyChanged(nameof(Order_Client_Name));
+            }
+        }
+
         private int _orderCode;
         private Nullable<System.DateTime> _orderFullfillment;
         private Nullable<System.DateTime> _orderDate;
@@ -104,7 +136,23 @@ namespace PL.Model
         private Nullable<int> _salesmanCode;
         private Nullable<int> _deliveryCode;
         private Nullable<int> _orderResultSum;
+        private string _orderResultName;
+        private string _orderStatusName;
+        private string _orderClientName;
 
+        private RelayCommand _changeOrderStatusCommand;
+        public RelayCommand ChangeOrderStatusCommand => _changeOrderStatusCommand ??
+                  (_changeOrderStatusCommand = new RelayCommand(obj =>
+                  {
+                      OrderViewModel.Instance.ChangeOrderStatus();
+                  }));
+
+        private RelayCommand _acceptOrderStatusCommand;
+        public RelayCommand AcceptOrderStatusCommand => _acceptOrderStatusCommand ??
+                  (_acceptOrderStatusCommand = new RelayCommand(obj =>
+                  {
+                      OrderViewModel.Instance.ChangeOrderStatus(true);
+                  }));
 
         #region Overides of INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

@@ -26,11 +26,6 @@ namespace PAL.Windows
             
         }
 
-        public static void ChangeButtonVisibility(bool isVisible)
-        {
-            
-        }
-
         private static Page SettingsPage = null;
         public static Page getInstance()
         {
@@ -84,6 +79,16 @@ namespace PAL.Windows
                 ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец ?
                 Visibility.Visible :
                 Visibility.Hidden;
+        }
+
+        private void OrderStatus_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(PL.View.Windows.OrderWindow.getInstance());
+        }
+
+        private void WatchOrders_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(PL.View.Windows.AcceptOrdersWindows.getInstance());
         }
     }
 }

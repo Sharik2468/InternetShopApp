@@ -18,11 +18,15 @@ namespace PL.ViewModel
         OrderViewModel()
         {
             OrderItems = new ObservableCollection<OrderItemModel>();
+            AllOrders = new ObservableCollection<OrderModel>();
+            OrdersForAccept = new ObservableCollection<OrderModel>();
             ProductsInBasket = new ObservableCollection<Product>();
             CurrentOrder = new OrderModel(GetCurrentOrderForAuthorizedUser());
             CurrentOrderItem = new Product();
         }
         public ObservableCollection<OrderItemModel> OrderItems { get; set; }
+        public ObservableCollection<OrderModel> OrdersForAccept { get; set; }
+        public ObservableCollection<OrderModel> AllOrders { get; set; }
         public ObservableCollection<Product> ProductsInBasket { get; set; }
         private OrderModel _currentOrder;
         public OrderModel CurrentOrder
@@ -35,6 +39,20 @@ namespace PL.ViewModel
             {
                 _currentOrder = value;
                 OnPropertyChanged(nameof(CurrentOrder));
+            }
+        }
+
+        private OrderModel _currentOrderForView;
+        public OrderModel CurrentOrderForView
+        {
+            get
+            {
+                return _currentOrderForView;
+            }
+            set
+            {
+                _currentOrderForView = value;
+                OnPropertyChanged(nameof(CurrentOrderForView));
             }
         }
 
@@ -57,6 +75,8 @@ namespace PL.ViewModel
             CurrentOrder = new OrderModel(GetCurrentOrderForAuthorizedUser());
             OnPropertyChanged(nameof(CurrentOrder));
         }
+
+
         public OrderModel GetCurrentOrderForAuthorizedUser()
         {
             try
@@ -75,8 +95,19 @@ namespace PL.ViewModel
             OnPropertyChanged(nameof(ProductsInBasket));
 
             SetCurrentOrderSum();
+            SetAllOrderForAuthorizedUser();
+            SetAllOrderForAccept();
         }
-
+        private void SetAllOrderForAuthorizedUser()
+        {
+            AllOrders = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(ClientViewModel.Instance.AuthorizedUser));
+            OnPropertyChanged(nameof(AllOrders));
+        }
+        private void SetAllOrderForAccept()
+        {
+            OrdersForAccept = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(ClientViewModel.Instance.AuthorizedUser, true));
+            OnPropertyChanged(nameof(OrdersForAccept));
+        }
         private void SetCurrentOrderSum()
         {
             if (CheckValidOrderAndOrderItem()) return;
@@ -116,6 +147,41 @@ namespace PL.ViewModel
 
             return InOrder == "Отменён" ? "В наличии" : "Отменён";
         }
+        public void ChangeOrderStatus(bool ForAccept = false)
+        {
+            if (!ForAccept)
+                CurrentOrderForView.Delivery_Code = CurrentOrderForView.Delivery_Code == 2 ? 4 : 2;
+            else
+                CurrentOrderForView.Delivery_Code = 3;
+            CurrentOrderForView.Order_Fullfillment = DateTime.Now;
+            CurrentOrderForView.Salesman_Code = ClientViewModel.Instance.AuthorizedUser.Client_Code;
+
+            _orderService.EditOrder(CurrentOrderForView);
+            Product CurProd = null;
+
+            var OrderItemsForBuy = _orderService.GetAllOrderItems(CurrentOrderForView.Order_Code);
+            foreach (var Item in OrderItemsForBuy)
+            {
+                CurProd = _productService.GetProductByID((int)Item.Product_Code)[0];
+                CurProd.NumberInStock -= (int)Item.Amount_Order_Item;
+                if (CurProd.NumberInStock >= 0) _productService.Update(CurProd);
+            }
+
+            SetCurrentOrderForAuthorizedUser();
+            SetCurrentOrderItem();
+            ProductViewModel.Instance.SetAllProducts();
+        }
+
+        private RelayCommand _finalOrderCommand;
+        public RelayCommand FinalOrderCommand => _finalOrderCommand ??
+                  (_finalOrderCommand = new RelayCommand(obj =>
+                  {
+                      CurrentOrder.Delivery_Code = 2;
+                      _orderService.EditOrder(CurrentOrder);
+
+                      SetCurrentOrderForAuthorizedUser();
+                      SetCurrentOrderItem();
+                  }));
 
         private RelayCommand _addOrderItemCommand;
         public RelayCommand AddOrderItemCommand => _addOrderItemCommand ??
@@ -140,7 +206,7 @@ namespace PL.ViewModel
 
                       SetNewAmount(Operations.Minus, _orderService.FindRepeatOrderItem(NewOrderItem));
 
-                      if(OrderItems.Count==0)
+                      if (OrderItems.Count == 0)
                       {
                           _orderService.DeleteOrder(CurrentOrder);
 
@@ -254,7 +320,7 @@ namespace PL.ViewModel
                 Status_Order_Item_Table_ID = 1
             };
 
-            if(NewOrderItem.Amount_Order_Item==0)
+            if (NewOrderItem.Amount_Order_Item == 0)
             {
                 _orderService.DeleteOrderItem(RepeatOrderItem);
                 SetCurrentOrderItem();

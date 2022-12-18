@@ -35,6 +35,7 @@ namespace PL
         {
             return db.Order_Table.AsEnumerable().Select(o => new OrderModel(o)).ToList();
         }
+
         public ObservableCollection<Product> GetProductsByOrderItem(ObservableCollection<OrderItemModel> Orders)
         {
             ObservableCollection<Product> SelectedProduct = new ObservableCollection<Product>();
@@ -61,13 +62,13 @@ namespace PL
                      .Where(s => s.Product_Code == OrderItem.Product_Code && s.Order_Code == OrderItem.Order_Code).First();
         }
 
-        public void AddOrder(OrderModel Order)
+        public void AddOrder(OrderModel Order, bool ForceCode = false)
         {
             int max = GetMaxOrderCode();
 
             var dbOrder = new Order_Table()
             {
-                Order_Code = max + 1,
+                Order_Code = ForceCode ? Order.Order_Code : max + 1,
                 Order_Fullfillment = Order.Order_Fullfillment,
                 Order_Date = Order.Order_Date,
                 Client_Code = Order.Client_Code,
@@ -75,6 +76,18 @@ namespace PL
                 Delivery_Code = Order.Delivery_Code
             };
             db.Order_Table.Add(dbOrder);
+            db.SaveChanges();
+        }
+
+        public void EditOrder(OrderModel Order)
+        {
+            var dbOrder = db.Order_Table.FirstOrDefault(u => u.Order_Code == Order.Order_Code);
+            dbOrder.Order_Code = Order.Order_Code;
+            dbOrder.Order_Fullfillment = Order.Order_Fullfillment;
+            dbOrder.Order_Date = Order.Order_Date;
+            dbOrder.Client_Code = Order.Client_Code;
+            dbOrder.Salesman_Code = Order.Salesman_Code;
+            dbOrder.Delivery_Code = Order.Delivery_Code;
             db.SaveChanges();
         }
 
@@ -141,7 +154,45 @@ namespace PL
         public OrderModel GetCurentOrderForUser(UserModel User)
         {
             return db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
-                     .Where(s => s.Client_Code == User.Client_Code).First();
+                     .Where(s => s.Client_Code == User.Client_Code
+                     && s.Delivery_Code == 1).First();
+        }
+
+        public ObservableCollection<OrderModel> GetOrdersForUser(UserModel User, bool ForAccept = false)
+        {
+            IEnumerable<OrderModel> Orders = null;
+            if (!ForAccept)
+                Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
+                         .Where(s => s.Client_Code == User.Client_Code
+                         &&s.Delivery_Code != 3);
+
+            else Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
+                         .Where(s => s.Delivery_Code == 2);
+
+
+            ObservableCollection<OrderModel> Result = new ObservableCollection<OrderModel>();
+
+            foreach (var order in Orders)
+            {
+                ProductService _productService = new ProductService();
+                UserService _userService = new UserService();
+
+                var OrderItems = GetAllOrderItems(order.Order_Code);
+                foreach (var orderItem in OrderItems)
+                    order.Order_Result_Name += _productService.GetProductByID((int)orderItem.Product_Code).FirstOrDefault().Name + " ";
+
+                order.Order_Status_Name = GetOrderStatusByID((int)order.Delivery_Code);
+                order.Order_Client_Name = _userService.GetClientByID((int)order.Client_Code).Name;
+                Result.Add(order);
+            }
+
+            return Result;
+        }
+
+        public string GetOrderStatusByID(int ID)
+        {
+            return db.Status_Table.AsEnumerable().Select(o => new StatusOrderModel(o))
+                     .Where(s => s.Delivery_Code == ID).First().Order_Status;
         }
     }
 }

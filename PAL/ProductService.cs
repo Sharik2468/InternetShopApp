@@ -19,7 +19,7 @@ namespace PL
 
         public List<Product> GetProducts()
         {
-            return db.Product_Table.AsEnumerable().Select(o => new Product(o)).ToList();
+            return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.NumberInStock > 0).ToList();
         }
 
         public void DeleteProduct(Model.Product product)

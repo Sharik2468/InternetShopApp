@@ -21,6 +21,11 @@ namespace PL
             var c = db.Client_Table.AsEnumerable().Select(o => new UserModel(o));
             return c.ToList();
         }
+
+        public UserModel GetClientByID(int ID)
+        {
+            return db.Client_Table.AsEnumerable().Select(o => new UserModel(o)).Where(s => s.Client_Code == ID).First();
+        }
         public UserModel GetClientFull(UserModel User)
         {
             var c = db.Client_Table.AsEnumerable().Select(o => new UserModel(o)).
