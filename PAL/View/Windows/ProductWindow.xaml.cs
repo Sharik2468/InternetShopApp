@@ -64,8 +64,18 @@ namespace PL.View.Windows
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0 ||
-                ClientViewModel.Instance.AuthorizedUser.UserTable==Model.ClientVariety.Покупатель) { DeleteProduct.Visibility=Visibility.Hidden; return; }
+                ClientViewModel.Instance.AuthorizedUser.UserTable == Model.ClientVariety.Покупатель)
+            {
+                DeleteProduct.Visibility = Visibility.Hidden;
+                AddProduct.Visibility = Visibility.Hidden;
+                DecreaseProduct.Visibility = Visibility.Hidden;
+
+                return;
+            }
+
             DeleteProduct.Visibility = Visibility.Visible;
+            AddProduct.Visibility = Visibility.Visible;
+            DecreaseProduct.Visibility = Visibility.Visible;
         }
     }
 }

@@ -21,6 +21,9 @@
     <None Remove="free-icon-television-1025152.png" />
     <None Remove="pngwing.com.png" />
     <None Remove="pngwing12.com.png" />
+    <None Remove="View\Password-Italic.ttf" />
+    <None Remove="View\Password.ttf" />
+    <None Remove="View\PasswordFilled.ttf" />
     <None Remove="View\Windows\free-icon-add-to-shopping-cart-57493.png" />
     <None Remove="View\Windows\free-icon-appliances-448836.png" />
     <None Remove="View\Windows\free-icon-guest-859030.png" />
@@ -50,6 +53,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="View\Password-Italic.ttf" />
+    <Resource Include="View\Password.ttf" />
+    <Resource Include="View\PasswordFilled.ttf" />
     <Resource Include="View\Windows\Icons\ea0aee6ec78d9ec755e3102507320029.png" />
     <Resource Include="View\Windows\Icons\free-icon-add-to-shopping-cart-57493.png" />
     <Resource Include="View\Windows\Icons\free-icon-appliances-448836.png" />

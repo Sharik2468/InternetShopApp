@@ -69,6 +69,29 @@ namespace PAL.Windows
         {
             if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0) { ClientName.Text = "гость"; return; }
             ClientName.Text = ClientViewModel.Instance.AuthorizedUser.Name;
+
+            if (ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец)
+            {
+                System.Windows.MessageBox.Show("Чтобы покупать, войдите как пользователь!");
+                this.NavigationService.Navigate(Start.getInstance());
+                return;
+            }
+        }
+
+        private void AddOrderItemAmount_Click(object sender, RoutedEventArgs e)
+        {
+            ProductViewModel.Instance.SelectedProduct.MarketPrice = OrderViewModel.Instance.ProductsInBasket[OrderItemListBox.SelectedIndex].MarketPrice;
+            ProductViewModel.Instance.SelectedProduct.Product_Code = OrderViewModel.Instance.ProductsInBasket[OrderItemListBox.SelectedIndex].Product_Code;
+
+            OrderViewModel.Instance.AddOrderItemCommand.Execute(null);
+        }
+
+        private void DecreaseOrderItemAmount_Click(object sender, RoutedEventArgs e)
+        {
+            ProductViewModel.Instance.SelectedProduct.MarketPrice = OrderViewModel.Instance.ProductsInBasket[OrderItemListBox.SelectedIndex].MarketPrice;
+            ProductViewModel.Instance.SelectedProduct.Product_Code = OrderViewModel.Instance.ProductsInBasket[OrderItemListBox.SelectedIndex].Product_Code;
+
+            OrderViewModel.Instance.DecreaseOrderItemCommand.Execute(null);
         }
     }
 }

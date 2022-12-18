@@ -111,6 +111,28 @@ namespace PL.ViewModel
             }
         }
 
+        private RelayCommand _deauthorizationCommand;
+        public RelayCommand DeauthorizationCommand => _deauthorizationCommand ??
+                  (_deauthorizationCommand = new RelayCommand(obj =>
+                  {
+                      UserModel DefaultUser = new UserModel()
+                      {
+                          Client_Code = 0,
+                          isAuthorized = Visibility.Hidden,
+                          Name = "",
+                          Surname = "",
+                          Telephone_Number = 0,
+                          Password = "",
+                          Location_Code = 0,
+                          UserTable = ClientVariety.Покупатель
+                      };
+
+                      SetUser(DefaultUser);
+                      OrderViewModel.Instance.SetCurrentOrderForAuthorizedUser();
+                      OrderViewModel.Instance.SetCurrentOrderItem();
+
+                      System.Windows.MessageBox.Show("Вы успешно вышли из аккаунта!");
+                  }));
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

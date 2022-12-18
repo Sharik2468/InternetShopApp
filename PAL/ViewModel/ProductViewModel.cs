@@ -78,6 +78,26 @@ namespace PL.ViewModel
                       }
                   }));
 
+        private RelayCommand _addAmountCommand;
+        public RelayCommand AddAmountCommand => _addAmountCommand ??
+                  (_addAmountCommand = new RelayCommand(obj =>
+                  {
+                      SelectedProduct.NumberInStock++;
+                      _productService.Update(SelectedProduct);
+                      Products = new ObservableCollection<Product>(_productService.GetProducts());
+                      OnPropertyChanged(nameof(Products));
+                  }));
+
+        private RelayCommand _decAmountCommand;
+        public RelayCommand DecreaseAmountCommand => _decAmountCommand ??
+                  (_decAmountCommand = new RelayCommand(obj =>
+                  {
+                      SelectedProduct.NumberInStock--;
+                      _productService.Update(SelectedProduct);
+                      Products = new ObservableCollection<Product>(_productService.GetProducts());
+                      OnPropertyChanged(nameof(Products));
+                  }));
+
         private RelayCommand _delCommand;
         public RelayCommand DelCommand => _delCommand ??
                   (_delCommand = new RelayCommand(obj =>

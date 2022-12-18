@@ -122,7 +122,10 @@
                                 <Image Grid.Column="0" Source="{Binding ImageToShow, Mode=OneWay}"/>
                                 <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
                                     <TextBlock FontSize="22" Text="{Binding Name}"/>
-                                    <TextBlock Text="{Binding MarketPrice}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding MarketPrice}"/>
+                                        <TextBlock Text=" Рублей"/>
+                                    </StackPanel>
                                     <TextBlock Text="{Binding Desctription}"/>
                                 </StackPanel>
                             </Grid>

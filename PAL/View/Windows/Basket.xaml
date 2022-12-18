@@ -44,10 +44,10 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Здравствуйте," HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="0,0,100,25"/>
-                    <TextBlock x:Name="ClientName" Grid.Column="1" Grid.ColumnSpan="2" Text= "гость" HorizontalAlignment="Left" FontSize="22" VerticalAlignment="Center" Height="29" Width="250" Margin="220,0,0,25" Loaded="ClientName_Loaded"/>
+                    <TextBlock x:Name="ClientName" Grid.Column="1" Grid.ColumnSpan="2" Text= "гость" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Width="110" Margin="160,0,0,25" Loaded="ClientName_Loaded"/>
                     <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="                Ваша корзина:" HorizontalAlignment="Center" FontSize="22" Width="369" VerticalAlignment="Center" Height="29" Margin="0,25,0,0"/>
 
-                    <ListBox x:Name="ProductsListBox" 
+                    <ListBox x:Name="OrderItemListBox" 
                          Grid.Row="1" 
                          Grid.Column="0" 
                          Grid.ColumnSpan="4" 
@@ -63,7 +63,7 @@
                             <ItemsPanelTemplate>
                                 <!--Для отображения карточек пользователей с динамическим количеством колонок-->
                                 <!--Внимание на Binding для ширины. Значение берется у UsersListBox-->
-                                <WrapPanel x:Name="wrapPanel" Height="{Binding Path=ActualHeight, ElementName=ProductsListBox}" Orientation="Vertical">
+                                <WrapPanel x:Name="wrapPanel" Height="{Binding Path=ActualHeight, ElementName=OrderItemListBox}" Orientation="Vertical">
                                 </WrapPanel>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
@@ -72,29 +72,53 @@
                                 <Grid Height="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="{Binding ActualWidth, ElementName=wrapPanel, Mode=OneWay}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="80"/>
-                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="350"/>
+                                        <ColumnDefinition Width="200"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Image Grid.Column="0" Source="{Binding ImageToShow, Mode=OneWay}"/>
                                     <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
                                         <TextBlock FontSize="22" Text="{Binding Name}"/>
-                                        <TextBlock Text="{Binding MarketPrice}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding MarketPrice}"/>
+                                            <TextBlock Text=" Рублей"/>
+                                        </StackPanel>
                                         <TextBlock Text="{Binding Desctription}"/>
                                     </StackPanel>
                                     <StackPanel Grid.Column="2">
                                         <TextBlock FontSize="16">Количество товара:</TextBlock>
                                         <TextBlock Text="{Binding CurrentAmount}"/>
                                         <TextBlock FontSize="16">Сумма товара:</TextBlock>
-                                        <TextBlock Text="{Binding CurrentSum}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding CurrentSum}"/>
+                                            <TextBlock Text=" Рублей"/>
+                                        </StackPanel>
                                         <TextBlock FontSize="16">Статус товара:</TextBlock>
-                                        <TextBlock Text="{Binding CurrentStatusID}"/>
+                                        <TextBlock Text="{Binding CurrentStatusName}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                        <Button Name="OrderItemStatusCheckBox" 
+                                                  HorizontalAlignment="Left" 
+                                                  Command="{Binding ChangeOrderItemStatusCommand}"
+                                                  VerticalAlignment="Stretch">Включён в заказ</Button>
+
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
+                                            <Button x:Name="AddOrderItemAmount" Height="20" Width="20" Content="+" Margin="15,10,10,10" Click="AddOrderItemAmount_Click"/>
+                                            <Button x:Name="DecreaseOrderItemAmount" Height="20" Width="20" Content="-" Margin="15,10,17,10" Click="DecreaseOrderItemAmount_Click"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-
-                    <Button Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" VerticalAlignment="Center" Height="20" Content="Очистить корзину" Command="{Binding RemoveOrderItemCommand}"/>
+                    <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4">
+                        <Label HorizontalAlignment="Center">Итоговая стоимость:</Label>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Label x:Name="OrderItemSumm" Content="{Binding CurrentOrder.Order_Result_Sum}"/>
+                            <Label HorizontalAlignment="Center" Content="рублей"/>
+                        </StackPanel>
+                        <Button VerticalAlignment="Center" Height="20" Content="Очистить корзину" Command="{Binding RemoveOrderItemCommand}"/>
+                    </StackPanel>
                 </Grid>
             </ScrollViewer>
 

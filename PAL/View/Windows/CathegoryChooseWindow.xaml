@@ -29,7 +29,7 @@
                      Grid.Row="1" Grid.Column="0"
                      Grid.ColumnSpan="4" 
                      HorizontalContentAlignment="Stretch" 
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto"  
                      d:ItemsSource="{d:SampleData}" 
                      IsSynchronizedWithCurrentItem="True" 
                      MaxHeight="1000" MouseDoubleClick="ProductsListBox_MouseDoubleClick" 
@@ -47,13 +47,13 @@
                     <ItemsPanelTemplate>
                         <!--Для отображения карточек пользователей с динамическим количеством колонок-->
                         <!--Внимание на Binding для ширины. Значение берется у UsersListBox-->
-                        <WrapPanel x:Name="wrapPanel" Height="{Binding Path=ActualHeight, ElementName=ProductsListBox}" Orientation="Vertical">
+                        <WrapPanel x:Name="wrapPanel" Width="{Binding Path=ActualWidth, ElementName=ProductsListBox}" Orientation="Horizontal">
                         </WrapPanel>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="800">
+                        <Grid Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="445">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>

@@ -87,12 +87,23 @@ namespace PL.Model
             }
         }
 
+        public Nullable<int> Order_Result_Sum
+        {
+            get => _orderResultSum;
+            set
+            {
+                _orderResultSum = value;
+                OnPropertyChanged(nameof(Order_Result_Sum));
+            }
+        }
+
         private int _orderCode;
         private Nullable<System.DateTime> _orderFullfillment;
         private Nullable<System.DateTime> _orderDate;
         private Nullable<int> _clientCode;
         private Nullable<int> _salesmanCode;
         private Nullable<int> _deliveryCode;
+        private Nullable<int> _orderResultSum;
 
 
         #region Overides of INotifyPropertyChanged

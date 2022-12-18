@@ -70,5 +70,10 @@ namespace PAL.Windows
             if(ClientViewModel.Instance.AuthorizedUser.Client_Code == 0) { ClientProfileName.Text = "гость"; return; }
             ClientProfileName.Text = ClientViewModel.Instance.AuthorizedUser.Name;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ClientProfileName.Text = "гость";
+        }
     }
 }

@@ -44,12 +44,18 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="1" Grid.Row="1" Source="{Binding SelectedProduct.ImageToShow, Mode=OneWay}"/>
+                    <Image x:Name="image" 
+                           Grid.Column="1" Grid.Row="1"
+                           Source="{Binding SelectedProduct.ImageToShow, Mode=OneWay}"/>
+
                     <StackPanel Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical">
 
                         <TextBlock FontSize="22" Text="{Binding SelectedProduct.Name}"  HorizontalAlignment="Center"/>
                         <TextBlock FontSize="18" Text="Цена:" HorizontalAlignment="Center"/>
-                        <TextBlock FontSize="18" Text="{Binding SelectedProduct.MarketPrice}" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock FontSize="18" Text="{Binding SelectedProduct.MarketPrice}"/>
+                            <TextBlock FontSize="18" Text=" Рублей"/>
+                        </StackPanel>
                         <TextBlock FontSize="18" Text="Количество:" HorizontalAlignment="Center"/>
                         <TextBlock FontSize="18" Text="{Binding SelectedProduct.NumberInStock}" HorizontalAlignment="Center"/>
 
@@ -66,9 +72,20 @@
                         <TextBlock Text="Добавить в корзину" HorizontalAlignment="Center" FontSize="16"/>
                     </StackPanel>
 
-                    <TextBlock  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="2" FontSize="16" Text="{Binding SelectedProduct.Desctription}" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow"/>
+                    <Border BorderThickness="2"
+                            BorderBrush="Black"
+                            Grid.Column="0" Grid.Row="3"
+                            Grid.ColumnSpan="4" Grid.RowSpan="2"
+                            Background="White"
+                            Margin="10,10,10,10">
+                        <TextBlock FontSize="16" Text="{Binding SelectedProduct.Desctription}" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow"/>
+                    </Border>
 
-                    <Button x:Name="DeleteProduct" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4" VerticalAlignment="Center" Height="25" Content="Удалить товар" Command="{Binding DelCommand}"/>
+                    <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4">
+                        <Button x:Name="AddProduct" Margin="10,10,10,10"  VerticalAlignment="Center" Height="25" Content="Добавить товар" Command="{Binding AddAmountCommand}"/>
+                        <Button x:Name="DecreaseProduct" Margin="10,10,10,10"  VerticalAlignment="Center" Height="25" Content="Забрать товар" Command="{Binding DecreaseAmountCommand}"/>
+                        <Button x:Name="DeleteProduct" Margin="10,10,10,10" Grid.ColumnSpan="4" VerticalAlignment="Center" Height="25" Content="Удалить товар" Command="{Binding DelCommand}"/>
+                    </StackPanel>
                 </Grid>
             </ScrollViewer>
 

@@ -39,13 +39,14 @@ namespace PL
         {
             ObservableCollection<Product> SelectedProduct = new ObservableCollection<Product>();
 
-            foreach (var o in Orders)
+            foreach (var o in Orders.Reverse())
             {
                 var CurrentProduct = db.Product_Table.AsEnumerable().Select(o => new Product(o))
                      .Where(s => s.Product_Code == o.Product_Code).First();
 
                 CurrentProduct.CurrentAmount = (int)o.Amount_Order_Item;
-                CurrentProduct.CurrentStatusID = o.Status_Order_Item_Table_ID;
+                CurrentProduct.CurrentStatusName = db.Status_Order_Item_Table.AsEnumerable().Select(o => new StatusItemModel(o))
+                     .Where(s => s.Status_Order_Item_ID == o.Status_Order_Item_Table_ID).First().Status_Order_Item_Table1;
                 CurrentProduct.CurrentSum = (float)o.Order_Sum;
 
                 SelectedProduct.Add(CurrentProduct);
@@ -56,8 +57,8 @@ namespace PL
 
         public OrderItemModel FindRepeatOrderItem(OrderItemModel OrderItem)
         {
-                return db.Order_Item_Table.AsEnumerable().Select(o => new OrderItemModel(o))
-                         .Where(s => s.Product_Code == OrderItem.Product_Code && s.Order_Code == OrderItem.Order_Code).First();
+            return db.Order_Item_Table.AsEnumerable().Select(o => new OrderItemModel(o))
+                     .Where(s => s.Product_Code == OrderItem.Product_Code && s.Order_Code == OrderItem.Order_Code).First();
         }
 
         public void AddOrder(OrderModel Order)
@@ -122,6 +123,8 @@ namespace PL
 
         public void DeleteOrderItem(OrderItemModel orderItem)
         {
+            if (orderItem.Order_Item_Code == 0) return;
+
             Order_Item_Table p = db.Order_Item_Table.Where(s => s.Order_Item_Code == orderItem.Order_Item_Code).First();
             db.Order_Item_Table.Remove(p);
             db.SaveChanges();
@@ -129,6 +132,7 @@ namespace PL
 
         public void DeleteOrder(OrderModel order)
         {
+            if (order.Order_Code == 0) return;
             Order_Table p = db.Order_Table.Where(s => s.Order_Code == order.Order_Code).First();
             db.Order_Table.Remove(p);
             db.SaveChanges();

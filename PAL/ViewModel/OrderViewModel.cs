@@ -20,6 +20,7 @@ namespace PL.ViewModel
             OrderItems = new ObservableCollection<OrderItemModel>();
             ProductsInBasket = new ObservableCollection<Product>();
             CurrentOrder = new OrderModel(GetCurrentOrderForAuthorizedUser());
+            CurrentOrderItem = new Product();
         }
         public ObservableCollection<OrderItemModel> OrderItems { get; set; }
         public ObservableCollection<Product> ProductsInBasket { get; set; }
@@ -37,6 +38,25 @@ namespace PL.ViewModel
             }
         }
 
+        private Product _currentOrderItem;
+        public Product CurrentOrderItem
+        {
+            get
+            {
+                return _currentOrderItem;
+            }
+            set
+            {
+                _currentOrderItem = value;
+                OnPropertyChanged(nameof(CurrentOrderItem));
+            }
+        }
+
+        public void SetCurrentOrderForAuthorizedUser()
+        {
+            CurrentOrder = new OrderModel(GetCurrentOrderForAuthorizedUser());
+            OnPropertyChanged(nameof(CurrentOrder));
+        }
         public OrderModel GetCurrentOrderForAuthorizedUser()
         {
             try
@@ -46,12 +66,6 @@ namespace PL.ViewModel
             catch { return new OrderModel(); }
         }
 
-        public void SetCurrentOrderForAuthorizedUser()
-        {
-            CurrentOrder = new OrderModel(GetCurrentOrderForAuthorizedUser());
-            OnPropertyChanged(nameof(CurrentOrder));
-        }
-
         public void SetCurrentOrderItem()
         {
             OrderItems = new ObservableCollection<OrderItemModel>(_orderService.GetAllOrderItems((int)CurrentOrder.Order_Code));
@@ -59,6 +73,48 @@ namespace PL.ViewModel
 
             ProductsInBasket = new ObservableCollection<Product>(GetProductsByOrderItem(OrderItems));
             OnPropertyChanged(nameof(ProductsInBasket));
+
+            SetCurrentOrderSum();
+        }
+
+        private void SetCurrentOrderSum()
+        {
+            if (CheckValidOrderAndOrderItem()) return;
+
+            CurrentOrder.Order_Result_Sum = 0;
+
+            foreach (var Item in OrderItems)
+                if (Item.Status_Order_Item_Table_ID == 1)
+                    CurrentOrder.Order_Result_Sum += Item.Order_Sum;
+            OnPropertyChanged(nameof(CurrentOrder));
+        }
+
+        private bool CheckValidOrderAndOrderItem()
+        {
+            return OrderItems.Count == 0 || CurrentOrder.Order_Code == 0;
+        }
+
+        public string ChangeOrderItemStatus(string InOrder, Product OrderItemProduct)
+        {
+            //OrderItemProduct.CurrentStatusName = InOrder == "В наличии" ? "Отменён" : "В наличии";
+            OrderItemModel OrderItemForChange = null;
+            OrderItemModel OrderItemForDelete = null;
+
+            foreach (var Item in OrderItems)
+            {
+                if (Item.Product_Code == OrderItemProduct.Product_Code)
+                {
+                    OrderItemForChange = Item;
+                    OrderItemForDelete = Item;
+                }
+            }
+
+            OrderItemForChange.Status_Order_Item_Table_ID = InOrder == "Отменён" ? 1 : 2;
+            _orderService.DeleteOrderItem(OrderItemForDelete);
+            _orderService.AddOrderItem(OrderItemForChange);
+            SetCurrentOrderItem();
+
+            return InOrder == "Отменён" ? "В наличии" : "Отменён";
         }
 
         private RelayCommand _addOrderItemCommand;
@@ -66,6 +122,31 @@ namespace PL.ViewModel
                   (_addOrderItemCommand = new RelayCommand(obj =>
                   {
                       AddNewOrderItemToTheBasket();
+                  }));
+
+        private RelayCommand _decreaseOrderItemCommand;
+        public RelayCommand DecreaseOrderItemCommand => _decreaseOrderItemCommand ??
+                  (_decreaseOrderItemCommand = new RelayCommand(obj =>
+                  {
+                      OrderItemModel NewOrderItem = new OrderItemModel()
+                      {
+                          Order_Item_Code = GetMaxOrderItemIndex() + 1,
+                          Order_Sum = (int)ProductViewModel.Instance.SelectedProduct.MarketPrice,
+                          Amount_Order_Item = 1,
+                          Product_Code = ProductViewModel.Instance.SelectedProduct.Product_Code,
+                          Order_Code = CurrentOrder.Order_Code,
+                          Status_Order_Item_Table_ID = 1
+                      };
+
+                      SetNewAmount(Operations.Minus, _orderService.FindRepeatOrderItem(NewOrderItem));
+
+                      if(OrderItems.Count==0)
+                      {
+                          _orderService.DeleteOrder(CurrentOrder);
+
+                          SetCurrentOrderForAuthorizedUser();
+                          SetCurrentOrderItem();
+                      }
                   }));
 
         private RelayCommand _removeOrderItemCommand;
@@ -88,7 +169,7 @@ namespace PL.ViewModel
                       SetCurrentOrderItem();
                   }));
 
-        public void AddNewOrderItemToTheBasket()
+        private void AddNewOrderItemToTheBasket()
         {
             if (!CheckAuthorizationAndClientCondition()) return;
 
@@ -157,6 +238,8 @@ namespace PL.ViewModel
 
         private bool SetNewAmount(Operations Opeartion, OrderItemModel RepeatOrderItem)
         {
+            if (RepeatOrderItem.Amount_Order_Item == 0) return false;
+
             OrderItemModel NewOrderItem = new OrderItemModel()
             {
                 Order_Item_Code = _orderService.FindRepeatOrderItem(RepeatOrderItem).Order_Item_Code,
@@ -170,6 +253,13 @@ namespace PL.ViewModel
                 Order_Code = CurrentOrder.Order_Code,
                 Status_Order_Item_Table_ID = 1
             };
+
+            if(NewOrderItem.Amount_Order_Item==0)
+            {
+                _orderService.DeleteOrderItem(RepeatOrderItem);
+                SetCurrentOrderItem();
+                return true;
+            }
 
             if (!CheckAvailableAmount(NewOrderItem))
             {
@@ -188,7 +278,7 @@ namespace PL.ViewModel
             if (SearchOrderItem.Order_Code == 0) return false;
             var searchProduct = _productService.GetProductByID((int)SearchOrderItem.Product_Code);
 
-            return searchProduct[0].NumberInStock > SearchOrderItem.Amount_Order_Item ? true : false;
+            return searchProduct[0].NumberInStock >= SearchOrderItem.Amount_Order_Item ? true : false;
         }
 
         private int FindRepeatOrder(OrderItemModel OrderItem)

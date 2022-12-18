@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PL.Commands;
+using PL.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -11,6 +13,7 @@ namespace PL.Model
     class Product : INotifyPropertyChanged
     {
         private readonly CategoryService _categoryServ = new CategoryService();
+        private readonly ProductService _productServ = new ProductService();
         public Product()
         { }
         public Product(DBAccess.Product_Table product)
@@ -182,16 +185,23 @@ namespace PL.Model
             }
         }
 
-        private int _currentStatusID;
-        public int CurrentStatusID
+        private string _currentStatusName;
+        public string CurrentStatusName
         {
-            get => _currentStatusID;
+            get => _currentStatusName;
             set
             {
-                _currentStatusID = value;
-                OnPropertyChanged(nameof(CurrentStatusID));
+                    _currentStatusName = value;
+                OnPropertyChanged(nameof(CurrentStatusName));
             }
         }
+
+        private RelayCommand _changeOrderItemStatusCommand;
+        public RelayCommand ChangeOrderItemStatusCommand => _changeOrderItemStatusCommand ??
+                  (_changeOrderItemStatusCommand = new RelayCommand(obj =>
+                  {
+                      _currentStatusName = OrderViewModel.Instance.ChangeOrderItemStatus(_currentStatusName, _productServ.GetProductByID(Product_Code)[0]);
+                  }));
 
         #region Overides of INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
