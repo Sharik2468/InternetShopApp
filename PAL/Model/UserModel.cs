@@ -139,7 +139,7 @@ namespace PL.Model
 
     enum ClientVariety
     {
-        Продавец,
-        Покупатель
+        Покупатель,
+        Продавец
     }
 }

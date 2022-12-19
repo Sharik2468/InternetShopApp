@@ -79,6 +79,11 @@ namespace PAL.Windows
                 ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец ?
                 Visibility.Visible :
                 Visibility.Hidden;
+
+            WatchOrdersStackPanel.Visibility =
+                ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец ?
+                Visibility.Visible :
+                Visibility.Hidden;
         }
 
         private void OrderStatus_Click(object sender, RoutedEventArgs e)

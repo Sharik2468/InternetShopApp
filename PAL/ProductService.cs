@@ -17,9 +17,14 @@ namespace PL
             db = new InternetShopEntities();
         }
 
-        public List<Product> GetProducts()
+        public List<Product> GetProducts(ClientVariety Table = ClientVariety.Покупатель)
         {
-            return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.NumberInStock > 0).ToList();
+            switch (Table)
+            {
+                case ClientVariety.Покупатель: return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.NumberInStock > 0).ToList();
+                case ClientVariety.Продавец: return db.Product_Table.AsEnumerable().Select(o => new Product(o)).ToList();
+            }
+            return null;
         }
 
         public void DeleteProduct(Model.Product product)

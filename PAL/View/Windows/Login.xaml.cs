@@ -50,6 +50,7 @@ namespace PAL.Windows
             if (!ClientViewModel.Instance.Autorization(UserComboBox.SelectedIndex == 0 ? ClientName.Text : SalemanName.Text)) return; 
             OrderViewModel.Instance.SetCurrentOrderForAuthorizedUser();
             OrderViewModel.Instance.SetCurrentOrderItem();
+            ProductViewModel.Instance.SetAllProducts();
             this.NavigationService.Navigate(Start.getInstance());
         }
     }

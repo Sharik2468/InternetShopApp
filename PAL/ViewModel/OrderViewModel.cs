@@ -24,10 +24,9 @@ namespace PL.ViewModel
             CurrentOrder = new OrderModel(GetCurrentOrderForAuthorizedUser());
             CurrentOrderItem = new Product();
         }
-        public ObservableCollection<OrderItemModel> OrderItems { get; set; }
         public ObservableCollection<OrderModel> OrdersForAccept { get; set; }
         public ObservableCollection<OrderModel> AllOrders { get; set; }
-        public ObservableCollection<Product> ProductsInBasket { get; set; }
+        
         private OrderModel _currentOrder;
         public OrderModel CurrentOrder
         {
@@ -41,6 +40,8 @@ namespace PL.ViewModel
                 OnPropertyChanged(nameof(CurrentOrder));
             }
         }
+        public ObservableCollection<OrderItemModel> OrderItems { get; set; }
+        public ObservableCollection<Product> ProductsInBasket { get; set; }
 
         private OrderModel _currentOrderForView;
         public OrderModel CurrentOrderForView
@@ -175,9 +176,9 @@ namespace PL.ViewModel
                 if (CurProd.NumberInStock >= 0) _productService.Update(CurProd);
             }
 
+            ProductViewModel.Instance.SetAllProducts();
             SetCurrentOrderForAuthorizedUser();
             SetCurrentOrderItem();
-            ProductViewModel.Instance.SetAllProducts();
         }
 
         private RelayCommand _finalOrderCommand;

@@ -33,7 +33,7 @@ namespace PL.ViewModel
 
         public void SetAllProducts()
         {
-            var NewProducts =_productService.GetProducts();
+            var NewProducts =_productService.GetProducts(ClientViewModel.Instance.AuthorizedUser.UserTable);
             NewProducts.Reverse();
             Products = new ObservableCollection<Product>(NewProducts);
             OnPropertyChanged(nameof(Products));
@@ -84,8 +84,7 @@ namespace PL.ViewModel
                   {
                       SelectedProduct.NumberInStock++;
                       _productService.Update(SelectedProduct);
-                      Products = new ObservableCollection<Product>(_productService.GetProducts());
-                      OnPropertyChanged(nameof(Products));
+                      SetAllProducts();
                   }));
 
         private RelayCommand _decAmountCommand;
@@ -93,9 +92,10 @@ namespace PL.ViewModel
                   (_decAmountCommand = new RelayCommand(obj =>
                   {
                       SelectedProduct.NumberInStock--;
+                      if (SelectedProduct.NumberInStock < 0) return;
+
                       _productService.Update(SelectedProduct);
-                      Products = new ObservableCollection<Product>(_productService.GetProducts());
-                      OnPropertyChanged(nameof(Products));
+                      SetAllProducts();
                   }));
 
         private RelayCommand _delCommand;
@@ -103,8 +103,7 @@ namespace PL.ViewModel
                   (_delCommand = new RelayCommand(obj =>
                   {
                       _productService.DeleteProduct(SelectedProduct);
-                      Products = new ObservableCollection<Product>(_productService.GetProducts());
-                      OnPropertyChanged(nameof(Products));
+                      SetAllProducts();
                   }));
 
         private RelayCommand _saveCommand;

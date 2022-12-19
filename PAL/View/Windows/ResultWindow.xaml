@@ -24,7 +24,7 @@
                      MouseDoubleClick="ProductsListBox_MouseDoubleClick" 
                      Grid.Row="1" Grid.Column="0" 
                      Grid.ColumnSpan="4" 
-                     ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" 
+                     ItemsSource="{Binding SearchProducts}" SelectedItem="{Binding SelectedProduct}" 
                      HorizontalContentAlignment="Stretch" 
                      ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"  

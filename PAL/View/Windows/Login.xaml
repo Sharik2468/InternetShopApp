@@ -91,6 +91,13 @@
                                 <TranslateTransform X="2"/>
                             </TransformGroup>
                         </TextBox.RenderTransform>
+                        <!--<TextBox.ContextMenu>
+                            <ContextMenu Name="cm" StaysOpen="true">
+                                <MenuItem Header="Изменить цвет текста"/>
+                                <MenuItem Header="Изменить текст фона"/>
+                                <MenuItem Header="Изменить цвет выделения"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>-->
                     </TextBox>
                 </StackPanel>
 

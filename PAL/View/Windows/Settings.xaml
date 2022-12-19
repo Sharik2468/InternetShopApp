@@ -45,7 +45,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Frame x:Name="_frameSettings" Grid.ColumnSpan="2" Margin="0,0,196,0" />
+
 
                     <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Настройки" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Width="109"/>
 
@@ -89,7 +89,7 @@
                         <TextBlock Text="Инструкция" HorizontalAlignment="Center" FontSize="16"/>
                     </StackPanel>
 
-                    <StackPanel Visibility="Hidden" x:Name="AddProductStackPanel" Grid.Column="0" Margin="1,0,0,0" Grid.Row="2">
+                    <StackPanel Visibility="Hidden" Grid.ColumnSpan="2" x:Name="AddProductStackPanel" Grid.Column="0" Grid.Row="2" Margin="0,0,196,0">
                         <Button Style="{DynamicResource ColorOverButtonChange}" Name="AddProductButton" Content="" Click="AddProductButton_Click" Height="100" Width="100" Opacity="0.9" Focusable="False">
                             <Button.Background>
                                 <ImageBrush ImageSource="/View/Windows/Icons/kindpng_3520971.png" Stretch="Fill" TileMode="None" Opacity="1"/>
@@ -99,14 +99,14 @@
                         <TextBlock Text="Добавить товар" HorizontalAlignment="Center" FontSize="16"/>
                     </StackPanel>
 
-                    <StackPanel Visibility="Visible" x:Name="WatchOrdersStackPanel" Grid.Column="1" Margin="1,0,0,0" Grid.Row="2">
+                    <StackPanel Visibility="Hidden" Grid.ColumnSpan="2" x:Name="WatchOrdersStackPanel" Grid.Column="1" Grid.Row="2" Margin="0,0,196,0">
                         <Button Style="{DynamicResource ColorOverButtonChange}" Name="WatchOrders" Content="" Click="WatchOrders_Click" Height="100" Width="100" Opacity="0.9" Focusable="False">
                             <Button.Background>
                                 <ImageBrush ImageSource="/View/Windows/Icons/checklist.png" Stretch="Fill" TileMode="None" Opacity="1"/>
                             </Button.Background>
                         </Button>
 
-                        <TextBlock Text="Добавить товар" HorizontalAlignment="Center" FontSize="16"/>
+                        <TextBlock Text="Подтвердить заказ" HorizontalAlignment="Center" FontSize="16"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
