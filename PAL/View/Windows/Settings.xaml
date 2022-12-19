@@ -80,7 +80,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="3" Margin="1,0,0,0" Grid.Row="1">
-                        <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False">
+                        <Button x:Name="InstructionButton" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False" Click="InstructionButton_Click">
                             <Button.Background>
                                 <ImageBrush ImageSource="Icons/free-icon-instructions-2618630.png" Stretch="Fill" TileMode="None" Opacity="1"/>
                             </Button.Background>
@@ -107,6 +107,16 @@
                         </Button>
 
                         <TextBlock Text="Подтвердить заказ" HorizontalAlignment="Center" FontSize="16"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Grid.Row="2" x:Name="SalesmanReportStackPanel">
+                        <Button x:Name="SalesmanReport" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False" Click="SalesmanReport_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/View/Windows/Icons/free-icon-report-1055644.png" Stretch="Fill" TileMode="None" Opacity="1"/>
+                            </Button.Background>
+                        </Button>
+
+                        <TextBlock Text="Получить отчёт" HorizontalAlignment="Center" FontSize="16"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

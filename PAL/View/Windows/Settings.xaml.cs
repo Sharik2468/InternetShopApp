@@ -1,6 +1,7 @@
 ﻿using PL.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,7 @@ namespace PAL.Windows
         {
             InitializeComponent();
             DataContext = ClientViewModel.Instance;
-            
+
         }
 
         private static Page SettingsPage = null;
@@ -68,7 +69,7 @@ namespace PAL.Windows
 
         private void Page_GotFocus(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -84,6 +85,11 @@ namespace PAL.Windows
                 ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец ?
                 Visibility.Visible :
                 Visibility.Hidden;
+
+            SalesmanReportStackPanel.Visibility =
+                 ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец ?
+                 Visibility.Visible :
+                 Visibility.Hidden;
         }
 
         private void OrderStatus_Click(object sender, RoutedEventArgs e)
@@ -94,6 +100,16 @@ namespace PAL.Windows
         private void WatchOrders_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(PL.View.Windows.AcceptOrdersWindows.getInstance());
+        }
+
+        private void SalesmanReport_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void InstructionButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

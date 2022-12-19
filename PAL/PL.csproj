@@ -29,6 +29,7 @@
     <None Remove="View\Windows\free-icon-appliances-448836.png" />
     <None Remove="View\Windows\free-icon-guest-859030.png" />
     <None Remove="View\Windows\free-icon-pc-3233554.png" />
+    <None Remove="View\Windows\free-icon-report-1055644.png" />
     <None Remove="View\Windows\free-icon-smartphones-1079519.png" />
     <None Remove="View\Windows\free-icon-television-1025152.png" />
     <None Remove="View\Windows\Icons\checklist.png" />
@@ -39,6 +40,7 @@
     <None Remove="View\Windows\Icons\free-icon-order-5220625.png" />
     <None Remove="View\Windows\Icons\free-icon-order-tracking-2649362.png" />
     <None Remove="View\Windows\Icons\free-icon-pc-3233554.png" />
+    <None Remove="View\Windows\Icons\free-icon-report-1055644.png" />
     <None Remove="View\Windows\Icons\free-icon-smartphones-1079519.png" />
     <None Remove="View\Windows\Icons\free-icon-television-1025152.png" />
     <None Remove="View\Windows\Icons\kindpng_3520971.png" />
@@ -69,6 +71,7 @@
     <Resource Include="View\Windows\Icons\free-icon-order-tracking-2649362.png" />
     <Resource Include="View\Windows\Icons\free-icon-pc-3233554.png" />
     <Resource Include="View\Windows\Icons\free-icon-profile-1250689.png" />
+    <Resource Include="View\Windows\Icons\free-icon-report-1055644.png" />
     <Resource Include="View\Windows\Icons\free-icon-settings-126472.png" />
     <Resource Include="View\Windows\Icons\free-icon-smartphones-1079519.png" />
     <Resource Include="View\Windows\Icons\free-icon-television-1025152.png" />
