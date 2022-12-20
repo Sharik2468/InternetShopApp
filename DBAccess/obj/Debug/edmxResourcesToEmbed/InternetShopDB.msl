@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище Internet_ShopModelContainer" CdmEntityContainer="InternetShopEntities">
+  <EntityContainerMapping StorageEntityContainer="Хранилище InternetShopModelContainer" CdmEntityContainer="InternetShopEntities">
     <EntitySetMapping Name="Category_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Category_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Category_Table">
         <MappingFragment StoreEntitySet="Category_Table">
           <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
           <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
@@ -11,7 +11,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Client_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Client_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Client_Table">
         <MappingFragment StoreEntitySet="Client_Table">
           <ScalarProperty Name="Client_Code" ColumnName="Client_Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -23,7 +23,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Location_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Location_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Location_Table">
         <MappingFragment StoreEntitySet="Location_Table">
           <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -31,7 +31,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Order_Item_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Order_Item_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Order_Item_Table">
         <MappingFragment StoreEntitySet="Order_Item_Table">
           <ScalarProperty Name="Order_Item_Code" ColumnName="Order_Item_Code" />
           <ScalarProperty Name="Order_Sum" ColumnName="Order_Sum" />
@@ -43,7 +43,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Order_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Order_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Order_Table">
         <MappingFragment StoreEntitySet="Order_Table">
           <ScalarProperty Name="Order_Code" ColumnName="Order_Code" />
           <ScalarProperty Name="Order_Fullfillment" ColumnName="Order_Fullfillment" />
@@ -55,7 +55,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Product_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Product_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Product_Table">
         <MappingFragment StoreEntitySet="Product_Table">
           <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
           <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
@@ -71,7 +71,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Salesman_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Salesman_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Salesman_Table">
         <MappingFragment StoreEntitySet="Salesman_Table">
           <ScalarProperty Name="Salesman_Code" ColumnName="Salesman_Code" />
           <ScalarProperty Name="Saleman_Name" ColumnName="Saleman_Name" />
@@ -83,7 +83,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Status_Order_Item_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Status_Order_Item_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Status_Order_Item_Table">
         <MappingFragment StoreEntitySet="Status_Order_Item_Table">
           <ScalarProperty Name="Status_Order_Item_ID" ColumnName="Status_Order_Item_ID" />
           <ScalarProperty Name="Status_Order_Item_Table1" ColumnName="Status_Order_Item_Table" />
@@ -91,7 +91,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Status_Table">
-      <EntityTypeMapping TypeName="Internet_ShopModel.Status_Table">
+      <EntityTypeMapping TypeName="InternetShopModel.Status_Table">
         <MappingFragment StoreEntitySet="Status_Table">
           <ScalarProperty Name="Delivery_Code" ColumnName="Delivery_Code" />
           <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
@@ -99,7 +99,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="Internet_ShopModel.sysdiagrams">
+      <EntityTypeMapping TypeName="InternetShopModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />

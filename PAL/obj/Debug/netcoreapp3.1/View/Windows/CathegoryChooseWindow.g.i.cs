@@ -61,7 +61,7 @@ namespace PL.View.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/PL;V1.0.0.0;component/view/windows/cathegorychoosewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/PL;component/view/windows/cathegorychoosewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\Windows\CathegoryChooseWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

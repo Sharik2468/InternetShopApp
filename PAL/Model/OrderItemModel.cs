@@ -39,7 +39,7 @@ namespace PL.Model
                 OnPropertyChanged(nameof(Order_Sum));
             }
         }
-        public Nullable<float> Amount_Order_Item
+        public Nullable<int> Amount_Order_Item
         {
             get => _amountOrderItem;
             set
@@ -78,7 +78,7 @@ namespace PL.Model
 
         private int _orderItemCode;
         private Nullable<int> _orderSum;
-        private Nullable<float> _amountOrderItem;
+        private Nullable<int> _amountOrderItem;
         private Nullable<int> _productCode;
         private Nullable<int> _orderCode;
         private int _statusOrderItemTableID;

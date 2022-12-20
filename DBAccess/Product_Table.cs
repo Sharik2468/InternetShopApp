@@ -22,14 +22,14 @@ namespace DBAccess
     
         public int Product_Code { get; set; }
         public string Name_Product { get; set; }
-        public Nullable<float> Market_Price_Product { get; set; }
-        public Nullable<float> Purchase_Price_Product { get; set; }
+        public Nullable<int> Market_Price_Product { get; set; }
+        public Nullable<int> Purchase_Price_Product { get; set; }
         public Nullable<System.DateTime> Date_of_Manufacture_Product { get; set; }
         public Nullable<int> Best_Before_Date_Product { get; set; }
         public Nullable<int> Category_ID { get; set; }
         public string Description { get; set; }
         public byte[] Image { get; set; }
-        public string Number_in_Stock { get; set; }
+        public Nullable<int> Number_in_Stock { get; set; }
     
         public virtual Category_Table Category_Table { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

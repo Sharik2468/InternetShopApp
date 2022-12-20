@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Internet_ShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище InternetShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category_Table">
           <Key>
             <PropertyRef Name="Category_ID" />
@@ -18,8 +18,8 @@
             <PropertyRef Name="Client_Code" />
           </Key>
           <Property Name="Client_Code" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Surname" Type="nvarchar(max)" />
           <Property Name="Telephone_Number" Type="bigint" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Location_Code" Type="int" />
@@ -29,7 +29,7 @@
             <PropertyRef Name="Location_Code" />
           </Key>
           <Property Name="Location_Code" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Order_Item_Table">
           <Key>
@@ -37,7 +37,7 @@
           </Key>
           <Property Name="Order_Item_Code" Type="int" Nullable="false" />
           <Property Name="Order_Sum" Type="int" />
-          <Property Name="Amount_Order_Item" Type="real" />
+          <Property Name="Amount_Order_Item" Type="int" />
           <Property Name="Product_Code" Type="int" />
           <Property Name="Order_Code" Type="int" />
           <Property Name="Status_Order_Item_Table_ID" Type="int" Nullable="false" />
@@ -58,23 +58,23 @@
             <PropertyRef Name="Product_Code" />
           </Key>
           <Property Name="Product_Code" Type="int" Nullable="false" />
-          <Property Name="Name_Product" Type="nchar" MaxLength="10" />
-          <Property Name="Market_Price_Product" Type="real" />
-          <Property Name="Purchase_Price_Product" Type="real" />
+          <Property Name="Name_Product" Type="nvarchar(max)" />
+          <Property Name="Market_Price_Product" Type="int" />
+          <Property Name="Purchase_Price_Product" Type="int" />
           <Property Name="Date_of_Manufacture_Product" Type="date" />
           <Property Name="Best_Before_Date_Product" Type="int" />
           <Property Name="Category_ID" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Image" Type="varbinary(max)" />
-          <Property Name="Number_in_Stock" Type="nchar" MaxLength="10" />
+          <Property Name="Number_in_Stock" Type="int" />
         </EntityType>
         <EntityType Name="Salesman_Table">
           <Key>
             <PropertyRef Name="Salesman_Code" />
           </Key>
           <Property Name="Salesman_Code" Type="int" Nullable="false" />
-          <Property Name="Saleman_Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Salesman_Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Saleman_Name" Type="nvarchar(max)" />
+          <Property Name="Salesman_Surname" Type="nvarchar(max)" />
           <Property Name="Telephone_Number" Type="bigint" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Location_Code" Type="int" />
@@ -223,7 +223,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище Internet_ShopModelContainer">
+        <EntityContainer Name="Хранилище InternetShopModelContainer">
           <EntitySet Name="Category_Table" EntityType="Self.Category_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client_Table" EntityType="Self.Client_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location_Table" EntityType="Self.Location_Table" Schema="dbo" store:Type="Tables" />
@@ -279,7 +279,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Internet_ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="InternetShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Category_Table">
           <Key>
             <PropertyRef Name="Category_ID" />
@@ -296,8 +296,8 @@
             <PropertyRef Name="Client_Code" />
           </Key>
           <Property Name="Client_Code" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Telephone_Number" Type="Int64" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Location_Code" Type="Int32" />
@@ -309,7 +309,7 @@
             <PropertyRef Name="Location_Code" />
           </Key>
           <Property Name="Location_Code" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Client_Table" Relationship="Self.FK_Client_Table_Location_Table" FromRole="Location_Table" ToRole="Client_Table" />
           <NavigationProperty Name="Salesman_Table" Relationship="Self.FK_Salesman_Table_Location_Table" FromRole="Location_Table" ToRole="Salesman_Table" />
         </EntityType>
@@ -319,7 +319,7 @@
           </Key>
           <Property Name="Order_Item_Code" Type="Int32" Nullable="false" />
           <Property Name="Order_Sum" Type="Int32" />
-          <Property Name="Amount_Order_Item" Type="Single" />
+          <Property Name="Amount_Order_Item" Type="Int32" />
           <Property Name="Product_Code" Type="Int32" />
           <Property Name="Order_Code" Type="Int32" />
           <Property Name="Status_Order_Item_Table_ID" Type="Int32" Nullable="false" />
@@ -347,15 +347,15 @@
             <PropertyRef Name="Product_Code" />
           </Key>
           <Property Name="Product_Code" Type="Int32" Nullable="false" />
-          <Property Name="Name_Product" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Market_Price_Product" Type="Single" />
-          <Property Name="Purchase_Price_Product" Type="Single" />
+          <Property Name="Name_Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Market_Price_Product" Type="Int32" />
+          <Property Name="Purchase_Price_Product" Type="Int32" />
           <Property Name="Date_of_Manufacture_Product" Type="DateTime" Precision="0" />
           <Property Name="Best_Before_Date_Product" Type="Int32" />
           <Property Name="Category_ID" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Number_in_Stock" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Number_in_Stock" Type="Int32" />
           <NavigationProperty Name="Category_Table" Relationship="Self.FK_Product_Table_Category_Table" FromRole="Product_Table" ToRole="Category_Table" />
           <NavigationProperty Name="Order_Item_Table" Relationship="Self.FK_Order_Item_Table_Product_Table" FromRole="Product_Table" ToRole="Order_Item_Table" />
         </EntityType>
@@ -364,8 +364,8 @@
             <PropertyRef Name="Salesman_Code" />
           </Key>
           <Property Name="Salesman_Code" Type="Int32" Nullable="false" />
-          <Property Name="Saleman_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Salesman_Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Saleman_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salesman_Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Telephone_Number" Type="Int64" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Location_Code" Type="Int32" />
@@ -575,9 +575,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище Internet_ShopModelContainer" CdmEntityContainer="InternetShopEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище InternetShopModelContainer" CdmEntityContainer="InternetShopEntities">
           <EntitySetMapping Name="Category_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Category_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Category_Table">
               <MappingFragment StoreEntitySet="Category_Table">
                 <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
                 <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
@@ -586,7 +586,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Client_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Client_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Client_Table">
               <MappingFragment StoreEntitySet="Client_Table">
                 <ScalarProperty Name="Client_Code" ColumnName="Client_Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -598,7 +598,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Location_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Location_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Location_Table">
               <MappingFragment StoreEntitySet="Location_Table">
                 <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -606,7 +606,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order_Item_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Order_Item_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Order_Item_Table">
               <MappingFragment StoreEntitySet="Order_Item_Table">
                 <ScalarProperty Name="Order_Item_Code" ColumnName="Order_Item_Code" />
                 <ScalarProperty Name="Order_Sum" ColumnName="Order_Sum" />
@@ -618,7 +618,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Order_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Order_Table">
               <MappingFragment StoreEntitySet="Order_Table">
                 <ScalarProperty Name="Order_Code" ColumnName="Order_Code" />
                 <ScalarProperty Name="Order_Fullfillment" ColumnName="Order_Fullfillment" />
@@ -630,7 +630,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Product_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Product_Table">
               <MappingFragment StoreEntitySet="Product_Table">
                 <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
                 <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
@@ -646,7 +646,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Salesman_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Salesman_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Salesman_Table">
               <MappingFragment StoreEntitySet="Salesman_Table">
                 <ScalarProperty Name="Salesman_Code" ColumnName="Salesman_Code" />
                 <ScalarProperty Name="Saleman_Name" ColumnName="Saleman_Name" />
@@ -658,7 +658,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Status_Order_Item_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Status_Order_Item_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Status_Order_Item_Table">
               <MappingFragment StoreEntitySet="Status_Order_Item_Table">
                 <ScalarProperty Name="Status_Order_Item_ID" ColumnName="Status_Order_Item_ID" />
                 <ScalarProperty Name="Status_Order_Item_Table1" ColumnName="Status_Order_Item_Table" />
@@ -666,7 +666,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Status_Table">
-            <EntityTypeMapping TypeName="Internet_ShopModel.Status_Table">
+            <EntityTypeMapping TypeName="InternetShopModel.Status_Table">
               <MappingFragment StoreEntitySet="Status_Table">
                 <ScalarProperty Name="Delivery_Code" ColumnName="Delivery_Code" />
                 <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
@@ -674,7 +674,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Internet_ShopModel.sysdiagrams">
+            <EntityTypeMapping TypeName="InternetShopModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />

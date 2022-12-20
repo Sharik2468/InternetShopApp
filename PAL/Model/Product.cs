@@ -20,12 +20,12 @@ namespace PL.Model
         {
             Product_Code = product.Product_Code;
             Name = product.Name_Product;
-            PurchasePrice = (float)product.Purchase_Price_Product;
-            MarketPrice = (float)product.Market_Price_Product;
+            PurchasePrice = (int)product.Purchase_Price_Product;
+            MarketPrice = (int)product.Market_Price_Product;
             BestBeforeDate = (float)product.Best_Before_Date_Product;
             Desctription = product.Description;
             Image = product.Image;
-            NumberInStock = Convert.ToInt32(product.Number_in_Stock);
+            NumberInStock = (int)product.Number_in_Stock;
             DateOfManufacture = (DateTime)product.Date_of_Manufacture_Product;
             CategoryID = (int)product.Category_ID;
 
@@ -119,8 +119,8 @@ namespace PL.Model
             }
         }
 
-        private float _purchasePrice;
-        public float PurchasePrice
+        private int _purchasePrice;
+        public int PurchasePrice
         {
             get => _purchasePrice;
             set
@@ -130,8 +130,8 @@ namespace PL.Model
             }
         }
 
-        private float _marketPrice;
-        public float MarketPrice
+        private int _marketPrice;
+        public int MarketPrice
         {
             get => _marketPrice;
             set

@@ -16,7 +16,7 @@ namespace DBAccess
     {
         public int Order_Item_Code { get; set; }
         public Nullable<int> Order_Sum { get; set; }
-        public Nullable<float> Amount_Order_Item { get; set; }
+        public Nullable<int> Amount_Order_Item { get; set; }
         public Nullable<int> Product_Code { get; set; }
         public Nullable<int> Order_Code { get; set; }
         public int Status_Order_Item_Table_ID { get; set; }

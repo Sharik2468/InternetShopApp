@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Хранилище Internet_ShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Хранилище InternetShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Category_Table">
     <Key>
       <PropertyRef Name="Category_ID" />
@@ -13,8 +13,8 @@
       <PropertyRef Name="Client_Code" />
     </Key>
     <Property Name="Client_Code" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Surname" Type="nvarchar(max)" />
     <Property Name="Telephone_Number" Type="bigint" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Location_Code" Type="int" />
@@ -24,7 +24,7 @@
       <PropertyRef Name="Location_Code" />
     </Key>
     <Property Name="Location_Code" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Order_Item_Table">
     <Key>
@@ -32,7 +32,7 @@
     </Key>
     <Property Name="Order_Item_Code" Type="int" Nullable="false" />
     <Property Name="Order_Sum" Type="int" />
-    <Property Name="Amount_Order_Item" Type="real" />
+    <Property Name="Amount_Order_Item" Type="int" />
     <Property Name="Product_Code" Type="int" />
     <Property Name="Order_Code" Type="int" />
     <Property Name="Status_Order_Item_Table_ID" Type="int" Nullable="false" />
@@ -53,23 +53,23 @@
       <PropertyRef Name="Product_Code" />
     </Key>
     <Property Name="Product_Code" Type="int" Nullable="false" />
-    <Property Name="Name_Product" Type="nchar" MaxLength="10" />
-    <Property Name="Market_Price_Product" Type="real" />
-    <Property Name="Purchase_Price_Product" Type="real" />
+    <Property Name="Name_Product" Type="nvarchar(max)" />
+    <Property Name="Market_Price_Product" Type="int" />
+    <Property Name="Purchase_Price_Product" Type="int" />
     <Property Name="Date_of_Manufacture_Product" Type="date" />
     <Property Name="Best_Before_Date_Product" Type="int" />
     <Property Name="Category_ID" Type="int" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Image" Type="varbinary(max)" />
-    <Property Name="Number_in_Stock" Type="nchar" MaxLength="10" />
+    <Property Name="Number_in_Stock" Type="int" />
   </EntityType>
   <EntityType Name="Salesman_Table">
     <Key>
       <PropertyRef Name="Salesman_Code" />
     </Key>
     <Property Name="Salesman_Code" Type="int" Nullable="false" />
-    <Property Name="Saleman_Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Salesman_Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Saleman_Name" Type="nvarchar(max)" />
+    <Property Name="Salesman_Surname" Type="nvarchar(max)" />
     <Property Name="Telephone_Number" Type="bigint" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Location_Code" Type="int" />
@@ -218,7 +218,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Хранилище Internet_ShopModelContainer">
+  <EntityContainer Name="Хранилище InternetShopModelContainer">
     <EntitySet Name="Category_Table" EntityType="Self.Category_Table" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Client_Table" EntityType="Self.Client_Table" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location_Table" EntityType="Self.Location_Table" Schema="dbo" store:Type="Tables" />

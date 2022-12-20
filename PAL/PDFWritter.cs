@@ -38,13 +38,9 @@ namespace PL
                         Alignment = Element.ALIGN_RIGHT
                     };
 
-                    PdfImage jpg = PDFImage.GetInstance(user.ImageBytes);
-                    jpg.Alignment = Element.ALIGN_CENTER;
-                    jpg.ScaleAbsolute(jpg.Width / 10, jpg.Height / 10);
 
                     document.Add(PheaderString);
                     document.Add(PdateString);
-                    document.Add(jpg);
                     document.Close();
                 }
             }

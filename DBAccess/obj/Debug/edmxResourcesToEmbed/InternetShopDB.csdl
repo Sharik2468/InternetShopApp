@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Internet_ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="InternetShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Category_Table">
     <Key>
       <PropertyRef Name="Category_ID" />
@@ -16,8 +16,8 @@
       <PropertyRef Name="Client_Code" />
     </Key>
     <Property Name="Client_Code" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Telephone_Number" Type="Int64" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Location_Code" Type="Int32" />
@@ -29,7 +29,7 @@
       <PropertyRef Name="Location_Code" />
     </Key>
     <Property Name="Location_Code" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Client_Table" Relationship="Self.FK_Client_Table_Location_Table" FromRole="Location_Table" ToRole="Client_Table" />
     <NavigationProperty Name="Salesman_Table" Relationship="Self.FK_Salesman_Table_Location_Table" FromRole="Location_Table" ToRole="Salesman_Table" />
   </EntityType>
@@ -39,7 +39,7 @@
     </Key>
     <Property Name="Order_Item_Code" Type="Int32" Nullable="false" />
     <Property Name="Order_Sum" Type="Int32" />
-    <Property Name="Amount_Order_Item" Type="Single" />
+    <Property Name="Amount_Order_Item" Type="Int32" />
     <Property Name="Product_Code" Type="Int32" />
     <Property Name="Order_Code" Type="Int32" />
     <Property Name="Status_Order_Item_Table_ID" Type="Int32" Nullable="false" />
@@ -67,15 +67,15 @@
       <PropertyRef Name="Product_Code" />
     </Key>
     <Property Name="Product_Code" Type="Int32" Nullable="false" />
-    <Property Name="Name_Product" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Market_Price_Product" Type="Single" />
-    <Property Name="Purchase_Price_Product" Type="Single" />
+    <Property Name="Name_Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Market_Price_Product" Type="Int32" />
+    <Property Name="Purchase_Price_Product" Type="Int32" />
     <Property Name="Date_of_Manufacture_Product" Type="DateTime" Precision="0" />
     <Property Name="Best_Before_Date_Product" Type="Int32" />
     <Property Name="Category_ID" Type="Int32" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="Number_in_Stock" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Number_in_Stock" Type="Int32" />
     <NavigationProperty Name="Category_Table" Relationship="Self.FK_Product_Table_Category_Table" FromRole="Product_Table" ToRole="Category_Table" />
     <NavigationProperty Name="Order_Item_Table" Relationship="Self.FK_Order_Item_Table_Product_Table" FromRole="Product_Table" ToRole="Order_Item_Table" />
   </EntityType>
@@ -84,8 +84,8 @@
       <PropertyRef Name="Salesman_Code" />
     </Key>
     <Property Name="Salesman_Code" Type="Int32" Nullable="false" />
-    <Property Name="Saleman_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Salesman_Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Saleman_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Salesman_Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Telephone_Number" Type="Int64" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Location_Code" Type="Int32" />

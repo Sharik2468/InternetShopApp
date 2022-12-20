@@ -55,7 +55,7 @@ namespace PL
                 Name_Product = product.Name,
                 Purchase_Price_Product = product.PurchasePrice,
                 Best_Before_Date_Product = (int)product.BestBeforeDate,
-                Number_in_Stock = 1.ToString(),
+                Number_in_Stock = 1,
                 Description = product.Desctription,
                 Category_ID = product.CategoryID,
                 Market_Price_Product = product.MarketPrice,
@@ -83,7 +83,7 @@ namespace PL
             dbProduct.Name_Product = product.Name;
             dbProduct.Purchase_Price_Product = product.PurchasePrice;
             dbProduct.Best_Before_Date_Product = (int?)product.BestBeforeDate;
-            dbProduct.Number_in_Stock = product.NumberInStock.ToString();
+            dbProduct.Number_in_Stock = product.NumberInStock;
             dbProduct.Description = product.Desctription;
             db.SaveChanges();
 
