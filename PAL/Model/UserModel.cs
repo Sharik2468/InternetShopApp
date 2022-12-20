@@ -1,7 +1,13 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using PL.Commands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows;
+using PL.ViewModel;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using System.IO;
 
 namespace PL.Model
 {
@@ -20,7 +26,7 @@ namespace PL.Model
             Telephone_Number = c.Telephone_Number;
             Password = c.Password;
             Location_Code = c.Location_Code;
-            isAuthorized = Visibility.Hidden;
+            isAuthorized = Visibilities.Hidden;
             UserTable = ClientVariety.Покупатель;
         }
         public UserModel(SalesmanModel c)
@@ -33,7 +39,7 @@ namespace PL.Model
             Telephone_Number = c.Telephone_Number;
             Password = c.Password;
             Location_Code = c.Location_Code;
-            isAuthorized = Visibility.Hidden;
+            isAuthorized = Visibilities.Hidden;
             UserTable = ClientVariety.Продавец;
         }
 
@@ -47,7 +53,7 @@ namespace PL.Model
             }
         }
 
-        public Visibility isAuthorized
+        public Visibilities isAuthorized
         {
             get => _isAuthorized;
             set
@@ -111,7 +117,7 @@ namespace PL.Model
             }
         }
 
-        private Visibility _isAuthorized;
+        private Visibilities _isAuthorized;
         private int _clientCode;
         private string _name;
         private string _surname;
@@ -119,7 +125,6 @@ namespace PL.Model
         private string _password;
         private Nullable<int> _locationCode;
         private ClientVariety _userTable;
-
 
         #region Overides of INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -130,7 +135,7 @@ namespace PL.Model
         #endregion
     }
 
-    enum Visibility
+    enum Visibilities
     {
         Hidden,
         Visible,

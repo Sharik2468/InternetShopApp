@@ -109,7 +109,7 @@ namespace PAL.Windows
 
         private void InstructionButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(PL.View.Windows.InstructionsWindow.getInstance());
         }
 
         private void HistoryButton_Click(object sender, RoutedEventArgs e)

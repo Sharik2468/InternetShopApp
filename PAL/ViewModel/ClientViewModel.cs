@@ -1,8 +1,15 @@
 ﻿using PL.Commands;
 using PL.Model;
+using PL.View.Windows;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
+using System.Threading;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace PL.ViewModel
 {
@@ -83,7 +90,7 @@ namespace PL.ViewModel
             AuthorizedUser.Surname = NewUser.Surname;
             AuthorizedUser.Telephone_Number = NewUser.Telephone_Number;
             AuthorizedUser.UserTable = NewUser.UserTable;
-            AuthorizedUser.isAuthorized = Visibility.Visible;
+            AuthorizedUser.isAuthorized = Visibilities.Visible;
         }
 
         public bool Registration(string TableChoose, string LocationName)
@@ -118,7 +125,7 @@ namespace PL.ViewModel
                       UserModel DefaultUser = new UserModel()
                       {
                           Client_Code = 0,
-                          isAuthorized = Visibility.Hidden,
+                          isAuthorized = Visibilities.Hidden,
                           Name = "",
                           Surname = "",
                           Telephone_Number = 0,
@@ -134,6 +141,30 @@ namespace PL.ViewModel
                       System.Windows.MessageBox.Show("Вы успешно вышли из аккаунта!");
                   }));
 
+        private RelayCommand _saveToPDFCommand;
+        /// <summary>
+        /// Сохранение информации о пользователе в PDF
+        /// </summary>
+        public RelayCommand SaveToPDFCommand => _saveToPDFCommand ??
+                  (_saveToPDFCommand = new RelayCommand(obj =>
+                  {
+                      if (AuthorizedUser.UserTable == ClientVariety.Покупатель) return;
+
+                      var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                      var DatePicker = new DateChoose();
+
+                      var Dates = Prompt.ShowDialog("Введите начальную и конечную дату", "Date");
+
+                      if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                      {
+                          PL.PDFWritter.WriteUser(AuthorizedUser,
+                              dialog.SelectedPath + Path.DirectorySeparatorChar + AuthorizedUser.Name + ".pdf",
+                              (DateTime)Dates[0],
+                              (DateTime)Dates[1]);
+                          System.Windows.MessageBox.Show("Успешно!");
+                      }
+                  }));
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -144,5 +175,30 @@ namespace PL.ViewModel
     {
         Войти,
         Зарегистрироваться
+    }
+
+    public static class Prompt
+    {
+        public static List<DateTime> ShowDialog(string text, string caption)
+        {
+            Form prompt = new Form();
+            prompt.Width = 500;
+            prompt.Height = 250;
+            prompt.Text = caption;
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = text };
+            DateTimePicker inputBox1 = new DateTimePicker() { Left = 50, Top = 50, Width = 400 };
+            DateTimePicker inputBox2 = new DateTimePicker() { Left = 50, Top = 90, Width = 400 };
+            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 130 };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(inputBox1);
+            prompt.Controls.Add(inputBox2);
+            prompt.ShowDialog();
+            List<DateTime> Result = new List<DateTime>();
+            Result.Add(inputBox1.Value);
+            Result.Add(inputBox2.Value);
+            return Result;
+        }
     }
 }

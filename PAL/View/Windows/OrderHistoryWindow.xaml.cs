@@ -72,12 +72,12 @@ namespace PL.View.Windows
             if (ClientViewModel.Instance.AuthorizedUser.Client_Code == 0) { ClientName.Text = "гость"; return; }
             ClientName.Text = ClientViewModel.Instance.AuthorizedUser.Name;
 
-            if (ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец)
-            {
-                System.Windows.MessageBox.Show("Чтобы покупать, войдите как пользователь!");
-                this.NavigationService.Navigate(Start.getInstance());
-                return;
-            }
+            //if (ClientViewModel.Instance.AuthorizedUser.UserTable == PL.Model.ClientVariety.Продавец)
+            //{
+            //    System.Windows.MessageBox.Show("Чтобы покупать, войдите как пользователь!");
+            //    this.NavigationService.Navigate(Start.getInstance());
+            //    return;
+            //}
         }
     }
 }

@@ -110,7 +110,7 @@
                     </StackPanel>
 
                     <StackPanel Visibility="Hidden" Grid.Column="2" Grid.Row="2" x:Name="SalesmanReportStackPanel">
-                        <Button x:Name="SalesmanReport" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False" Click="SalesmanReport_Click">
+                        <Button x:Name="SalesmanReport" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False" Command="{Binding SaveToPDFCommand}">
                             <Button.Background>
                                 <ImageBrush ImageSource="/View/Windows/Icons/free-icon-report-1055644.png" Stretch="Fill" TileMode="None" Opacity="1"/>
                             </Button.Background>

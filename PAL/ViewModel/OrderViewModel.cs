@@ -28,7 +28,7 @@ namespace PL.ViewModel
         public ObservableCollection<OrderModel> OrdersForAccept { get; set; }
         public ObservableCollection<OrderModel> OrdersForHistory { get; set; }
         public ObservableCollection<OrderModel> AllOrders { get; set; }
-        
+
         private OrderModel _currentOrder;
         public OrderModel CurrentOrder
         {
@@ -104,17 +104,24 @@ namespace PL.ViewModel
         }
         private void SetAllOrderForAuthorizedUser()
         {
-            AllOrders = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(ClientViewModel.Instance.AuthorizedUser));
+            AllOrders = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(
+                ClientViewModel.Instance.AuthorizedUser));
             OnPropertyChanged(nameof(AllOrders));
         }
         private void SetAllOrderForAccept()
         {
-            OrdersForAccept = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(ClientViewModel.Instance.AuthorizedUser, OrderVariant.ForAccept));
+            OrdersForAccept = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(
+                ClientViewModel.Instance.AuthorizedUser, OrderVariant.ForAccept));
             OnPropertyChanged(nameof(OrdersForAccept));
         }
         private void SetAllOrderForHistory()
         {
-            OrdersForHistory = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(ClientViewModel.Instance.AuthorizedUser, OrderVariant.ForHistory));
+            if (ClientViewModel.Instance.AuthorizedUser.UserTable == ClientVariety.Покупатель)
+                OrdersForHistory = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(
+                    ClientViewModel.Instance.AuthorizedUser, OrderVariant.ForHistory));
+            else
+                OrdersForHistory = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(
+                    ClientViewModel.Instance.AuthorizedUser, OrderVariant.ForSalesmanHistory));
             OnPropertyChanged(nameof(OrdersForHistory));
         }
         private void SetCurrentOrderSum()
@@ -420,6 +427,7 @@ namespace PL.ViewModel
     {
         ForView,
         ForAccept,
-        ForHistory
+        ForHistory,
+        ForSalesmanHistory
     }
 }

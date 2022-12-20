@@ -5,10 +5,9 @@ C:\Users\ADMIN\Desktop\Работа в универе\Конструирован
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\bin\Debug\EntityFramework.xml
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\obj\Debug\DBAccess.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\obj\Debug\DBAccess.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\obj\Debug\DBAccess.csproj.CopyComplete
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\obj\Debug\DBAccess.dll
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\obj\Debug\DBAccess.pdb
-C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\bin\Debug\ru\EntityFramework.resources.dll
-C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\DBAccess\bin\Debug\ru\EntityFramework.SqlServer.resources.dll

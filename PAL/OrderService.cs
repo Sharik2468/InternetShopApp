@@ -31,6 +31,15 @@ namespace PL
             return c.ToList();
         }
 
+        public List<OrderModel> GetAllAcceptedOrdersForSelasman(int UserID, System.DateTime Start, System.DateTime End)
+        {
+            return db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
+                .Where(s => s.Salesman_Code == UserID
+                && s.Order_Fullfillment >= Start
+                && s.Order_Fullfillment <= End
+                && s.Delivery_Code==3).ToList();
+        }
+
         public List<OrderModel> GetAllOrders()
         {
             return db.Order_Table.AsEnumerable().Select(o => new OrderModel(o)).ToList();
@@ -174,6 +183,9 @@ namespace PL
                 case ViewModel.OrderVariant.ForHistory:
                     Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
                                                            .Where(s => s.Client_Code == User.Client_Code); break;
+                case ViewModel.OrderVariant.ForSalesmanHistory:
+                    Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
+                                                           .Where(s => s.Salesman_Code == User.Client_Code); break;
             }
 
             ObservableCollection<OrderModel> Result = new ObservableCollection<OrderModel>();

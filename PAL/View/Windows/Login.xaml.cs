@@ -1,6 +1,9 @@
 ﻿using PL.ViewModel;
+using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace PAL.Windows
 {
@@ -52,6 +55,30 @@ namespace PAL.Windows
             OrderViewModel.Instance.SetCurrentOrderItem();
             ProductViewModel.Instance.SetAllProducts();
             this.NavigationService.Navigate(Start.getInstance());
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            PasswordTextBox.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)random.Next(0, 255),
+                                                      (byte)random.Next(0, 255),
+                                                      (byte)random.Next(0, 255)));
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            PasswordTextBox.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)random.Next(0, 255),
+                                                      (byte)random.Next(0, 255),
+                                                      (byte)random.Next(0, 255)));
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            PasswordTextBox.SelectionBrush = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)random.Next(0, 255),
+                                                      (byte)random.Next(0, 255),
+                                                      (byte)random.Next(0, 255)));
         }
     }
 }

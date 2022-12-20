@@ -51,6 +51,8 @@
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.4.1" />
+    <PackageReference Include="WindowsAPICodePack" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>

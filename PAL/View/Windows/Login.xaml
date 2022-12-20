@@ -81,8 +81,8 @@
                             <TranslateTransform X="-68"/>
                         </TransformGroup>
                     </StackPanel.RenderTransform>
-                    <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0" HorizontalAlignment="Stretch">Пароль:</TextBlock>
-                    <TextBox Width="200" Height="25" Text="{Binding AuthorizedUser.Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" FontFamily="Password">
+                    <TextBlock  VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0" HorizontalAlignment="Stretch">Пароль:</TextBlock>
+                    <TextBox x:Name="PasswordTextBox" Text="{Binding AuthorizedUser.Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="25"  VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" FontFamily="Password" Background="White">
                         <TextBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1"/>
@@ -91,13 +91,13 @@
                                 <TranslateTransform X="2"/>
                             </TransformGroup>
                         </TextBox.RenderTransform>
-                        <!--<TextBox.ContextMenu>
+                        <TextBox.ContextMenu>
                             <ContextMenu Name="cm" StaysOpen="true">
-                                <MenuItem Header="Изменить цвет текста"/>
-                                <MenuItem Header="Изменить текст фона"/>
-                                <MenuItem Header="Изменить цвет выделения"/>
+                                <MenuItem Header="Изменить цвет текста" Click="MenuItem_Click"/>
+                                <MenuItem Header="Изменить цвет фона" Click="MenuItem_Click_1"/>
+                                <MenuItem Header="Изменить цвет выделения" Click="MenuItem_Click_2"/>
                             </ContextMenu>
-                        </TextBox.ContextMenu>-->
+                        </TextBox.ContextMenu>
                     </TextBox>
                 </StackPanel>
 
