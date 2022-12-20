@@ -50,7 +50,7 @@
                     <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Настройки" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Width="109"/>
 
                     <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,196,0" Grid.Row="1">
-                        <Button Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False">
+                        <Button x:Name="HistoryButton" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False" Click="HistoryButton_Click">
                             <Button.Background>
                                 <ImageBrush ImageSource="Icons/free-icon-order-5220625.png" Stretch="Fill" TileMode="None" Opacity="1"/>
                             </Button.Background>
@@ -109,7 +109,7 @@
                         <TextBlock Text="Подтвердить заказ" HorizontalAlignment="Center" FontSize="16"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="2" Grid.Row="2" x:Name="SalesmanReportStackPanel">
+                    <StackPanel Visibility="Hidden" Grid.Column="2" Grid.Row="2" x:Name="SalesmanReportStackPanel">
                         <Button x:Name="SalesmanReport" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False" Click="SalesmanReport_Click">
                             <Button.Background>
                                 <ImageBrush ImageSource="/View/Windows/Icons/free-icon-report-1055644.png" Stretch="Fill" TileMode="None" Opacity="1"/>

@@ -158,17 +158,23 @@ namespace PL
                      && s.Delivery_Code == 1).First();
         }
 
-        public ObservableCollection<OrderModel> GetOrdersForUser(UserModel User, bool ForAccept = false)
+        public ObservableCollection<OrderModel> GetOrdersForUser(UserModel User, ViewModel.OrderVariant variant = ViewModel.OrderVariant.ForView)
         {
             IEnumerable<OrderModel> Orders = null;
-            if (!ForAccept)
-                Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
-                         .Where(s => s.Client_Code == User.Client_Code
-                         &&s.Delivery_Code != 3);
+            switch (variant)
+            {
 
-            else Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
-                         .Where(s => s.Delivery_Code == 2);
-
+                case ViewModel.OrderVariant.ForView:
+                    Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
+                                                          .Where(s => s.Client_Code == User.Client_Code
+                                                                    && s.Delivery_Code != 3); break;
+                case ViewModel.OrderVariant.ForAccept:
+                    Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
+                                                           .Where(s => s.Delivery_Code == 2); break;
+                case ViewModel.OrderVariant.ForHistory:
+                    Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
+                                                           .Where(s => s.Client_Code == User.Client_Code); break;
+            }
 
             ObservableCollection<OrderModel> Result = new ObservableCollection<OrderModel>();
 
@@ -176,10 +182,14 @@ namespace PL
             {
                 ProductService _productService = new ProductService();
                 UserService _userService = new UserService();
+                order.Order_Result_Sum = 0;
 
                 var OrderItems = GetAllOrderItems(order.Order_Code);
                 foreach (var orderItem in OrderItems)
+                {
                     order.Order_Result_Name += _productService.GetProductByID((int)orderItem.Product_Code).FirstOrDefault().Name + " ";
+                    order.Order_Result_Sum += (int)_productService.GetProductByID((int)orderItem.Product_Code).FirstOrDefault().MarketPrice;//TODO PriceToFloat
+                }
 
                 order.Order_Status_Name = GetOrderStatusByID((int)order.Delivery_Code);
                 order.Order_Client_Name = _userService.GetClientByID((int)order.Client_Code).Name;

@@ -60,3 +60,5 @@ C:\Users\ADMIN\Desktop\Работа в универе\Конструирован
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\OrderWindow.baml
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\AcceptOrdersWindows.g.cs
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\AcceptOrdersWindows.baml
+C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\OrderHistoryWindow.g.cs
+C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\obj\Debug\netcoreapp3.1\View\Windows\OrderHistoryWindow.baml

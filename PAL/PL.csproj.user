@@ -25,6 +25,9 @@
     <Compile Update="View\Windows\Main.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Windows\OrderHistoryWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Windows\OrderWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -67,6 +70,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\Main.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Windows\OrderHistoryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\OrderWindow.xaml">

@@ -20,11 +20,13 @@ namespace PL.ViewModel
             OrderItems = new ObservableCollection<OrderItemModel>();
             AllOrders = new ObservableCollection<OrderModel>();
             OrdersForAccept = new ObservableCollection<OrderModel>();
+            OrdersForHistory = new ObservableCollection<OrderModel>();
             ProductsInBasket = new ObservableCollection<Product>();
             CurrentOrder = new OrderModel(GetCurrentOrderForAuthorizedUser());
             CurrentOrderItem = new Product();
         }
         public ObservableCollection<OrderModel> OrdersForAccept { get; set; }
+        public ObservableCollection<OrderModel> OrdersForHistory { get; set; }
         public ObservableCollection<OrderModel> AllOrders { get; set; }
         
         private OrderModel _currentOrder;
@@ -98,6 +100,7 @@ namespace PL.ViewModel
             SetCurrentOrderSum();
             SetAllOrderForAuthorizedUser();
             SetAllOrderForAccept();
+            SetAllOrderForHistory();
         }
         private void SetAllOrderForAuthorizedUser()
         {
@@ -106,8 +109,13 @@ namespace PL.ViewModel
         }
         private void SetAllOrderForAccept()
         {
-            OrdersForAccept = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(ClientViewModel.Instance.AuthorizedUser, true));
+            OrdersForAccept = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(ClientViewModel.Instance.AuthorizedUser, OrderVariant.ForAccept));
             OnPropertyChanged(nameof(OrdersForAccept));
+        }
+        private void SetAllOrderForHistory()
+        {
+            OrdersForHistory = new ObservableCollection<OrderModel>(_orderService.GetOrdersForUser(ClientViewModel.Instance.AuthorizedUser, OrderVariant.ForHistory));
+            OnPropertyChanged(nameof(OrdersForHistory));
         }
         private void SetCurrentOrderSum()
         {
@@ -407,4 +415,11 @@ namespace PL.ViewModel
         Plus,
         Minus
     };
+
+    enum OrderVariant
+    {
+        ForView,
+        ForAccept,
+        ForHistory
+    }
 }
