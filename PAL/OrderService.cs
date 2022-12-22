@@ -58,6 +58,7 @@ namespace PL
                 CurrentProduct.CurrentStatusName = db.Status_Order_Item_Table.AsEnumerable().Select(o => new StatusItemModel(o))
                      .Where(s => s.Status_Order_Item_ID == o.Status_Order_Item_Table_ID).First().Status_Order_Item_Table1;
                 CurrentProduct.CurrentSum = (float)o.Order_Sum;
+                CurrentProduct.CurrentButtonStatusName = CurrentProduct.CurrentStatusName == "В наличии" ? "Не включать в заказ" : "Включать в заказ";
 
                 SelectedProduct.Add(CurrentProduct);
             }
@@ -185,12 +186,13 @@ namespace PL
                                                            .Where(s => s.Client_Code == User.Client_Code); break;
                 case ViewModel.OrderVariant.ForSalesmanHistory:
                     Orders = db.Order_Table.AsEnumerable().Select(o => new OrderModel(o))
-                                                           .Where(s => s.Salesman_Code == User.Client_Code); break;
+                                                           .Where(s => s.Salesman_Code == User.Client_Code &&
+                                                                       s.Delivery_Code == 3); break;
             }
 
             ObservableCollection<OrderModel> Result = new ObservableCollection<OrderModel>();
 
-            foreach (var order in Orders)
+            foreach (var order in Orders.Reverse())
             {
                 ProductService _productService = new ProductService();
                 UserService _userService = new UserService();

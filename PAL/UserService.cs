@@ -59,6 +59,25 @@ namespace PL
                 .Where(s => s.Name == Name).FirstOrDefault().Location_Code;
         }
 
+        public bool FindRepeatUser(UserModel NewUser)
+        {
+            switch (NewUser.UserTable)
+            {
+                case ClientVariety.Покупатель:
+                    return db.Client_Table.AsEnumerable().Select(o => new UserModel(o))
+                        .Where(s => s.Name == NewUser.Name
+                        && s.Surname == NewUser.Surname
+                        && s.Password == NewUser.Password).FirstOrDefault() != null ? true : false;
+
+                case ClientVariety.Продавец:
+                    return db.Salesman_Table.AsEnumerable().Select(o => new UserModel(o))
+                        .Where(s => s.Name == NewUser.Name
+                        && s.Surname == NewUser.Surname
+                        && s.Password == NewUser.Password).FirstOrDefault() != null ? true : false;
+            }
+            return false;
+        }
+
         public void AddClient(Model.UserModel Client, string TableChoose)
         {
             int max = GetMaxClientCode(TableChoose);

@@ -94,21 +94,38 @@ namespace PL
             return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.Product_Code == ID).ToList();
         }
 
-        public List<Product> GetProductByCategoryID(int CategoryID)
+        public List<Product> GetProductByCategoryID(int CategoryID, ClientVariety variant)
         {
-            return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.CategoryID == CategoryID).ToList();
+            switch (variant)
+            {
+                case ClientVariety.Покупатель:
+                    return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.CategoryID == CategoryID
+                                                                                               && s.NumberInStock > 0).ToList();
+                case ClientVariety.Продавец:
+                    return db.Product_Table.AsEnumerable().Select(o => new Product(o)).Where(s => s.CategoryID == CategoryID).ToList();
+            }
+            return null;
         }
 
-        public List<Product> GetProductByText(string Text)
+        public List<Product> GetProductByText(string Text, ClientVariety variant)
         {
             List<Product> ResultProducts = new List<Product>();
             var products = GetProducts();
 
             foreach (var prod in products)
             {
-                if (Regex.IsMatch(prod.Name, "\\b" + Text + "\\b") ||
-                    Regex.IsMatch(prod.Desctription, "\\b" + Text + "\\b"))
-                    ResultProducts.Add(prod);
+                switch (variant)
+                {
+                    case ClientVariety.Покупатель:
+                        if ((Regex.IsMatch(prod.Name, "\\b" + Text + "\\b") ||
+                            Regex.IsMatch(prod.Desctription, "\\b" + Text + "\\b")) &&
+                            prod.NumberInStock > 0) ResultProducts.Add(prod); break;
+
+                    case ClientVariety.Продавец:
+                        if (Regex.IsMatch(prod.Name, "\\b" + Text + "\\b") ||
+                            Regex.IsMatch(prod.Desctription, "\\b" + Text + "\\b")) ResultProducts.Add(prod); break;
+
+                }
             }
 
             return ResultProducts;

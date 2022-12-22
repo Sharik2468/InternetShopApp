@@ -43,12 +43,15 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Здравствуйте," HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="0,0,100,25"/>
-                    <TextBlock x:Name="ClientName" Grid.Column="1" Grid.ColumnSpan="2" Text= "гость" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Width="110" Margin="160,0,0,25" Loaded="ClientName_Loaded"/>
-                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="                Ваша корзина:" HorizontalAlignment="Center" FontSize="22" Width="369" VerticalAlignment="Center" Height="29" Margin="0,25,0,0"/>
+
+                    <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock  Text="Здравствуйте," HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="0,0,0,25"/>
+                    <TextBlock x:Name="ClientName" Text= "гость" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="5,0,0,25" Loaded="ClientName_Loaded"/>
+                    </StackPanel>
+                        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Ваша корзина:" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="0,25,0,0"/>
 
                     <ListBox x:Name="OrderItemListBox" 
-                         Grid.Row="1" 
+                         Grid.Row="2" 
                          Grid.Column="0" 
                          Grid.ColumnSpan="4" 
                          Grid.RowSpan="4" 
@@ -105,13 +108,13 @@
                                         <TextBlock FontSize="16">Статус товара:</TextBlock>
                                         <TextBlock Text="{Binding CurrentStatusName}"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                    <StackPanel Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                         <Button Name="OrderItemStatusCheckBox" 
-                                                  HorizontalAlignment="Left" 
+                                                  HorizontalAlignment="Center" 
                                                   Command="{Binding ChangeOrderItemStatusCommand}"
-                                                  VerticalAlignment="Stretch">Включён в заказ</Button>
+                                                  VerticalAlignment="Stretch" Content="{Binding CurrentButtonStatusName}"/>
 
-                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                                             <Button x:Name="AddOrderItemAmount" Height="20" Width="20" Content="+" Margin="15,10,10,10" Click="AddOrderItemAmount_Click"/>
                                             <Button x:Name="DecreaseOrderItemAmount" Height="20" Width="20" Content="-" Margin="15,10,17,10" Click="DecreaseOrderItemAmount_Click"/>
                                         </StackPanel>
@@ -120,14 +123,15 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4">
+                    
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4">
                         <Label HorizontalAlignment="Center">Итоговая стоимость:</Label>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Label x:Name="OrderItemSumm" Content="{Binding CurrentOrder.Order_Result_Sum}"/>
                             <Label HorizontalAlignment="Center" Content="рублей"/>
                         </StackPanel>
-                        <Button VerticalAlignment="Center" Height="20" Content="Оформить заказ" Command="{Binding FinalOrderCommand}"/>
-                        <Button VerticalAlignment="Center" Height="20" Content="Очистить корзину" Command="{Binding RemoveOrderItemCommand}"/>
+                        <Button VerticalAlignment="Center" Height="20" Width="500" Margin="10,10,10,0" Content="Оформить заказ" Command="{Binding FinalOrderCommand}"/>
+                        <Button VerticalAlignment="Center" Height="20" Width="500" Margin="10,10,10,10" Content="Очистить корзину" Command="{Binding RemoveOrderItemCommand}"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
@@ -135,7 +139,6 @@
             <StackPanel Grid.Column="0" Grid.Row="0" Background="#00D1FF" HorizontalAlignment="Stretch">
                 <TextBlock Text="ElectroNIX" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="Motorwerk" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-
                 </StackPanel>
             </StackPanel>
 

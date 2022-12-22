@@ -64,8 +64,12 @@ namespace PL.View.Windows
 
         private void ProductsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (CathegoryViewModel.Instance.SelectedCategory.Category_ID != 0)
-                this.NavigationService.Navigate(ResultWindow.getInstance(CathegoryViewModel.Instance.SelectedCategory.Category_ID.ToString()));
+            try
+            {
+                if (CathegoryViewModel.Instance.SelectedCategory.Category_ID != 0)
+                    this.NavigationService.Navigate(ResultWindow.getInstance(CathegoryViewModel.Instance.SelectedCategory.Category_ID.ToString()));
+            }
+            catch { }
         }
     }
 }

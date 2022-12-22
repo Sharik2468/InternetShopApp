@@ -24,6 +24,7 @@ namespace PL.View.Windows
         public AddProductWindow()
         {
             InitializeComponent();
+            DataContext = ProductViewModel.Instance;
             _categoryServ = new CategoryService();
             CategoryComboBox.ItemsSource = _categoryServ.GetCategoryName();
         }

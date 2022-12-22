@@ -196,6 +196,17 @@ namespace PL.Model
             }
         }
 
+        private string _currentButtonStatusName;
+        public string CurrentButtonStatusName
+        {
+            get => _currentButtonStatusName;
+            set
+            {
+                _currentButtonStatusName = value;
+                OnPropertyChanged(nameof(CurrentButtonStatusName));
+            }
+        }
+
         private RelayCommand _changeOrderItemStatusCommand;
         public RelayCommand ChangeOrderItemStatusCommand => _changeOrderItemStatusCommand ??
                   (_changeOrderItemStatusCommand = new RelayCommand(obj =>

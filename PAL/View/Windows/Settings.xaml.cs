@@ -94,7 +94,8 @@ namespace PAL.Windows
 
         private void OrderStatus_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(PL.View.Windows.OrderWindow.getInstance());
+            if (ClientViewModel.Instance.AuthorizedUser.UserTable != PL.Model.ClientVariety.Продавец)
+                this.NavigationService.Navigate(PL.View.Windows.OrderWindow.getInstance());
         }
 
         private void WatchOrders_Click(object sender, RoutedEventArgs e)

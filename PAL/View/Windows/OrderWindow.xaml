@@ -44,9 +44,11 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Здравствуйте," HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="0,0,100,25"/>
-                    <TextBlock x:Name="ClientName" Grid.Column="1" Grid.ColumnSpan="2" Text= "гость" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Width="110" Margin="160,0,0,25" Loaded="ClientName_Loaded"/>
-                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="                 Ваши заказы:" HorizontalAlignment="Center" FontSize="22" Width="369" VerticalAlignment="Center" Height="29" Margin="0,25,0,0"/>
+                    <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock  Text="Здравствуйте," HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="0,0,0,25"/>
+                    <TextBlock x:Name="ClientName" Text= "гость" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="5,0,0,25" Loaded="ClientName_Loaded"/>
+                    </StackPanel>
+                        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Ваши заказы:" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Center" Height="29" Margin="0,25,0,0"/>
 
                     <ListBox x:Name="OrderItemListBox" 
                          Grid.Row="1" 

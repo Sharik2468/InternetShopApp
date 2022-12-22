@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using PL.Commands;
 using PL.Model;
-using PL.ViewModel;
 
 
 namespace PL.ViewModel
@@ -165,6 +164,7 @@ namespace PL.ViewModel
         }
         public void ChangeOrderStatus()
         {
+            if (CurrentOrderForView.Delivery_Code == 1) { System.Windows.MessageBox.Show("Вы не можете отменить неоформленный заказ!"); return; }
             CurrentOrderForView.Delivery_Code = CurrentOrderForView.Delivery_Code == 2 ? 4 : 2;
             _orderService.EditOrder(CurrentOrderForView);
 
@@ -200,6 +200,36 @@ namespace PL.ViewModel
         public RelayCommand FinalOrderCommand => _finalOrderCommand ??
                   (_finalOrderCommand = new RelayCommand(obj =>
                   {
+                      bool NewOrderCreated = false;
+                      OrderModel NewOrder = null;
+                      var CurrentOrderItems = _orderService.GetAllOrderItems(CurrentOrder.Order_Code);
+
+                      foreach (var Item in CurrentOrderItems)
+                      {
+                          if (Item.Status_Order_Item_Table_ID == 2)
+                          {
+                              OrderItems.Remove(Item);
+                              _orderService.DeleteOrderItem(Item);
+                              if (!NewOrderCreated)
+                              {
+                                  NewOrder = new OrderModel()
+                                  {
+                                      Order_Code = GetMaxOrderIndex() + 1,
+                                      Order_Fullfillment = null,
+                                      Order_Date = DateTime.Now,
+                                      Client_Code = ClientViewModel.Instance.AuthorizedUser.Client_Code,
+                                      Salesman_Code = 1,//TODO добавить код того, кто добавил продукт!!!!
+                                      Delivery_Code = 1,
+                                  };
+                                  _orderService.AddOrder(NewOrder);
+                                  NewOrderCreated = true;
+                              }
+                              Item.Order_Code = NewOrder.Order_Code;
+                              OrderItems.Add(Item);
+                              _orderService.AddOrderItem(Item);
+                          }
+                      }
+
                       CurrentOrder.Delivery_Code = 2;
                       _orderService.EditOrder(CurrentOrder);
 
@@ -269,7 +299,7 @@ namespace PL.ViewModel
                 CurrentOrder = new OrderModel()
                 {
                     Order_Code = GetMaxOrderIndex() + 1,
-                    Order_Fullfillment = DateTime.Now,
+                    Order_Fullfillment = null,
                     Order_Date = DateTime.Now,
                     Client_Code = ClientViewModel.Instance.AuthorizedUser.Client_Code,
                     Salesman_Code = 1,//TODO добавить код того, кто добавил продукт!!!!

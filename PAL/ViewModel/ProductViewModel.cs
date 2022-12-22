@@ -52,13 +52,13 @@ namespace PL.ViewModel
 
         public void SetProductByID(int CategoryID)
         {
-            Products = new ObservableCollection<Product>(_productService.GetProductByCategoryID(CategoryID));
+            Products = new ObservableCollection<Product>(_productService.GetProductByCategoryID(CategoryID, ClientViewModel.Instance.AuthorizedUser.UserTable));
             OnPropertyChanged(nameof(Products));
         }
 
         public void SetProductByText(string Text)
         {
-            Products = new ObservableCollection<Product>(_productService.GetProductByText(Text));
+            Products = new ObservableCollection<Product>(_productService.GetProductByText(Text, ClientViewModel.Instance.AuthorizedUser.UserTable));
             OnPropertyChanged(nameof(Products));
         }
 

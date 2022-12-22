@@ -6,16 +6,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Threading;
-using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Threading;
 
 namespace PL.ViewModel
 {
     class ClientViewModel : INotifyPropertyChanged
     {
         private readonly UserService _userService = new UserService();
+        public delegate void Authorization();
+        public event Authorization onAuthorized;
         private static ClientViewModel _instance = new ClientViewModel();
         public static ClientViewModel Instance => _instance;
         public ClientViewModel()
@@ -53,6 +52,20 @@ namespace PL.ViewModel
                 OnPropertyChanged(nameof(AuthorizedUser));
             }
         }
+
+        private UserModel _cachedUser;
+        public UserModel CachedUser
+        {
+            get
+            {
+                return _cachedUser;
+            }
+            set
+            {
+                _cachedUser = value;
+                OnPropertyChanged(nameof(CachedUser));
+            }
+        }
         public bool Autorization(string ClientOrSalesmanChoose)
         {
             SalesmanModel AuthorizedUserSalesman = new SalesmanModel()
@@ -75,10 +88,12 @@ namespace PL.ViewModel
             }
 
             System.Windows.MessageBox.Show("Вы прошли авторизацию!");
+            onAuthorized.Invoke();
+
             return true;
         }
 
-        private void SetUser(UserModel NewUser)
+        public void SetUser(UserModel NewUser)
         {
             if (NewUser == null) return;
 
@@ -106,9 +121,11 @@ namespace PL.ViewModel
                     Location_Code = _userService.GetLocationCodeByName(LocationName),
                     UserTable = TableChoose == "Продавец" ? ClientVariety.Продавец : ClientVariety.Покупатель
                 };
+                if(_userService.FindRepeatUser(RegistrationUser)) { System.Windows.MessageBox.Show("Такой пользователь уже существует, придумайте новый пароль!"); return false; }
                 _userService.AddClient(RegistrationUser, TableChoose);
                 AuthorizedUser.Name = "";//Для того, чтобы не отображалось в форме профиля
                 System.Windows.MessageBox.Show("Вы успешно зарегистрировались! Вы можете войти в свой аккаунт.");
+
                 return true;
             }
             catch
@@ -151,7 +168,6 @@ namespace PL.ViewModel
                       if (AuthorizedUser.UserTable == ClientVariety.Покупатель) return;
 
                       var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                      var DatePicker = new DateChoose();
 
                       var Dates = Prompt.ShowDialog("Введите начальную и конечную дату", "Date");
 

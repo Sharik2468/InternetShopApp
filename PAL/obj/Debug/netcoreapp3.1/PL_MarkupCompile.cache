@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\ADMIN\Desktop\Работа в универе\Конструирование ПО\InternetShop\InternetShopApp\PAL\App.xaml
-18688933739
+17425711834
 21644407804
-38-1519757502
-2191523761810
-ButtonTemplate.xaml;View\Windows\AboutWindow.xaml;View\Windows\AcceptOrdersWindows.xaml;View\Windows\AddProductWindow.xaml;View\Windows\Basket.xaml;View\Windows\CathegoryChooseWindow.xaml;View\Windows\DateChoose.xaml;View\Windows\InstructionsWindow.xaml;View\Windows\Login.xaml;View\Windows\Main.xaml;View\Windows\OrderHistoryWindow.xaml;View\Windows\OrderWindow.xaml;View\Windows\ProductWindow.xaml;View\Windows\Profile.xaml;View\Windows\RegisterWindow.xaml;View\Windows\ResultWindow.xaml;View\Windows\Settings.xaml;View\Windows\Start.xaml;
+371157891135
+2201773462851
+ButtonTemplate.xaml;View\Windows\AboutWindow.xaml;View\Windows\AcceptOrdersWindows.xaml;View\Windows\AddProductWindow.xaml;View\Windows\Basket.xaml;View\Windows\CathegoryChooseWindow.xaml;View\Windows\InstructionsWindow.xaml;View\Windows\Login.xaml;View\Windows\Main.xaml;View\Windows\OrderHistoryWindow.xaml;View\Windows\OrderWindow.xaml;View\Windows\ProductWindow.xaml;View\Windows\Profile.xaml;View\Windows\RegisterWindow.xaml;View\Windows\ResultWindow.xaml;View\Windows\Settings.xaml;View\Windows\Start.xaml;
 
 False
 

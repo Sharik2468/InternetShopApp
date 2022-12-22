@@ -1,4 +1,5 @@
-﻿using PL.ViewModel;
+﻿using PL.Model;
+using PL.ViewModel;
 using System;
 using System.Drawing;
 using System.Windows;
@@ -12,10 +13,18 @@ namespace PAL.Windows
     /// </summary>
     public partial class Login : Page
     {
+        private bool RestoreCachedUser = true;
         public Login()
         {
             InitializeComponent();
             DataContext = ClientViewModel.Instance;
+
+            ClientViewModel.Instance.onAuthorized += Instance_onAuthorized;
+        }
+
+        private void Instance_onAuthorized()
+        {
+            RestoreCachedUser = false;
         }
 
         private static Page LoginPage = null;
@@ -50,7 +59,7 @@ namespace PAL.Windows
 
         private void RegisterOrLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!ClientViewModel.Instance.Autorization(UserComboBox.SelectedIndex == 0 ? ClientName.Text : SalemanName.Text)) return; 
+            if (!ClientViewModel.Instance.Autorization(UserComboBox.SelectedIndex == 0 ? ClientName.Text : SalemanName.Text)) return;
             OrderViewModel.Instance.SetCurrentOrderForAuthorizedUser();
             OrderViewModel.Instance.SetCurrentOrderItem();
             ProductViewModel.Instance.SetAllProducts();
@@ -79,6 +88,23 @@ namespace PAL.Windows
             PasswordTextBox.SelectionBrush = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)random.Next(0, 255),
                                                       (byte)random.Next(0, 255),
                                                       (byte)random.Next(0, 255)));
+        }
+
+        private void PasswordTextBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ClientViewModel.Instance.AuthorizedUser.Password = PasswordTextBox.Password;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            RestoreCachedUser = true;
+            ClientViewModel.Instance.CachedUser = new UserModel(ClientViewModel.Instance.AuthorizedUser);
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (RestoreCachedUser)
+                ClientViewModel.Instance.SetUser(ClientViewModel.Instance.CachedUser);
         }
     }
 }

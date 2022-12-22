@@ -29,6 +29,18 @@ namespace PL.Model
             isAuthorized = Visibilities.Hidden;
             UserTable = ClientVariety.Покупатель;
         }
+
+        public UserModel(DBAccess.Salesman_Table c)
+        {
+            Client_Code = c.Salesman_Code;
+            Name = c.Saleman_Name;
+            Surname = c.Salesman_Surname;
+            Telephone_Number = c.Telephone_Number;
+            Password = c.Password;
+            Location_Code = c.Location_Code;
+            isAuthorized = Visibilities.Hidden;
+            UserTable = ClientVariety.Продавец;
+        }
         public UserModel(SalesmanModel c)
         {
             if (c == null) return;
@@ -41,6 +53,20 @@ namespace PL.Model
             Location_Code = c.Location_Code;
             isAuthorized = Visibilities.Hidden;
             UserTable = ClientVariety.Продавец;
+        }
+
+        public UserModel(UserModel c)
+        {
+            if (c == null) return;
+
+            Client_Code = c.Client_Code;
+            Name = c.Name;
+            Surname = c.Surname;
+            Telephone_Number = c.Telephone_Number;
+            Password = c.Password;
+            Location_Code = c.Location_Code;
+            isAuthorized = c.isAuthorized;
+            UserTable = c.UserTable;
         }
 
         public ClientVariety UserTable

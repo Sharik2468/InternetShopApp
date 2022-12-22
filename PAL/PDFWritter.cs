@@ -3,6 +3,7 @@ using iTextSharp.text.pdf;
 using PL.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -55,18 +56,19 @@ namespace PL
                     foreach (var Order in AllOrders)
                     {
                         List<OrderItemModel> AllItemsOfOrder = _orderService.GetAllOrderItems(Order.Order_Code);
-                        Paragraph PorderString = new Paragraph("Заказ № " + Order.Order_Code.ToString(), font);
+                        string s = DateTime.Parse(Order.Order_Fullfillment.ToString()).ToShortDateString();
+                        Paragraph PorderString = new Paragraph("Заказ № " + Order.Order_Code.ToString()+" Дата оформления заказа: " + s, font);
                         PorderString.Alignment = Element.ALIGN_LEFT;
                         document.Add(PorderString);
 
-                        foreach (var Item in AllItemsOfOrder)
+                        foreach (OrderItemModel Item in AllItemsOfOrder)
                         {
                             Product prod = _productService.GetProductByID((int)Item.Product_Code)[0];
-                            Paragraph PitemString = new Paragraph("Имя товара: " + prod.Name+ " " +
-                                                                  "Количество: " + Item.Amount_Order_Item+ " "+
-                                                                  "Рыночная цена: " + prod.MarketPrice*Item.Amount_Order_Item+" "+
-                                                                  "Закупочная цена: " + prod.PurchasePrice * Item.Amount_Order_Item + " "+
-                                                                  "Выгода: "+ (prod.MarketPrice * Item.Amount_Order_Item - prod.PurchasePrice * Item.Amount_Order_Item).ToString() + " ", font);
+                            Paragraph PitemString = new Paragraph("Имя товара: " + prod.Name + " " +
+                                                                  "Количество: " + Item.Amount_Order_Item + " " +
+                                                                  "Рыночная цена: " + prod.MarketPrice * Item.Amount_Order_Item + " " +
+                                                                  "Закупочная цена: " + prod.PurchasePrice * Item.Amount_Order_Item + " " +
+                                                                  "Выгода: " + (prod.MarketPrice * Item.Amount_Order_Item - prod.PurchasePrice * Item.Amount_Order_Item).ToString() + " ", font);
                             PitemString.Alignment = Element.ALIGN_LEFT;
                             document.Add(PitemString);
 

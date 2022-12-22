@@ -1,4 +1,5 @@
 ﻿using PAL.Windows;
+using PL.Model;
 using PL.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,16 @@ namespace PL.View.Windows
             if (!ClientViewModel.Instance.Registration(SelectedUserTable.SelectedIndex == 0 ? ClientName.Text : SalesmanName.Text, LocationName)) return;
 
             this.NavigationService.Navigate(Start.getInstance());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ClientViewModel.Instance.CachedUser = new UserModel(ClientViewModel.Instance.AuthorizedUser);
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ClientViewModel.Instance.SetUser(ClientViewModel.Instance.CachedUser);
         }
     }
 }
