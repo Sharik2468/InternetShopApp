@@ -104,7 +104,7 @@ namespace PAL.Windows
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             if (RestoreCachedUser)
-                ClientViewModel.Instance.SetUser(ClientViewModel.Instance.CachedUser);
+                ClientViewModel.Instance.SetUser(ClientViewModel.Instance.CachedUser, ClientViewModel.Instance.CachedUser.UserTable.ToString());
         }
     }
 }

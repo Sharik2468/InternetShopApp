@@ -21,8 +21,8 @@
 
             <StackPanel Background="#00D1FF" Grid.Column="0" Grid.Row="1">
                 <Label HorizontalAlignment="Center" FontSize="22">Интернет магазин "ELECTRONIX"</Label>
-                <Label HorizontalAlignment="Center" FontSize="18">Версия 0.1</Label>
-                <Label HorizontalAlignment="Center" FontSize="18">Разработал Шарабанов Никита Алексадрович</Label>
+                <Label HorizontalAlignment="Center" FontSize="18">Версия 0.5</Label>
+                <Label HorizontalAlignment="Center" FontSize="18">Разработал Шарабанов Никита Александрович</Label>
             </StackPanel>
 
             <StackPanel Grid.Column="0" Grid.Row="0" Background="#00D1FF" HorizontalAlignment="Stretch">

@@ -191,9 +191,9 @@ namespace PL.ViewModel
                 if (CurProd.NumberInStock >= 0) _productService.Update(CurProd);
             }
 
-            ProductViewModel.Instance.SetAllProducts();
             SetCurrentOrderForAuthorizedUser();
             SetCurrentOrderItem();
+            ProductViewModel.Instance.SetAllProducts();
         }
 
         private RelayCommand _finalOrderCommand;

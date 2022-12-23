@@ -77,5 +77,20 @@ namespace PL.View.Windows
             AddProduct.Visibility = Visibility.Visible;
             DecreaseProduct.Visibility = Visibility.Visible;
         }
+
+        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(Start.getInstance());
+        }
+
+        private void DecreaseProduct_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(Start.getInstance());
+        }
+
+        private void DeleteProduct_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(Start.getInstance());
+        }
     }
 }

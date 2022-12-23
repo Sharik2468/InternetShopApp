@@ -52,13 +52,15 @@ namespace PL.ViewModel
 
         public void SetProductByID(int CategoryID)
         {
-            Products = new ObservableCollection<Product>(_productService.GetProductByCategoryID(CategoryID, ClientViewModel.Instance.AuthorizedUser.UserTable));
+            Products = new ObservableCollection<Product>(_productService.GetProductByCategoryID(CategoryID, 
+                ClientViewModel.Instance.AuthorizedUser.UserTable));
             OnPropertyChanged(nameof(Products));
         }
 
         public void SetProductByText(string Text)
         {
-            Products = new ObservableCollection<Product>(_productService.GetProductByText(Text, ClientViewModel.Instance.AuthorizedUser.UserTable));
+            Products = new ObservableCollection<Product>(_productService.GetProductByText(Text, 
+                ClientViewModel.Instance.AuthorizedUser.UserTable));
             OnPropertyChanged(nameof(Products));
         }
 
@@ -73,7 +75,7 @@ namespace PL.ViewModel
                       if (openFileDialog.ShowDialog().Value)
                       {
                           _productService.AddProduct(getNewProductInstance(), openFileDialog.FileName);
-                          Products = new ObservableCollection<Product>(_productService.GetProducts());
+                          Products = new ObservableCollection<Product>(_productService.GetProducts(ClientViewModel.Instance.AuthorizedUser.UserTable));
                           OnPropertyChanged(nameof(Products));
                       }
                   }));
@@ -92,7 +94,12 @@ namespace PL.ViewModel
                   (_decAmountCommand = new RelayCommand(obj =>
                   {
                       SelectedProduct.NumberInStock--;
-                      if (SelectedProduct.NumberInStock < 0) return;
+                      if (SelectedProduct.NumberInStock < 0) 
+                      { 
+                          SelectedProduct.NumberInStock++;
+                          System.Windows.MessageBox.Show("Вы не можете забрать товар, которого нет, со склада!");
+                          return; 
+                      }
 
                       _productService.Update(SelectedProduct);
                       SetAllProducts();

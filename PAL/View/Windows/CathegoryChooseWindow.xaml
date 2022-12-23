@@ -32,9 +32,18 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Auto"  
                      d:ItemsSource="{d:SampleData}" 
                      IsSynchronizedWithCurrentItem="True" 
-                     MaxHeight="1000" MouseDoubleClick="ProductsListBox_MouseDoubleClick" 
+                     MaxHeight="1000"
                      HorizontalAlignment="Stretch" 
                      VerticalAlignment="Stretch">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>
@@ -57,7 +66,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" MouseDown="StackPanel_MouseDown">
                                 <TextBlock FontSize="30" Text="{Binding Category_Name}" TextAlignment="Center"/>
                             </StackPanel>
                         </Grid>

@@ -79,7 +79,7 @@ namespace PL.ViewModel
 
             SetUser(ClientOrSalesmanChoose == "Покупатель" ?
                 _userService.GetClientFull(AuthorizedUser)
-                : new UserModel(_userService.GetSalesmanFull(AuthorizedUserSalesman)));
+                : new UserModel(_userService.GetSalesmanFull(AuthorizedUserSalesman)), ClientOrSalesmanChoose);
 
             if (AuthorizedUser.Client_Code == 0)
             {
@@ -93,7 +93,7 @@ namespace PL.ViewModel
             return true;
         }
 
-        public void SetUser(UserModel NewUser)
+        public void SetUser(UserModel NewUser, string TableChoose)
         {
             if (NewUser == null) return;
 
@@ -104,7 +104,7 @@ namespace PL.ViewModel
             AuthorizedUser.Password = NewUser.Password;
             AuthorizedUser.Surname = NewUser.Surname;
             AuthorizedUser.Telephone_Number = NewUser.Telephone_Number;
-            AuthorizedUser.UserTable = NewUser.UserTable;
+            AuthorizedUser.UserTable = TableChoose == "Покупатель" ? ClientVariety.Покупатель : ClientVariety.Продавец;
             AuthorizedUser.isAuthorized = Visibilities.Visible;
         }
 
@@ -121,7 +121,7 @@ namespace PL.ViewModel
                     Location_Code = _userService.GetLocationCodeByName(LocationName),
                     UserTable = TableChoose == "Продавец" ? ClientVariety.Продавец : ClientVariety.Покупатель
                 };
-                if(_userService.FindRepeatUser(RegistrationUser)) { System.Windows.MessageBox.Show("Такой пользователь уже существует, придумайте новый пароль!"); return false; }
+                if (_userService.FindRepeatUser(RegistrationUser)) { System.Windows.MessageBox.Show("Такой пользователь уже существует, придумайте новый пароль!"); return false; }
                 _userService.AddClient(RegistrationUser, TableChoose);
                 AuthorizedUser.Name = "";//Для того, чтобы не отображалось в форме профиля
                 System.Windows.MessageBox.Show("Вы успешно зарегистрировались! Вы можете войти в свой аккаунт.");
@@ -151,7 +151,7 @@ namespace PL.ViewModel
                           UserTable = ClientVariety.Покупатель
                       };
 
-                      SetUser(DefaultUser);
+                      SetUser(DefaultUser, "Покупатель");
                       OrderViewModel.Instance.SetCurrentOrderForAuthorizedUser();
                       OrderViewModel.Instance.SetCurrentOrderItem();
 

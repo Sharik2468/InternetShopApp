@@ -75,16 +75,16 @@
                             </TransformGroup>
                         </StackPanel.RenderTransform>
                         <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0" HorizontalAlignment="Stretch">Дата изготовления:</TextBlock>
-                        <TextBox Width="200" Height="20" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="ManufDate">
-                            <TextBox.RenderTransform>
+                        <DatePicker Width="200" Height="25" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Name="ManufDate" DisplayDate="{Binding NewProduct.DateOfManufacture}">
+                            <DatePicker.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="1"/>
                                     <SkewTransform/>
                                     <RotateTransform/>
                                     <TranslateTransform X="2"/>
                                 </TransformGroup>
-                            </TextBox.RenderTransform>
-                        </TextBox>
+                            </DatePicker.RenderTransform>
+                        </DatePicker>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="203,10,10,10" RenderTransformOrigin="0.5,0.5">

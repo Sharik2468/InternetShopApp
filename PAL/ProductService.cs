@@ -110,7 +110,7 @@ namespace PL
         public List<Product> GetProductByText(string Text, ClientVariety variant)
         {
             List<Product> ResultProducts = new List<Product>();
-            var products = GetProducts();
+            var products = GetProducts(variant);
 
             foreach (var prod in products)
             {

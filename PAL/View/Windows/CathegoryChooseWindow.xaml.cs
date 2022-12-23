@@ -62,7 +62,12 @@ namespace PL.View.Windows
             this.NavigationService.Navigate(Settings.getInstance());
         }
 
-        private void ProductsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ProductsListBox_Selected_1(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {

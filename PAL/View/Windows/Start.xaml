@@ -49,7 +49,7 @@
                 <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Категории товаров" HorizontalAlignment="Center" FontSize="22" Width="199" VerticalAlignment="Center" Height="28"/>
                 <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Text="Новые товары" HorizontalAlignment="Center" FontSize="22" Width="157" VerticalAlignment="Center" Height="30"/>
 
-                <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,196,8">
+                <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,196,8" VerticalAlignment="Center">
                     <Button x:Name="Appliances" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False" Click="Appliances_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/View/Windows/Icons/free-icon-appliances-448836.png" Stretch="Fill" TileMode="None" Opacity="1"/>
@@ -59,7 +59,7 @@
                     <TextBlock Text="Бытовая техника" HorizontalAlignment="Center" FontSize="16"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,195,8">
+                <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,195,8" VerticalAlignment="Center">
                     <Button x:Name="Smartphones" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False" Click="Smartphones_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/View/Windows/Icons/free-icon-smartphones-1079519.png" Stretch="Fill" TileMode="None" Opacity="1"/>
@@ -69,7 +69,7 @@
                     <TextBlock Text="Смартфоны" HorizontalAlignment="Center" FontSize="16"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,0,0,8">
+                <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,0,0,8" VerticalAlignment="Center">
                     <Button x:Name="Television" Click="Television_Click" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False">
                         <Button.Background>
                             <ImageBrush ImageSource="/View/Windows/Icons/free-icon-television-1025152.png" Stretch="Fill" TileMode="None" Opacity="1"/>
@@ -79,7 +79,7 @@
                     <TextBlock Text="Телевизоры" HorizontalAlignment="Center" FontSize="16"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Grid.Row="1" Margin="1,0,0,8">
+                <StackPanel Grid.Column="3" Grid.Row="1" Margin="1,0,0,8" VerticalAlignment="Center">
                     <Button x:Name="Computer" Click="Computer_Click" Style="{DynamicResource ColorOverButtonChange}" Content="" Height="100" Width="100" Opacity="0.9" Focusable="False">
                         <Button.Background>
                             <ImageBrush ImageSource="/View/Windows/Icons/free-icon-pc-3233554.png" Stretch="Fill" TileMode="None" Opacity="1"/>

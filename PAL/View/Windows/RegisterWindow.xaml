@@ -152,16 +152,16 @@
                         </TransformGroup>
                     </StackPanel.RenderTransform>
                     <TextBlock VerticalAlignment="Center" FontSize="16" Margin="0,0,5,0" HorizontalAlignment="Stretch">Пароль:</TextBlock>
-                    <TextBox Width="200" Height="25" Text="{Binding AuthorizedUser.Password, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch">
-                        <TextBox.RenderTransform>
+                    <PasswordBox x:Name="PasswordTextBox" Width="200" Height="25" PasswordChanged="PasswordBox_PasswordChanged" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch">
+                        <PasswordBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1"/>
                                 <SkewTransform/>
                                 <RotateTransform/>
                                 <TranslateTransform X="2"/>
                             </TransformGroup>
-                        </TextBox.RenderTransform>
-                    </TextBox>
+                        </PasswordBox.RenderTransform>
+                    </PasswordBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">

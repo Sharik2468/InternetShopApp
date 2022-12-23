@@ -82,9 +82,9 @@
                     </Border>
 
                     <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4">
-                        <Button x:Name="AddProduct" Margin="10,10,10,10"  VerticalAlignment="Center" Height="25" Content="Добавить товар" Command="{Binding AddAmountCommand}"/>
-                        <Button x:Name="DecreaseProduct" Margin="10,10,10,10"  VerticalAlignment="Center" Height="25" Content="Забрать товар" Command="{Binding DecreaseAmountCommand}"/>
-                        <Button x:Name="DeleteProduct" Margin="10,10,10,10" Grid.ColumnSpan="4" VerticalAlignment="Center" Height="25" Content="Удалить товар" Command="{Binding DelCommand}"/>
+                        <Button x:Name="AddProduct" Margin="10,10,10,10"  VerticalAlignment="Center" Height="25" Content="Добавить товар" Command="{Binding AddAmountCommand}" Click="AddProduct_Click"/>
+                        <Button x:Name="DecreaseProduct" Margin="10,10,10,10"  VerticalAlignment="Center" Height="25" Content="Забрать товар" Command="{Binding DecreaseAmountCommand}" Click="DecreaseProduct_Click"/>
+                        <Button x:Name="DeleteProduct" Margin="10,10,10,10" Grid.ColumnSpan="4" VerticalAlignment="Center" Height="25" Content="Удалить товар" Command="{Binding DelCommand}" Click="DeleteProduct_Click"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

@@ -37,7 +37,6 @@ namespace PL
         {
             var c = db.Category_Table.AsEnumerable().Select(o => new CategoryModel(o));
             var p = c.Where(s => s.Parent_ID == ParentID && s.Category_ID!=ParentID).ToList();
-            // return db.Category_Table.AsEnumerable().Select(o => new CategoryModel(o)).ToList();
             return p;
         }
 

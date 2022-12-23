@@ -84,7 +84,12 @@ namespace PL.View.Windows
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            ClientViewModel.Instance.SetUser(ClientViewModel.Instance.CachedUser);
+            ClientViewModel.Instance.SetUser(ClientViewModel.Instance.CachedUser, ClientViewModel.Instance.CachedUser.UserTable.ToString());
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ClientViewModel.Instance.AuthorizedUser.Password = PasswordTextBox.Password;
         }
     }
 }
